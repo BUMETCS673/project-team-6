@@ -18,3 +18,7 @@ Hello, my name is Chenghao. I came from Econ and Finance background looking to s
 
 ## Devon Dudley
 Hello, my name is Devon. I work with many startups and VCs with ambitions of becoming a Venture Capital Associate by the time I graduate with part-time gigs developing for startups and sitting on boards for early-stage companies.
+
+
+## Cangqing (Kris) Wang
+Hi, my B.S of CS degree graduate from USF California, and I am living in SF Bay Area. Recently, I registered a company and working with my group of friend on Iot platform. This is my last semster at BU, looking forward to completing my Master degree.
