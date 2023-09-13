@@ -10,3 +10,7 @@ Before becoming a full time student at BU I was working as a software engineer. 
 
 ## Nickolas Cruz
 Hello, my name is Nickolas. I come from a mental health background looking to switch into computer science.  I am currently taking classes ad-hoc and am a non-degree student. 
+
+
+## Chenghao Ye
+Hello, my name is Chenghao. I came from Econ and Finance background looking to switch my major into SDE. I am currently looking for jobs as software engineer.
