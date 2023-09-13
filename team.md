@@ -14,3 +14,7 @@ Hello, my name is Nickolas. I come from a mental health background looking to sw
 
 ## Chenghao Ye
 Hello, my name is Chenghao. I came from Econ and Finance background looking to switch my major into SDE. I am currently looking for jobs as software engineer.
+
+
+## Cangqing (Kris) Wang
+Hi, my B.S of CS degree graduate from USF California, and I am living in SF Bay Area. Recently, I registered a company and working with my group of friend on Iot platform. This is my last semster at BU, looking forward to completing my Master degree.
