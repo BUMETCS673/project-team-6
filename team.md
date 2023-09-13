@@ -14,3 +14,7 @@ Hello, my name is Nickolas. I come from a mental health background looking to sw
 
 ## Chenghao Ye
 Hello, my name is Chenghao. I came from Econ and Finance background looking to switch my major into SDE. I am currently looking for jobs as software engineer.
+
+
+## Devon Dudley
+Hello, my name is Devon. I work with many startups and VCs with ambitions of becoming a Venture Capital Associate by the time I graduate with part-time gigs developing for startups and sitting on boards for early-stage companies.
