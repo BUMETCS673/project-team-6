@@ -6,3 +6,7 @@ Before becoming a full time student at BU I was working as a software engineer. 
 ## Abdallah El Hamawi
 + I am a current software development graduate student at BU and I'm graduating in May 2024.
 +  I decided to switch my career when I moved to Seattle and explored different domains. I am familiar with full-stack development and enjoy learning different tools to improve. 
+
+
+## Nickolas Cruz
+Hello, my name is Nickolas. I come from a mental health background looking to switch into computer science.  I am currently taking classes ad-hoc and am a non-degree student. 
