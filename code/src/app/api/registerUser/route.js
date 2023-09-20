@@ -26,17 +26,18 @@ import bcrypt from 'bcryptjs'
 export async function POST(req) {
     try {
         const { firstname, lastname, email, password } = await req.json()
-   
-        
-        await dbConnect()
-        
-        const existingUser = await User.findOne({ email });
+
+        if (password.length < 3 || password.length > 20) {
+            return NextResponse.json({ message: "Invalid! Password must be between 3 and 20 characters." }, { status: 400 })
+        } await dbConnect()
+
+        const existingUser = await User.findOne({ email })
         if (existingUser) {
-            return NextResponse.json({ message: "Email already in use." }, { status: 400 });
+            return NextResponse.json({ message: "Email already in use." }, { status: 400 })
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
-        await User.create({ firstname, lastname, email, password:hashedPassword })        
+        await User.create({ firstname, lastname, email, password: hashedPassword })
 
         return NextResponse.json({ message: "User registered." }, { status: 201 })
     } catch (err) {
