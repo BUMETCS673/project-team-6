@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+const logger = require('pino')();
 /**
  * Establishes a connection to the MongoDB database.
  *
@@ -15,9 +16,9 @@ import mongoose from 'mongoose';
 const dbConnect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log('mongoDB connected ...');
+    logger.info('mongoDB connected ...');
   } catch (error) {
-    console.log('Error connecting to MongoDB', error);
+    logger.info('Error connecting to MongoDB', error);
   }
 };
 

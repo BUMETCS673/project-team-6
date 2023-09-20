@@ -5,6 +5,8 @@ import dbConnect from '@/lib/dbConnect';
 import user from '@/models/User';
 import bcrypt from 'bcryptjs';
 
+const logger = require('pino')();
+
 /**
  * Configuration options for NextAuth authentication.
  * @typedef {Object} AuthOptions
@@ -46,7 +48,7 @@ export const authOptions = {
 
           return foundUser;
         } catch (error) {
-          console.log('Error: ', error);
+          logger.info('Error: ', error);
           return null;
         }
       },

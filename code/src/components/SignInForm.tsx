@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+const logger = require('pino')();
+
 export default function SignInForm() {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -28,10 +30,10 @@ export default function SignInForm() {
         setErrorMsg('Invalid Credentials');
         return;
       }
-      console.log(res);
+      logger.info(res);
       router.replace('/dashboard');
     } catch (error) {
-      console.log(error);
+      logger.info(error);
     }
   };
 
@@ -60,7 +62,7 @@ export default function SignInForm() {
       const data = await response.json();
       setResponseMessage(data.message);
     } catch (error) {
-      console.log('Error during registration: ', error);
+      logger.info('Error during registration: ', error);
     }
   };
 
