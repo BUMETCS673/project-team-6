@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .rounded-bl-5xl {
   border-bottom-left-radius: 250px;
 }
 .rounded-br-5xl {
-    border-bottom-right-radius: 250px;
-  }
+  border-bottom-right-radius: 250px;
+}

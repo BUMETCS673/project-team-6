@@ -15,24 +15,25 @@ Ensure you have the following installed on your local machine:
 
 1. Download [`.env.local`](https://drive.google.com/drive/folders/1Mx231NNCxOlgj50SCO9v4FwHHe73eDxR?usp=drive_link) file and put into your root folder
 
-    ```
-    /code
-    |   .env.local  #It contains JWT Secret & MongoDB verification
-                    #Avoid sensitive data exposure
-    ```
+   ```
+   /code
+   |   .env.local  #It contains JWT Secret & MongoDB verification
+                   #Avoid sensitive data exposure
+   ```
+
 2. Below is the shell command that you need to install the library before you running the servers:
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 3. Run the development server:
 
-    ```bash
-    npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
-    ```
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

@@ -1,10 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 /**
  * Establishes a connection to the MongoDB database.
- * 
+ *
  * Uses the connection string provided in the environment variable MONGODB_URI.
- * Logs a success message to the console upon successful connection and an error message upon failure.
+ * Logs a success message to the console upon successful connection and an
+ * error message upon failure.
  *
  * @async
  * @function
@@ -12,13 +13,12 @@ import mongoose from 'mongoose'
  */
 
 const dbConnect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI)
-        console.log('mongoDB connected ...')
-    }
-    catch (error) {
-        console.log('Error connecting to MongoDB', error)
-    }
-}
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('mongoDB connected ...');
+  } catch (error) {
+    console.log('Error connecting to MongoDB', error);
+  }
+};
 
-export default dbConnect
+export default dbConnect;
