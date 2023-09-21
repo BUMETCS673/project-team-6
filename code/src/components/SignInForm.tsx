@@ -131,8 +131,7 @@ export default function SignInForm() {
               <p className="text-white text-lg font-bold flex flex-col items-center">
                 Already Signed up?
                 <span className="text-xs font-light ">
-                  Sign in to your account so you can continue
-                  {' '}
+                  Sign in to your account so you can continue{' '}
                 </span>
               </p>
               <button
@@ -155,8 +154,8 @@ export default function SignInForm() {
               {responseMessage && (
                 <div
                   className={`p-3 rounded-md mb-2 ${
-                    responseMessage?.includes('Error')
-                    || responseMessage?.includes('Invalid')
+                    responseMessage?.includes('Error') ||
+                    responseMessage?.includes('Invalid')
                       ? 'bg-red-400'
                       : 'bg-green-400'
                   } text-white`}

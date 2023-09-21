@@ -26,9 +26,7 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(req: Request) {
   try {
-    const {
-      firstname, lastname, email, password,
-    } = await req.json();
+    const { firstname, lastname, email, password } = await req.json();
 
     if (password.length < 3 || password.length > 20) {
       return NextResponse.json(
