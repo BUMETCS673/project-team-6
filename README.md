@@ -1,8 +1,4 @@
-# GroupProjectTemplate
-
-Please make sure to modify this readme file as well as the "about" property of the project!
-
-## Team Rocket: RCM - Rental Car Management
+# Team Rocket: RCM - Rental Car Management
 
 The purpose of RCM is to be a business management tool specifically for car rental companies.
 It should be used by the company to manage inventory, maintenance schedules, and edit information

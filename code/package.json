@@ -13,7 +13,8 @@
     "eslint": "next lint",
     "prettierfix": "npx prettier . --write",
     "eslintfix": "next lint --fix",
-    "test": "jest"
+    "test": "jest",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@types/node": "20.5.9",
@@ -30,6 +31,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.38.1",
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
