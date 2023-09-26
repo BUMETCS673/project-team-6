@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/dashboard/addcar/page.jsx"
+    "src/app/dashboard/addcar/page.tsx"
   ],
   "exclude": ["node_modules"]
 }
