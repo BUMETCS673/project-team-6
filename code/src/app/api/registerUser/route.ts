@@ -34,6 +34,15 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
+
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { message: 'Invalid! Must be email format' },
+        { status: 400 },
+      );
+    }
     await dbConnect();
 
     const existingUser = await user.findOne({ email });
