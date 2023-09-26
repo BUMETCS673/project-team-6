@@ -15,7 +15,7 @@ export default function page() {
               type="text"
               placeholder="Search"
               className="bg-white border rounded px-2 py-1 focus:outline-none w-full  text-[#cbcedb]"
-            ></input>
+             />
           </div>
 
           <div className="flex flex-col items-center  w-36 gap-4">
@@ -26,7 +26,7 @@ export default function page() {
               type="text"
               placeholder="Search"
               className="bg-white border rounded px-2 py-1 focus:outline-none w-full  text-[#cbcedb]"
-            ></input>
+             />
           </div>
           <div className="flex flex-col items-center  w-36 gap-4">
             <p className="[font-family:'Lexend_Giga-Bold',Helvetica] font-bold text-black text-[16px] text-center tracking-[0] leading-[normal]">
@@ -36,7 +36,7 @@ export default function page() {
               type="text"
               placeholder="Search"
               className="bg-white border rounded px-2 py-1 focus:outline-none w-full  text-[#cbcedb]"
-            ></input>
+             />
           </div>
           <div className="flex flex-col items-center  w-36 gap-4">
             <p className="[font-family:'Lexend_Giga-Bold',Helvetica] font-bold text-black text-[16px] text-center tracking-[0] leading-[normal]">
@@ -46,7 +46,7 @@ export default function page() {
               type="text"
               placeholder="Search"
               className="bg-white border rounded px-2 py-1 focus:outline-none w-full  text-[#cbcedb]"
-            ></input>
+             />
           </div>
         </div>
 
@@ -57,7 +57,7 @@ export default function page() {
             manufacturer="Toyota"
             model="Camry"
             carType="Sedan"
-          ></CarResultBar>
+           />
         </div>
       </div>
     </DashboardLayout>

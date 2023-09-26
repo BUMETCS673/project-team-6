@@ -1,10 +1,18 @@
 import React from 'react';
 
-const CarResultBar = ({ carId, manufacturer, model, carType }) => {
+interface CarResultBarProps {
+  carId: number;
+  manufacturer: string;
+  model: string;
+  carType: string;
+}
+
+function CarResultBar(props: CarResultBarProps) {
+  const { carId, manufacturer, model, carType } = props;
   return (
     <div className="flex relative items-center h-[65px]  bg-white rounded-[5px] shadow-[0px_4px_10px_#cbcedb]">
       <div className="flex-grow">
-        <button>...</button>
+        <p>...</p>
       </div>
 
       {/* Display Car ID result */}
@@ -38,6 +46,6 @@ const CarResultBar = ({ carId, manufacturer, model, carType }) => {
       {/* Future Feature Button */}
     </div>
   );
-};
+}
 
 export default CarResultBar;
