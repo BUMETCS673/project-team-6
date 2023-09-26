@@ -20,12 +20,10 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
     }
   }, [session, router]);
 
-
   return (
     <div className="flex flex-row border h-screen">
       {/* side bar */}
       <div className="flex flex-col pl-10 w-1/5 border bg-white">
-
         <div className="p-3">
           <p className="p-1 text-orange-500 font-bold ">
             Rental<span className="underline">Company</span>
