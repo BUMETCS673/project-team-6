@@ -31,7 +31,7 @@ export default function SignInForm() {
         return;
       }
       logger.info(res);
-      router.replace('/dashboard');
+      router.replace('/dashboard/managecars');
     } catch (error) {
       logger.info(error);
     }
