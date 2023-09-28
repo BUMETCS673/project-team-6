@@ -83,6 +83,7 @@ export default function SignInForm() {
             <div>
               <p className="font-bold">Email</p>
               <input
+                placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 type="text"
                 className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
@@ -91,6 +92,7 @@ export default function SignInForm() {
             <div>
               <p className="font-bold">Password</p>
               <input
+                placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
@@ -185,6 +187,7 @@ export default function SignInForm() {
               <div>
                 <p className="font-bold">Email</p>
                 <input
+                  placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   type="text"
                   className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
@@ -193,6 +196,7 @@ export default function SignInForm() {
               <div>
                 <p className="font-bold">Password</p>
                 <input
+                  placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
