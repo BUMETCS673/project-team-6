@@ -117,6 +117,7 @@ export default function SignInForm() {
               </span>
             </p>
             <button
+              data-testid="to-signup"
               type="button"
               onClick={() => {
                 setIsLogin(false);
@@ -165,6 +166,11 @@ export default function SignInForm() {
                   {responseMessage}
                 </div>
               )}
+              {errorMsg && (
+                <div className="bg-red-400 text-white p-3 rounded-md mb-2">
+                  {errorMsg}
+                </div>
+              )}
               <div className="flex flex-row gap-3">
                 <div>
                   <p className="font-bold">Firstname</p>
@@ -203,6 +209,7 @@ export default function SignInForm() {
                 />
               </div>
               <button
+                data-testid="submit-signup"
                 type="submit"
                 className="text-black border border-gray-400 rounded-lg px-6 py-3"
               >
