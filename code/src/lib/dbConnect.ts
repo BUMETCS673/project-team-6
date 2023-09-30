@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
+
 declare global {
+  // eslint-disable-next-line vars-on-top, no-var
   var mongoose: any // This must be a `var` and not a `let / const`
 }
 
@@ -8,7 +10,8 @@ const logger = require('pino')();
 let cached = global.mongoose
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null }
+  global.mongoose = { conn: null, promise: null }
+  cached = global.mongoose
 }
 
 /**
@@ -33,9 +36,7 @@ const dbConnect = async () => {
     const opts = {
       bufferCommands: false,
     }
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mongoose) => {
-      return mongoose
-    })
+    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mg) => mg)
   }
   try {
     cached.conn = await cached.promise

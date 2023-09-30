@@ -66,8 +66,7 @@ export default function AccessPage() {
     }
   };
 
-  const loginComponent = () => {
-    return (
+  const loginComponent = () => (
       <>
         <form
           onSubmit={handleLogin}
@@ -125,13 +124,9 @@ export default function AccessPage() {
         </div>
       </>
     )
-  }
 
-  const signUpComponent = () => {
-    return (
-      <>
-
-        <div className="flex bg-white w-full h-full items-center space-x-4">
+  const signUpComponent = () => (
+      <div className="flex bg-white w-full h-full items-center space-x-4">
           <div className="w-1/2 flex flex-col justify-center items-center  bg-blue-400 h-full rounded-br-5xl">
             <p className="text-white text-lg font-bold flex flex-col items-center">
               Already Signed up?
@@ -218,10 +213,7 @@ export default function AccessPage() {
             </button>
           </form>
         </div>
-
-      </>
     )
-  }
 
   return (
     <div className="grid place-items-center h-screen bg-gray-200">
