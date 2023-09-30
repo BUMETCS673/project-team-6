@@ -1,6 +1,3 @@
-
-
-
 <div className="flex max-w-full w-[842px] flex-col ml-3.5 mb-1 max-md:max-w-full max-md:ml-2.5">
   <div className="max-w-full w-[842px] self-center max-md:max-w-full">
     <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">

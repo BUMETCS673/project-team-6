@@ -14,6 +14,7 @@ const AddCar = (props) => {
     condition,
     oilChange,
   } = props;
+
   return (
     <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">
       {/* car id  */}

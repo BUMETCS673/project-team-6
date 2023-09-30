@@ -7,8 +7,6 @@ interface CarResultBarProps {
   carType: string;
 }
 
-
-
 function CarResultBar(props: CarResultBarProps) {
   const { carId, manufacturer, model, carType } = props;
   return (
