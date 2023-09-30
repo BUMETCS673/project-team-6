@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface CarResultBarProps {
-  carId: String;
+  carId: string;
   manufacturer: string;
   model: string;
   carType: string;

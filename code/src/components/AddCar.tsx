@@ -1,6 +1,20 @@
 import React from 'react';
 
-const AddCar = (props) => {
+interface AddCarProps {
+  carId: string;
+  manufacturer: string;
+  type: string;
+  year: string;
+  license: string;
+  mileage: string;
+  model: string;
+  color: string;
+  seats: string;
+  condition: string;
+  oilChange: string;
+}
+
+const AddCar = (props:AddCarProps) => {
   const {
     carId,
     manufacturer,
@@ -39,32 +53,32 @@ const AddCar = (props) => {
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Type"
+              value={type}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Year"
+              value={year}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="License"
+              value={license}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Mileage"
+              value={mileage}
             />
           </div>
         </div>
@@ -75,8 +89,8 @@ const AddCar = (props) => {
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Model"
+              value={model}
             />
           </div>
 
@@ -84,32 +98,32 @@ const AddCar = (props) => {
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Color"
+              value={color}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Seats"
+              value={seats}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Condition"
+              value={condition}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
+              placeholder="Oil Change"
+              value={oilChange}
             />
           </div>
         </div>
