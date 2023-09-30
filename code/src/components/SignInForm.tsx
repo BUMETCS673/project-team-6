@@ -20,7 +20,6 @@ export default function SignInForm() {
     e.preventDefault();
 
     try {
-   
       const res: any = await signIn('credentials', {
         email,
         password,
