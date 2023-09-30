@@ -1,9 +1,13 @@
 import DashboardLayout from '../../../components/DashboardLayout';
+import CarResultBar from '../../../components/CarResultBar';
+import EditCar from '../../../components/EditCar';
 
 export default function page() {
   return (
     <DashboardLayout>
-      <p>edit car</p>
+      <div>
+        <EditCar />
+      </div>
     </DashboardLayout>
   );
 }
