@@ -100,7 +100,7 @@ export default function AccessPage() {
         </button>
       </form>
 
-      <div className="w-1/2 flex flex-col justify-center items-center bg-blue-400 h-full rounded-bl-5xl">
+      <div className="w-1/2 flex flex-col justify-center items-center bg-blue-400 h-full rounded-bl-5xl rounded-r-2xl">
         <p className="text-white text-lg font-bold flex flex-col">
           Don&apos;t Have an Account Yet?
           <span className="text-xs font-light">
@@ -123,8 +123,8 @@ export default function AccessPage() {
   );
 
   const signUpComponent = () => (
-    <div className="flex bg-white w-full h-full items-center space-x-4">
-      <div className="w-1/2 flex flex-col justify-center items-center  bg-blue-400 h-full rounded-br-5xl">
+    <div className="flex bg-white w-full h-full items-center space-x-4 rounded-2xl">
+      <div className="w-1/2 flex flex-col justify-center items-center  bg-blue-400 h-full rounded-br-5xl rounded-l-2xl">
         <p className="text-white text-lg font-bold flex flex-col items-center">
           Already Signed up?
           <span className="text-xs font-light ">
@@ -215,7 +215,7 @@ export default function AccessPage() {
 
   return (
     <div className="grid place-items-center h-screen bg-gray-200">
-      <div className="flex rounded-3xl shadow-xl bg-white w-1/2 h-1/2 items-center space-x-4">
+      <div className="flex rounded-2xl shadow-xl bg-white w-1/2 h-1/2 items-center space-x-4">
         {/* Login Form */}
         {isLogin && loginComponent()}
 
