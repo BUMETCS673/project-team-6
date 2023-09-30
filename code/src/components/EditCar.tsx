@@ -4,18 +4,29 @@ interface EditCarProps {
   carId: string;
   manufacturer: string;
   type: string;
-  year: string;
+  year: number;
   license: string;
-  mileage: string;
+  mileage: number;
   model: string;
   color: string;
-  seats: string;
+  seats: number;
   condition: string;
   oilChange: string;
 }
-const EditCar = (props: EditCarProps) => {
+
+function EditCar(props: EditCarProps) {
   const {
-    carId,manufacturer,type,year,license,mileage,model,color,seats,condition,oilChange,
+    carId,
+    manufacturer,
+    type,
+    year,
+    license,
+    mileage,
+    model,
+    color,
+    seats,
+    condition,
+    oilChange,
   } = props;
   return (
     <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">

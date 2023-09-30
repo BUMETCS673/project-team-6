@@ -4,17 +4,17 @@ interface AddCarProps {
   carId: string;
   manufacturer: string;
   type: string;
-  year: string;
+  year: number;
   license: string;
-  mileage: string;
+  mileage: number;
   model: string;
   color: string;
-  seats: string;
+  seats: number;
   condition: string;
   oilChange: string;
 }
 
-const AddCar = (props:AddCarProps) => {
+function AddCar (props:AddCarProps) {
   const {
     carId,
     manufacturer,

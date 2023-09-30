@@ -2,31 +2,29 @@ import React from 'react';
 
 interface CarInfoProps {
   carId: string;
-  mileage: string;
+  mileage: number;
   type: string;
-  seats: string;
+  seats: number;
   condition: string;
   license: string;
   oilChange: string;
   model: string;
   color: string;
-  year: string;
-  manufacturer: string;
+  year: number;
 }
 
 function CarInfo(props: CarInfoProps) {
   const {
     carId,
-    mileage = '11000',
-    type = 'Sedan',
-    seats = '5',
+    mileage ,
+    type ,
+    seats ,
     condition,
-    license = "000000",
-    oilChange = '13000',
+    license ,
+    oilChange ,
     model,
-    color = "red",
+    color,
     year,
-    manufacturer,
   } = props;
   return (
     <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">
