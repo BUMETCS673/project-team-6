@@ -20,25 +20,25 @@ describe('SignInForm', () => {
   test('redirect to SignUp page', () => {
     const { getByText, getByTestId } = render(<AccessPage />);
 
-    expect(getByTestId("to-signup")).toBeTruthy();
+    expect(getByTestId('to-signup')).toBeTruthy();
 
-    fireEvent.click(getByTestId("to-signup"));
+    fireEvent.click(getByTestId('to-signup'));
 
-    expect(getByText("Sign Up a New Account")).toBeInTheDocument();
-  })
+    expect(getByText('Sign Up a New Account')).toBeInTheDocument();
+  });
 });
 
 describe('SignUpForm', () => {
   beforeAll(() => {
-    const {getByTestId} = render(<AccessPage />);
-    fireEvent.click(getByTestId("to-signup"));
-  })
+    const { getByTestId } = render(<AccessPage />);
+    fireEvent.click(getByTestId('to-signup'));
+  });
 
   test('Invalid form submission', () => {
-    expect(screen.getByTestId("submit-signup")).toBeInTheDocument();
+    expect(screen.getByTestId('submit-signup')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId("submit-signup"));
+    fireEvent.click(screen.getByTestId('submit-signup'));
 
-    expect(screen.getByText("All fields are necessary.")).toBeInTheDocument();
+    expect(screen.getByText('All fields are necessary.')).toBeInTheDocument();
   });
 });

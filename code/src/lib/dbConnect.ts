@@ -2,23 +2,23 @@ import mongoose from 'mongoose';
 
 declare global {
   // eslint-disable-next-line vars-on-top, no-var
-  var mongoose: any // This must be a `var` and not a `let / const`
+  var mongoose: any; // This must be a `var` and not a `let / const`
 }
 
 const logger = require('pino')();
 
-let cached = global.mongoose
+let cached = global.mongoose;
 
 if (!cached) {
-  global.mongoose = { conn: null, promise: null }
-  cached = global.mongoose
+  global.mongoose = { conn: null, promise: null };
+  cached = global.mongoose;
 }
 
 /**
  * Returns a connection to the MongoDB database.
  *
  * Checks to see if the connection to the MongoDB already exists and returns the connection if so.
- * If not, uses the connection string provided in the environment variable MONGODB_URI 
+ * If not, uses the connection string provided in the environment variable MONGODB_URI
  * to establish a new connection.
  * Logs a success message to the console upon successful connection and an
  * error message upon failure.
@@ -30,24 +30,26 @@ if (!cached) {
 
 const dbConnect = async () => {
   if (cached.conn) {
-    return cached.conn
+    return cached.conn;
   }
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-    }
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mg) => mg)
+    };
+    cached.promise = mongoose
+      .connect(process.env.MONGODB_URI, opts)
+      .then((mg) => mg);
   }
   try {
-    cached.conn = await cached.promise
+    cached.conn = await cached.promise;
     logger.info('mongoDB connected ...');
   } catch (error) {
-    cached.promise = null
+    cached.promise = null;
     logger.info(`Error connecting to MongoDB: ${error}`);
-    throw error
+    throw error;
   }
 
-  return cached.conn
-}
+  return cached.conn;
+};
 
 export default dbConnect;
