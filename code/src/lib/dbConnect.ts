@@ -14,6 +14,14 @@ if (!cached) {
   cached = global.mongoose;
 }
 
+const MONGODB_URI = process.env.MONGODB_URI!
+
+if (!MONGODB_URI) {
+  throw new Error(
+    'Please define the MONGODB_URI environment variable inside .env.local'
+  )
+}
+
 /**
  * Returns a connection to the MongoDB database.
  *
@@ -27,7 +35,6 @@ if (!cached) {
  * @function
  * @throws {Error} Throws an error if there's an issue connecting to the MongoDB database.
  */
-
 const dbConnect = async () => {
   if (cached.conn) {
     return cached.conn;
@@ -37,7 +44,7 @@ const dbConnect = async () => {
       bufferCommands: false,
     };
     cached.promise = mongoose
-      .connect(process.env.MONGODB_URI, opts)
+      .connect(MONGODB_URI, opts)
       .then((mg) => mg);
   }
   try {
