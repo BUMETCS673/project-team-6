@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const logger = require('pino')();
 
-export default function SignInForm() {
+export default function AccessPage() {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
