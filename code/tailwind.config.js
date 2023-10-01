@@ -42,6 +42,9 @@ module.exports = {
         '30': '7.5rem',
         '15': '3.75rem',
       },
+      scale: {
+        '110': '1.10',
+      }
     },
   },
   plugins: [],
