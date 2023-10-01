@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React,{useState} from 'react';
 
 interface AddCarProps {
   carId: string;
@@ -15,20 +16,19 @@ interface AddCarProps {
 }
 
 function AddCar(props: AddCarProps) {
-  const {
-    carId,
-    manufacturer,
-    type,
-    year,
-    license,
-    mileage,
-    model,
-    color,
-    seats,
-    condition,
-    oilChange,
-  } = props;
 
+  const [carId, setCarId] = useState(props.carId);
+  const [manufacturer, setManufacturer] = useState(props.manufacturer);
+  const [type, setType] = useState(props.type);
+  const [year, setYear] = useState(props.year);
+  const [license, setLicense] = useState(props.license);
+  const [mileage, setMileage] = useState(props.mileage);
+  const [model, setModel] = useState(props.model);
+  const [color, setColor] = useState(props.color);
+  const [seats, setSeats] = useState(props.seats);
+  const [condition, setCondition] = useState(props.condition);
+  const [oilChange, setOilChange] = useState(props.oilChange);
+  
   return (
     <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">
       {/* car id  */}
@@ -46,6 +46,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Manufacturer"
               value={manufacturer}
+              onChange={(e) => setManufacturer(e.target.value)}
             />
           </div>
 
@@ -55,6 +56,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Type"
               value={type}
+              onChange={(e) => setType(e.target.value)}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -63,6 +65,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Year"
               value={year}
+              onChange={(e) => setYear(Number(e.target.value))}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -71,6 +74,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="License"
               value={license}
+              onChange={(e) => setLicense(e.target.value)}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -79,6 +83,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Mileage"
               value={mileage}
+              onChange={(e) => setMileage(Number(e.target.value))}
             />
           </div>
         </div>
@@ -91,6 +96,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Model"
               value={model}
+              onChange={(e) => setModel(e.target.value)}
             />
           </div>
 
@@ -100,6 +106,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Color"
               value={color}
+              onChange={(e) => setColor(e.target.value)}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -108,6 +115,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Seats"
               value={seats}
+              onChange={(e) => setSeats(Number(e.target.value))}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -116,6 +124,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Condition"
               value={condition}
+              onChange={(e) => setCondition(e.target.value)}
             />
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -124,6 +133,7 @@ function AddCar(props: AddCarProps) {
               type="text"
               placeholder="Oil Change"
               value={oilChange}
+              onChange={(e) => setOilChange(e.target.value)}
             />
           </div>
         </div>
