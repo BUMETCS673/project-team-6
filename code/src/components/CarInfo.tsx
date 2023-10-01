@@ -16,12 +16,12 @@ interface CarInfoProps {
 function CarInfo(props: CarInfoProps) {
   const {
     carId,
-    mileage ,
-    type ,
-    seats ,
+    mileage,
+    type,
+    seats,
     condition,
-    license ,
-    oilChange ,
+    license,
+    oilChange,
     model,
     color,
     year,
@@ -122,8 +122,6 @@ function CarInfo(props: CarInfoProps) {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }

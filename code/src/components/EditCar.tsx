@@ -139,6 +139,6 @@ function EditCar(props: EditCarProps) {
       </div>
     </div>
   );
-};
+}
 
 export default EditCar;

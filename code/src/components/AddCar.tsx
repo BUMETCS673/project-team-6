@@ -14,7 +14,7 @@ interface AddCarProps {
   oilChange: string;
 }
 
-function AddCar (props:AddCarProps) {
+function AddCar(props: AddCarProps) {
   const {
     carId,
     manufacturer,
@@ -140,6 +140,6 @@ function AddCar (props:AddCarProps) {
       </div>
     </div>
   );
-};
+}
 
 export default AddCar;
