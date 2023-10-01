@@ -1,5 +1,6 @@
 'use client';
-import React,{useState} from 'react';
+import React, { useState } from 'react';
+import RoundedInput from './RoundedInput';
 
 interface AddCarProps {
   carId: string;
@@ -16,7 +17,6 @@ interface AddCarProps {
 }
 
 function AddCar(props: AddCarProps) {
-
   const [carId, setCarId] = useState(props.carId);
   const [manufacturer, setManufacturer] = useState(props.manufacturer);
   const [type, setType] = useState(props.type);
@@ -28,7 +28,7 @@ function AddCar(props: AddCarProps) {
   const [seats, setSeats] = useState(props.seats);
   const [condition, setCondition] = useState(props.condition);
   const [oilChange, setOilChange] = useState(props.oilChange);
-  
+
   return (
     <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">
       {/* car id  */}
@@ -40,15 +40,13 @@ function AddCar(props: AddCarProps) {
 
       <div className="flex flex-row gap-24">
         <div className="flex flex-col gap-6 font-semibold text-[#cbcedb]">
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
+     
+            <RoundedInput
               type="text"
               placeholder="Manufacturer"
-              value={manufacturer}
               onChange={(e) => setManufacturer(e.target.value)}
             />
-          </div>
+        
 
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
