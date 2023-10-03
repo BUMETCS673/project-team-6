@@ -4,8 +4,7 @@ import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import Sidebar from './SideBar'; 
-
+import Sidebar from './SideBar';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -23,37 +22,37 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
   }, [session, router]);
 
   return (
-    <div className="flex flex-row border h-screen">
+    <div className="flex border h-screen">
       {/* side bar */}
-       <Sidebar />
- 
+      <Sidebar />
+
       {/* Car information */}
-      <div className=" border  flex-grow bg-gray-50 items-center">
-        <div className="flex flex-row bg-white p-5">
-          <div>
-            <p>Search icon</p>
-          </div>
-          <div className="flex-grow w-80 pr-10">
-            {/* Registration number or vehicle name */}
-            <input
-              type="text"
-              placeholder="Registration number or vehicle name"
-              className="bg-white border rounded px-2 py-1 focus:outline-none w-full font-semibold text-[#cbcedb]"
-            />
-          </div>
-          <div className="ml-auto">
+      <div className="flex-col w-full bg-gray-50 flex">
+        <div className="flex flex-row bg-white w-full h-10 items-center">
+          {/* Left Icon */}
+          <div className="w-8 h-8 bg-gray-300 rounded-full" />
+
+          {/* Registration number or vehicle name */}
+          <input
+            type="text"
+            placeholder="Registration number or vehicle name"
+            className="flex-grow mx-4 bg-white rounded px-2 font-light text-sm text-[#cbcedb]"
+          />
+
+          <div className="flex flex-row items-center">
             <button
               type="button"
-              className="bg-orange-500 text-white px-2 py-1 rounded-2xl mr-2"
+              className="bg-orange-500 text-white px-2 rounded-2xl mr-2"
               onClick={() => signOut({ callbackUrl: '/signin' })}
             >
-              <p className="text-white px-4">Log Out</p>
+              <p className="text-white px-4 py-1 text-sm">Log Out</p>
             </button>
-          </div>
 
-          <div className="w-8 h-8 bg-gray-300 rounded-full" />
+            <div className="w-8 h-8 bg-gray-300 rounded-full" />
+          </div>
         </div>
-        <div className="p-5">{children}</div>
+
+        <div className="p-10 flex-grow">{children}</div>
       </div>
     </div>
   );
