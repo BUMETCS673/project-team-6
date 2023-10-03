@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import RoundedInput from './RoundedInput';
 
+const logger = require('pino')();
+
 interface AddCarProps {
   carId: string;
   manufacturer: string;
@@ -43,18 +45,15 @@ function AddCar(props: AddCarProps) {
     const conditionValue = condition;
     const oilChangeValue = oilChange;
 
-    console.log('Form submitted!');
+    logger.log('Form submitted!');
   }
 
   return (
-    <div
-      className="bg-white rounded-3xl shadow-[0px_4px_10px_#cbcedb]
-       flex flex-col justify-center items-center p-10 gap-5
-    "
-    >
+
+    <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
       <div
         className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
-        font-semibold text-[#cbcedb] text-[16px] tracking-[0] leading-[normal]"
+        font-semibold text-gray-400 text-lg mb-10"
       >
         Car ID # {carId}
       </div>
@@ -127,7 +126,7 @@ function AddCar(props: AddCarProps) {
             type="button"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
-              font-semibold text-[#f8f8f7] text-lg text-center"
+              font-semibold text-white text-lg text-center"
             onClick={() => console.log('Hello')}
           >
             Add Car
