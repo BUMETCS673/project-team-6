@@ -3,73 +3,57 @@
 import React, { useState } from 'react';
 import RoundedInput from './RoundedInput';
 
+type Message = {
+  text: string;
+  type: 'red' | 'green';
+};
+
 const logger = require('pino')();
 
-interface AddCarProps {
-  carId: string;
-  manufacturer: string;
-  type: string;
-  year: number;
-  license: string;
-  mileage: number;
-  model: string;
-  color: string;
-  seats: number;
-  condition: string;
-  oilChange: string;
-}
+function AddCar() {
+  const [manufacturer, setManufacturer] = useState('manufacturer');
+  const [type, setType] = useState('type');
+  const [year, setYear] = useState(2022);
+  const [license, setLicense] = useState('license');
+  const [mileage, setMileage] = useState(5000);
+  const [model, setModel] = useState('model');
+  const [color, setColor] = useState('color');
+  const [seats, setSeats] = useState(5);
+  const [condition, setCondition] = useState('New');
+  const [mileageLastOilChange, setMileageLastOilChange] = useState(1000);
+  const [mileageLastTireChange, setMileageLastTireChange] = useState(6000);
+  const [dateNextTireChange, setDateNextTireChange] = useState(Date);
+  const [dateNextOilChange, setDateNextOilChange] = useState(Date);
 
-function AddCar({
-  carId,
-  manufacturer: initialManufacturer,
-  type: initialType,
-  year: initialYear,
-  license: initialLicense,
-  mileage: initialMileage,
-  model: initialModel,
-  color: initialColor,
-  seats: initialSeats,
-  condition: initialCondition,
-  oilChange: initialOilChange,
-}: AddCarProps) {
-  const [manufacturer, setManufacturer] = useState(initialManufacturer);
-  const [type, setType] = useState(initialType);
-  const [year, setYear] = useState(initialYear);
-  const [license, setLicense] = useState(initialLicense);
-  const [mileage, setMileage] = useState(initialMileage);
-  const [model, setModel] = useState(initialModel);
-  const [color, setColor] = useState(initialColor);
-  const [seats, setSeats] = useState(initialSeats);
-  const [condition, setCondition] = useState(initialCondition);
-  const [oilChange, setOilChange] = useState(initialOilChange);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const manufacturerValue = manufacturer;
-    const typeValue = type;
-    const yearValue = year;
-    const licenseValue = license;
-    const mileageValue = mileage;
-    const modelValue = model;
-    const colorValue = color;
-    const seatsValue = seats;
-    const conditionValue = condition;
-    const oilChangeValue = oilChange;
-
-    logger.log(
-      manufacturerValue,
-      typeValue,
-      yearValue,
-      licenseValue,
-      mileageValue,
-      modelValue,
-      colorValue,
-      seatsValue,
-      conditionValue,
-      oilChangeValue,
-    );
-  }
+  const [message, setMessage] = useState<Message | null>(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/carInfo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          manufacturer,
+          type,
+          year,
+          license,
+          mileage,
+          model,
+          color,
+          seats,
+          condition,
+          mileageLastOilChange,
+          mileageLastTireChange,
+          dateNextTireChange,
+          dateNextOilChange,
+        }),
+      });
+      const data = await response.json();
+      setMessage({ type: 'green', text: data.message });
+    } catch (error) {
+      logger.log(error);
+    }
+  };
 
   return (
     <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
@@ -80,82 +64,70 @@ function AddCar({
         Car ID # {carId}
       </div>
       <div className="flex flex-col w-full">
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className="grid grid-cols-2 gap-4"
-        >
+        <form className="grid grid-cols-2 gap-4">
           <RoundedInput
             type="text"
-            placeholder="Manufacturer"
+            placeholder={manufacturer}
             onChange={(e) => setManufacturer(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder="Type"
+            placeholder={type}
             onChange={(e) => setType(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder="Year"
+            placeholder={year.toString()}
             onChange={(e) => setYear(Number(e.target.value))}
           />
           <RoundedInput
             type="text"
-            placeholder="License"
+            placeholder={license}
             onChange={(e) => setLicense(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder="Mileage"
+            placeholder={mileage.toString()}
             onChange={(e) => setMileage(Number(e.target.value))}
           />
           <RoundedInput
             type="text"
-            placeholder="Model"
+            placeholder={model}
             onChange={(e) => setModel(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder="Color"
+            placeholder={color}
             onChange={(e) => setColor(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder="Seats"
+            placeholder={seats.toString()}
             onChange={(e) => setSeats(Number(e.target.value))}
           />
           <RoundedInput
             type="text"
-            placeholder="Condition"
+            placeholder={condition}
             onChange={(e) => setCondition(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder="Oil Change"
+            placeholder={oilChange}
             onChange={(e) => setOilChange(e.target.value)}
           />
+          {message && (
+            <div className="col-span-2 rounded-3xl px-10 py-1 text-center">
+              {message.text}
+            </div>
+          )}
           <button
             type="button"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
               font-semibold text-white text-lg text-center"
-            // onClick={() => console.error('Hello')}
           >
             Add Car
           </button>
-          {/* 
-          <div>
-            {manufacturer}
-            {type}
-            {year}
-            {license}
-            {model}
-            {mileage}
-            {seats}
-            {color}
-            {condition}
-            {oilChange}
-          </div> */}
         </form>
       </div>
     </div>
