@@ -7,8 +7,10 @@ module.exports = {
         'custom-orange': '#E17242',
         'custom-hover-orange': '#EB946F',
         'custom-grey': '#5D5B5B',
+        'dark-grey': '#4A4A4A',
         'bg-light-grey': '#D3D3D3',
         'custom-light-grey': '#F3F3F3',
+        "extra-light-grey": "#F0F0F0",
         'text-grey': '#969897',
       },
       height: {
@@ -28,6 +30,8 @@ module.exports = {
       },
       translate: {
         '110': '27.5rem',
+        '90': '22.5rem',
+        '85': '21.25rem',
         '75': '18.75rem',
         '65': '16.25rem',
         '58': '14.5rem',
@@ -44,7 +48,10 @@ module.exports = {
       },
       scale: {
         '110': '1.10',
-      }
+      },
+      borderRadius: {
+        '7xl': '5rem',
+      },
     },
   },
   plugins: [],
