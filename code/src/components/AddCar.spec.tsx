@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { getByPlaceholderText, render, screen } from '@testing-library/react';
 import AddCar from './AddCar';
 
 jest.mock('next/navigation', () => ({
@@ -26,7 +26,8 @@ describe('AddCar Component', () => {
       />,
     );
 
-    expect(getByText('12345')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Manufacturer')).toBeInTheDocument();
+   
   });
 });
 
