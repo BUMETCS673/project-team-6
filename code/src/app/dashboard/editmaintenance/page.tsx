@@ -1,9 +1,10 @@
 import DashboardLayout from '../../../components/DashboardLayout';
+import EditMaintenance from '../../../components/EditMaintenance';
 
 export default function page() {
   return (
     <DashboardLayout>
-      <p>edit maintenance</p>
+      <EditMaintenance />
     </DashboardLayout>
   );
 }
