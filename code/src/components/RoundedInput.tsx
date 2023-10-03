@@ -10,14 +10,14 @@ const RoundedInput: React.FC<RoundedInputProps> = ({ type,placeholder, onChange 
 
 
   return (
-
+    <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
       <input
         onChange={onChange}
         type={type}
         placeholder={placeholder}
-        className="rounded-xl font-normal border border-gray-500 py-2 pl-2 text-2xs w-full"
+        className="rounded-xl font-normal  py-2 pl-2 text-2xs w-full"
       />
- 
+    </div>
   );
 }
 
