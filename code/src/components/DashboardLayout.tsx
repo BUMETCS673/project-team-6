@@ -25,7 +25,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
   return (
     <div className="flex flex-row border h-screen">
       {/* side bar */}
-       {/* <Sidebar /> */}
+       <Sidebar />
  
       {/* Car information */}
       <div className=" border  flex-grow bg-gray-50 items-center">
