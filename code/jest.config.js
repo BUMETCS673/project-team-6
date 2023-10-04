@@ -2,9 +2,12 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(t|j)sx?$': ['ts-jest', {
-      tsconfig: 'tsconfig.jest.json',  
-    }],
+    '^.+\\.(t|j)sx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.jest.json',
+      },
+    ],
   },
-  modulePathIgnorePatterns: ['e2e']
+  modulePathIgnorePatterns: ['e2e'],
 };

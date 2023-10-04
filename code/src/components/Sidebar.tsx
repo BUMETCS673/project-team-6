@@ -7,7 +7,6 @@ interface SidebarLinkProps {
   text: string;
 }
 
-
 function SidebarLink({ href, text }: SidebarLinkProps) {
   return (
     <Link className="flex flex-row" href={href}>
@@ -38,6 +37,6 @@ function Sidebar() {
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;

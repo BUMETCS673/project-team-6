@@ -17,7 +17,7 @@ interface AddCarProps {
   seats: number;
   condition: string;
   oilChange: string;
-} 
+}
 
 function AddCar({
   carId,
