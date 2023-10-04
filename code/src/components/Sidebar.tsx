@@ -1,4 +1,3 @@
-// Sidebar.tsx
 import Link from 'next/link';
 
 interface SidebarLinkProps {

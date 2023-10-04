@@ -6,7 +6,6 @@ interface RoundedInputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-// Use function declaration and simplify the return statement
 function RoundedInput({ type, placeholder, onChange }: RoundedInputProps) {
   return (
     <input

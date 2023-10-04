@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface EditCarProps {
   carId: string;
   manufacturer: string;
