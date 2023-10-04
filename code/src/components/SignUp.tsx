@@ -60,8 +60,8 @@ export default function SignUp({
   };
 
   return (
-    <div className="flex bg-white w-full h-full items-center space-x-4">
-      <div className="w-1/2 flex flex-col justify-center items-center  bg-blue-400 h-full rounded-br-5xl">
+    <div className="flex bg-white w-full h-full items-center space-x-4 rounded-2xl">
+      <div className="w-1/2 flex flex-col justify-center items-center  bg-blue-400 h-full rounded-br-5xl rounded-l-2xl">
         <p className="text-white text-lg font-bold flex flex-col items-center">
           Already Signed up?
           <span className="text-xs font-light ">

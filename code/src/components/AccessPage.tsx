@@ -11,7 +11,7 @@ export default function AccessPage() {
 
   return (
     <div className="grid place-items-center h-screen bg-gray-200">
-      <div className="flex rounded-3xl shadow-xl bg-white w-1/2 h-1/2 items-center space-x-4">
+      <div className="flex rounded-2xl shadow-xl bg-white w-1/2 h-1/2 items-center space-x-4">
         {isLogin ? (
           <SignIn
             email={email}

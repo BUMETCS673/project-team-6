@@ -59,7 +59,7 @@ export default function SignIn({
         </button>
       </form>
 
-      <div className="w-1/2 flex flex-col justify-center items-center bg-blue-400 h-full rounded-bl-5xl">
+      <div className="w-1/2 flex flex-col justify-center items-center bg-blue-400 h-full rounded-bl-5xl rounded-r-2xl">
         <p className="text-white text-lg font-bold flex flex-col">
           Don&apos;t Have an Account Yet?
           <span className="text-xs font-light">
