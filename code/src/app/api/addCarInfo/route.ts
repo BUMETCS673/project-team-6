@@ -56,24 +56,32 @@ export async function POST(req: Request) {
 
     await car.create({
       manufacturer,
-        type,
-        year,
-        license,
-        currentMileage: mileage,
-        model,
-        color,
-        numSeat: seats,
-        condition,
-        mileageLastOilChange,
-        mileageLastTireChange,
-        dateNextOilChange,
-        dateNextTireChange,
-        maintenanceOverdue,
-        maintenanceRequired
+      type,
+      year,
+      license,
+      currentMileage: mileage,
+      model,
+      color,
+      numSeat: seats,
+      condition,
+      mileageLastOilChange,
+      mileageLastTireChange,
+      dateNextOilChange,
+      dateNextTireChange,
+      maintenanceOverdue,
+      maintenanceRequired
     });
+
+    const existingLicense = await car.findOne({ license });
+    if (existingLicense) {
+      return NextResponse.json(
+        { message: 'License number already registered.' },
+        { status: 400 },
+      );
+    }
     
     return NextResponse.json({ message: 'Car Added' }, { status: 201 });
   } catch (err: any) {
-    return NextResponse.json({ message: err }, { status: 500 });
+    return NextResponse.json({ message: `Server Error: ${err}` }, { status: 500 });
   }
 }
