@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-body::-webkit-scrollbar { 
+body::-webkit-scrollbar {
   width: 0 !important;
 }
 

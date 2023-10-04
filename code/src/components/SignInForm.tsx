@@ -1,18 +1,21 @@
 'use client';
-
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const logger = require('pino')();
 
-export default function SignInForm() {
+type SignInFormProps = {
+  status: boolean;
+};
+
+export default function SignInForm({ status }: SignInFormProps)  {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState((status == true || status == false) ? status : true);
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const router = useRouter();
 
@@ -67,8 +70,8 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="grid place-items-center h-screen bg-gray-200">
-      <div className="flex rounded-3xl shadow-xl bg-white w-1/2 h-1/2 items-center space-x-4">
+    <div className="grid place-items-center w-1/2 h-1/2 relative grid-click-through bg-transparent z-10">
+      <div className="flex rounded-3xl shadow-xl bg-white w-full h-full items-center space-x-4 z-10">
         {/* Login Form */}
         {isLogin && (
           <form
@@ -81,8 +84,9 @@ export default function SignInForm() {
               </div>
             )}
             <div>
-              <p className="font-bold">Email</p>
+              <label htmlFor="emailInput" className="font-bold">Email</label>
               <input
+                id="emailInput"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 type="text"
@@ -90,8 +94,9 @@ export default function SignInForm() {
               />
             </div>
             <div>
-              <p className="font-bold">Password</p>
+              <label htmlFor="passwordInput" className="font-bold">Password</label>
               <input
+                id='passwordInput'
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
@@ -109,7 +114,7 @@ export default function SignInForm() {
 
         {/* Sign Up Button */}
         {isLogin ? (
-          <div className="w-1/2 flex flex-col justify-center items-center bg-blue-400 h-full rounded-bl-5xl">
+          <div className="w-1/2 flex flex-col justify-center items-center bg-custom-orange h-full rounded-bl-5xl rounded-r-2xl">
             <p className="text-white text-lg font-bold flex flex-col">
               Don&apos;t Have an Account Yet?
               <span className="text-xs font-light">
@@ -128,8 +133,8 @@ export default function SignInForm() {
             </button>
           </div>
         ) : (
-          <div className="flex bg-white w-full h-full items-center space-x-4">
-            <div className="w-1/2 flex flex-col justify-center items-center  bg-blue-400 h-full rounded-br-5xl">
+          <div className="flex bg-white w-full h-full items-center space-x-4 rounded-2xl">
+            <div className="w-1/2 flex flex-col justify-center items-center bg-custom-orange h-full rounded-br-5xl rounded-l-2xl">
               <p className="text-white text-lg font-bold flex flex-col items-center">
                 Already Signed up?
                 <span className="text-xs font-light ">
@@ -151,7 +156,7 @@ export default function SignInForm() {
 
             <form
               onSubmit={handleSignUp}
-              className="flex flex-col gap-3  w-1/2 px-10"
+              className="flex flex-col gap-3  w-1/2 px-10 rounded-xl"
             >
               {responseMessage && (
                 <div
@@ -167,26 +172,31 @@ export default function SignInForm() {
               )}
               <div className="flex flex-row gap-3">
                 <div>
-                  <p className="font-bold">Firstname</p>
+                  <label htmlFor="firstNameInput" className="font-bold">Firstname</label>
                   <input
+                    id="firstNameInput"
                     onChange={(e) => setFirstname(e.target.value)}
                     type="text"
                     className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
+                    placeholder='Firstname'
                   />
                 </div>
                 <div>
-                  <p className="font-bold">Lastname</p>
+                  <label htmlFor="lastNameInput" className="font-bold">Lastname</label>
                   <input
+                    id="lastNameInput"
                     onChange={(e) => setLastname(e.target.value)}
                     type="text"
                     className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
+                    placeholder='Lastname'
                   />
                 </div>
               </div>
 
               <div>
-                <p className="font-bold">Email</p>
+                <label htmlFor="emailInput" className="font-bold">Email</label>
                 <input
+                  id="emailInput"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   type="text"
@@ -194,8 +204,9 @@ export default function SignInForm() {
                 />
               </div>
               <div>
-                <p className="font-bold">Password</p>
+                <label htmlFor="passwordInput" className="font-bold">Password</label>
                 <input
+                  id="passwordInput"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
