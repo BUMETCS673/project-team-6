@@ -2,19 +2,21 @@
 import Link from 'next/link';
 
 interface SidebarLinkProps {
+  // imgSrc:string;
   href: string;
   text: string;
 }
 
-const SidebarLink: React.FC<SidebarLinkProps> = ({ href, text }) => {
+
+function SidebarLink({ href, text }: SidebarLinkProps) {
   return (
     <Link className="flex flex-row" href={href}>
+      {/* <img src={imgSrc} alt = "Ikon"></img> */}
       <p>{text}</p>
     </Link>
   );
-};
-
-const Sidebar: React.FC = () => {
+}
+function Sidebar() {
   return (
     <div className="flex flex-col pl-10 w-1/5 border bg-white">
       <div className="p-3">

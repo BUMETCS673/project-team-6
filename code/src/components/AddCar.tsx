@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import RoundedInput from './RoundedInput';
 
@@ -16,20 +17,31 @@ interface AddCarProps {
   seats: number;
   condition: string;
   oilChange: string;
-}
+} 
 
-function AddCar(props: AddCarProps) {
-  const [carId, setCarId] = useState(props.carId);
-  const [manufacturer, setManufacturer] = useState(props.manufacturer);
-  const [type, setType] = useState(props.type);
-  const [year, setYear] = useState(props.year);
-  const [license, setLicense] = useState(props.license);
-  const [mileage, setMileage] = useState(props.mileage);
-  const [model, setModel] = useState(props.model);
-  const [color, setColor] = useState(props.color);
-  const [seats, setSeats] = useState(props.seats);
-  const [condition, setCondition] = useState(props.condition);
-  const [oilChange, setOilChange] = useState(props.oilChange);
+function AddCar({
+  carId,
+  manufacturer: initialManufacturer,
+  type: initialType,
+  year: initialYear,
+  license: initialLicense,
+  mileage: initialMileage,
+  model: initialModel,
+  color: initialColor,
+  seats: initialSeats,
+  condition: initialCondition,
+  oilChange: initialOilChange,
+}: AddCarProps) {
+  const [manufacturer, setManufacturer] = useState(initialManufacturer);
+  const [type, setType] = useState(initialType);
+  const [year, setYear] = useState(initialYear);
+  const [license, setLicense] = useState(initialLicense);
+  const [mileage, setMileage] = useState(initialMileage);
+  const [model, setModel] = useState(initialModel);
+  const [color, setColor] = useState(initialColor);
+  const [seats, setSeats] = useState(initialSeats);
+  const [condition, setCondition] = useState(initialCondition);
+  const [oilChange, setOilChange] = useState(initialOilChange);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -45,11 +57,21 @@ function AddCar(props: AddCarProps) {
     const conditionValue = condition;
     const oilChangeValue = oilChange;
 
-    logger.log('Form submitted!');
+    logger.log(
+      manufacturerValue,
+      typeValue,
+      yearValue,
+      licenseValue,
+      mileageValue,
+      modelValue,
+      colorValue,
+      seatsValue,
+      conditionValue,
+      oilChangeValue,
+    );
   }
 
   return (
-
     <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
       <div
         className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
@@ -67,70 +89,73 @@ function AddCar(props: AddCarProps) {
             placeholder="Manufacturer"
             onChange={(e) => setManufacturer(e.target.value)}
           />
-
           <RoundedInput
             type="text"
             placeholder="Type"
             onChange={(e) => setType(e.target.value)}
           />
-
           <RoundedInput
             type="number"
             placeholder="Year"
             onChange={(e) => setYear(Number(e.target.value))}
           />
-
           <RoundedInput
             type="text"
             placeholder="License"
             onChange={(e) => setLicense(e.target.value)}
           />
-
           <RoundedInput
             type="number"
             placeholder="Mileage"
             onChange={(e) => setMileage(Number(e.target.value))}
           />
-
           <RoundedInput
             type="text"
             placeholder="Model"
             onChange={(e) => setModel(e.target.value)}
           />
-
           <RoundedInput
             type="text"
             placeholder="Color"
             onChange={(e) => setColor(e.target.value)}
           />
-
           <RoundedInput
             type="number"
             placeholder="Seats"
             onChange={(e) => setSeats(Number(e.target.value))}
           />
-
           <RoundedInput
             type="text"
             placeholder="Condition"
             onChange={(e) => setCondition(e.target.value)}
           />
-
           <RoundedInput
             type="text"
             placeholder="Oil Change"
             onChange={(e) => setOilChange(e.target.value)}
           />
-
           <button
             type="button"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
               font-semibold text-white text-lg text-center"
-            onClick={() => console.log('Hello')}
+            // onClick={() => console.error('Hello')}
           >
             Add Car
           </button>
+          {/* 
+          <div>
+            {manufacturer}
+            {type}
+            {year}
+            {license}
+            {model}
+            {mileage}
+            {seats}
+            {color}
+            {condition}
+            {oilChange}
+          </div> */}
         </form>
       </div>
     </div>
