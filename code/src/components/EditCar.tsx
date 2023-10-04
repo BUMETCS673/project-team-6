@@ -101,7 +101,7 @@ function EditCar(props: EditCarProps) {
             />
           </div>
         </div>
-    
+
         {/* Right column */}
         <div className="flex flex-col gap-6 font-semibold text-[#cbcedb]">
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
@@ -138,7 +138,7 @@ function EditCar(props: EditCarProps) {
             />
           </div>
           <div className="w-[308px] h-[45px]">
-            {/*Placeholder for Empty Space*/}
+            {/* Placeholder for Empty Space */}
           </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input

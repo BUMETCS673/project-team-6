@@ -34,23 +34,24 @@ import car from '@/models/Car';
 export async function POST(req: Request) {
   try {
     const {
-        manufacturer,
-        type,
-        year,
-        license,
-        mileage,
-        model,
-        color,
-        seats,
-        condition,
-        mileageLastOilChange,
-        mileageLastTireChange,
-        dateNextOilChange,
-        dateNextTireChange,
-     } = await req.json();
+      manufacturer,
+      type,
+      year,
+      license,
+      mileage,
+      model,
+      color,
+      seats,
+      condition,
+      mileageLastOilChange,
+      mileageLastTireChange,
+      dateNextOilChange,
+      dateNextTireChange,
+    } = await req.json();
 
     // Set defaults
-    let maintenanceOverdue, maintenanceRequired = false
+    let maintenanceOverdue;
+      const maintenanceRequired = false;
 
     await dbConnect();
 
@@ -69,7 +70,7 @@ export async function POST(req: Request) {
       dateNextOilChange,
       dateNextTireChange,
       maintenanceOverdue,
-      maintenanceRequired
+      maintenanceRequired,
     });
 
     const existingLicense = await car.findOne({ license });
@@ -79,9 +80,12 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
-    
+
     return NextResponse.json({ message: 'Car Added' }, { status: 201 });
   } catch (err: any) {
-    return NextResponse.json({ message: `Server Error: ${err}` }, { status: 500 });
+    return NextResponse.json(
+      { message: `Server Error: ${err}` },
+      { status: 500 },
+    );
   }
 }
