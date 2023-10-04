@@ -23,14 +23,14 @@ export default function Home() {
 
   useEffect(() => {
     if (active) {
-        document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
     } else {
-        document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
     }
 
     // Cleanup effect when component unmounts
     return () => {
-        document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
     };
   }, [active]);
 
@@ -105,12 +105,15 @@ export default function Home() {
   ];
   return (
     <>
-      {active && 
+      {active && (
         <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center z-50">
-          <SignInForm status={true}/>
-          <div className="absolute top-0 bottom-0 left-0 right-0 bg-transparent z-0" onClick={() => setActive(false)}></div>
+          <SignInForm status={true} />
+          <div
+            className="absolute top-0 bottom-0 left-0 right-0 bg-transparent z-0"
+            onClick={() => setActive(false)}
+          ></div>
         </div>
-      }
+      )}
       <div className="bg-white min-h-full w-full">
         {/* Top Bar */}
         <nav className="fixed top-0 w-full flex justify-between items-center px-4 py-10 bg-gradient-to-b from-black to-transparent z-40">

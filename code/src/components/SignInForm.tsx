@@ -9,13 +9,15 @@ type SignInFormProps = {
   status: boolean;
 };
 
-export default function SignInForm({ status }: SignInFormProps)  {
+export default function SignInForm({ status }: SignInFormProps) {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [isLogin, setIsLogin] = useState((status == true || status == false) ? status : true);
+  const [isLogin, setIsLogin] = useState(
+    status == true || status == false ? status : true,
+  );
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const router = useRouter();
 
@@ -84,7 +86,9 @@ export default function SignInForm({ status }: SignInFormProps)  {
               </div>
             )}
             <div>
-              <label htmlFor="emailInput" className="font-bold">Email</label>
+              <label htmlFor="emailInput" className="font-bold">
+                Email
+              </label>
               <input
                 id="emailInput"
                 placeholder="Email"
@@ -94,9 +98,11 @@ export default function SignInForm({ status }: SignInFormProps)  {
               />
             </div>
             <div>
-              <label htmlFor="passwordInput" className="font-bold">Password</label>
+              <label htmlFor="passwordInput" className="font-bold">
+                Password
+              </label>
               <input
-                id='passwordInput'
+                id="passwordInput"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
@@ -172,29 +178,35 @@ export default function SignInForm({ status }: SignInFormProps)  {
               )}
               <div className="flex flex-row gap-3">
                 <div>
-                  <label htmlFor="firstNameInput" className="font-bold">Firstname</label>
+                  <label htmlFor="firstNameInput" className="font-bold">
+                    Firstname
+                  </label>
                   <input
                     id="firstNameInput"
                     onChange={(e) => setFirstname(e.target.value)}
                     type="text"
                     className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
-                    placeholder='Firstname'
+                    placeholder="Firstname"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastNameInput" className="font-bold">Lastname</label>
+                  <label htmlFor="lastNameInput" className="font-bold">
+                    Lastname
+                  </label>
                   <input
                     id="lastNameInput"
                     onChange={(e) => setLastname(e.target.value)}
                     type="text"
                     className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
-                    placeholder='Lastname'
+                    placeholder="Lastname"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="emailInput" className="font-bold">Email</label>
+                <label htmlFor="emailInput" className="font-bold">
+                  Email
+                </label>
                 <input
                   id="emailInput"
                   placeholder="Email"
@@ -204,7 +216,9 @@ export default function SignInForm({ status }: SignInFormProps)  {
                 />
               </div>
               <div>
-                <label htmlFor="passwordInput" className="font-bold">Password</label>
+                <label htmlFor="passwordInput" className="font-bold">
+                  Password
+                </label>
                 <input
                   id="passwordInput"
                   placeholder="Password"

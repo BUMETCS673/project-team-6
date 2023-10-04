@@ -10,19 +10,25 @@ jest.mock('next/navigation', () => ({
 
 describe('SignInForm', () => {
   test('should render login form when status is true', () => {
-    const { getByRole, getByPlaceholderText } = render(<SignInForm status={true} />);
+    const { getByRole, getByPlaceholderText } = render(
+      <SignInForm status={true} />,
+    );
 
     expect(getByRole('textbox', { name: 'Email' })).toBeInTheDocument();
     expect(getByPlaceholderText('Password')).toBeInTheDocument();
 
-    const signInButton = getByRole('button', { name: 'Sign In with credentials' });
+    const signInButton = getByRole('button', {
+      name: 'Sign In with credentials',
+    });
     expect(signInButton).toBeInTheDocument();
 
     fireEvent.click(signInButton);
   });
 
   test('should render sign up form when status is false', () => {
-    const { getByRole, getByPlaceholderText } = render(<SignInForm status={false} />);
+    const { getByRole, getByPlaceholderText } = render(
+      <SignInForm status={false} />,
+    );
 
     expect(getByRole('textbox', { name: 'Firstname' })).toBeInTheDocument();
     expect(getByRole('textbox', { name: 'Lastname' })).toBeInTheDocument();
