@@ -51,7 +51,7 @@ export async function POST(req: Request) {
 
     // Set defaults
     let maintenanceOverdue;
-      const maintenanceRequired = false;
+    const maintenanceRequired = false;
 
     await dbConnect();
 
