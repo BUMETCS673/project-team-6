@@ -11,14 +11,14 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout(props: DashboardLayoutProps) {
   const { children } = props;
-  // const { data: session } = useSession();
-  // const router = useRouter();
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.replace('/signin');
-  //   }
-  // }, [session, router]);
+  useEffect(() => {
+    if (!session) {
+      router.replace('/signin');
+    }
+  }, [session, router]);
 
   return (
     <div className="flex border h-screen">

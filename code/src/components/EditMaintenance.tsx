@@ -1,6 +1,6 @@
 'use client';
 
-type MaintenanceInputProps = {
+interface MaintenanceInputProps  {
   text?: string;
   type?: string;
   placeholder?: string;
@@ -14,7 +14,7 @@ function MaintenanceInput({
   onChange,
 }: MaintenanceInputProps) {
   return (
-    <label className="flex justify-between text-md">
+    <div className="flex justify-between text-md">
       {text}
       <input
         onChange={onChange}
@@ -22,10 +22,11 @@ function MaintenanceInput({
         placeholder={placeholder}
         className="rounded-xl font-normal border-2 border-gray-200 pl-2 text-2xs w-36"
       />
-    </label>
+    </div>
   );
 }
 MaintenanceInput.defaultProps = {
+  text: 'label',
   type: 'text',
   placeholder: 'Enter value',
   onChange: () => {},
