@@ -50,10 +50,18 @@ export async function POST(req: Request) {
     } = await req.json();
 
     // Set defaults
-    let maintenanceOverdue;
-    const maintenanceRequired = false;
+    let maintenanceOverdue = false;
+    let maintenanceRequired = false;
 
     await dbConnect();
+
+    const existingLicense = await car.findOne({ license });
+    if (existingLicense) {
+      return NextResponse.json(
+        { message: 'License number already registered.' },
+        { status: 400 },
+      );
+    }
 
     await car.create({
       manufacturer,
@@ -72,14 +80,6 @@ export async function POST(req: Request) {
       maintenanceOverdue,
       maintenanceRequired,
     });
-
-    const existingLicense = await car.findOne({ license });
-    if (existingLicense) {
-      return NextResponse.json(
-        { message: 'License number already registered.' },
-        { status: 400 },
-      );
-    }
 
     return NextResponse.json({ message: 'Car Added' }, { status: 201 });
   } catch (err: any) {
