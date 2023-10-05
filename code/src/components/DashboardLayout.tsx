@@ -1,9 +1,9 @@
 'use client';
 
 import { useSession, signOut } from 'next-auth/react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Sidebar from './Sidebar';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -23,42 +23,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
   return (
     <div className="flex border h-screen">
       {/* side bar */}
-      <div className="flex flex-col pl-10 w-1/5 border bg-white">
-        <div className="p-3">
-          <p className="p-1 text-orange-500 font-bold ">
-            Rental<span className="underline">Company</span>
-          </p>
-        </div>
-
-        <div className="py-2 font-semibold text-[#cbcedb]">MENU</div>
-
-        <div className="flex flex-col gap-4 font-semibold text-[#cbcedb]">
-          <Link className="flex flex-row" href="/dashboard/managecars">
-            {/* <img src={userIcon} alt="User Icon" /> */}
-            <p>Manage Cars</p>
-          </Link>
-          <Link className="flex flex-row" href="/dashboard/addcar">
-            {/* <img src={add} alt="add icon" /> */}
-            <p>Add Cars</p>
-          </Link>
-          <Link className="flex flex-row" href="/dashboard/editcar">
-            {/* <img src={edit} alt="User Icon" /> */}
-            <p>Edit Cars</p>
-          </Link>
-          <Link className="flex flex-row" href="/dashboard/carinformation">
-            {/* <img src={info} alt="U" /> */}
-            <p>Car Information</p>
-          </Link>
-          <Link className="flex flex-row" href="/dashboard/maintenance">
-            {/* <img src={maintenance} alt="User Icon" /> */}
-            <p>Maintenance</p>
-          </Link>
-          <Link className="flex flex-row" href="/dashboard/editmaintenance">
-            {/* <img src={maintenance} alt="User Icon" /> */}
-            <p>Edit Maintenance</p>
-          </Link>
-        </div>
-      </div>
+      <Sidebar />
 
       {/* Car information */}
       <div className="flex-col w-full bg-gray-50 flex">
