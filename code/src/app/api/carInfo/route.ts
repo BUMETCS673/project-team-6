@@ -3,6 +3,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import car from '@/models/Car';
+
 /**
  * Add car info REST API access.
  * This endpoint allows a user to add car information.
@@ -26,7 +27,7 @@ import car from '@/models/Car';
  * @param {string} req.body.dateNextOilChange - The date of next oil change.
  * @param {string} req.body.dateNextTireChange - The date of next tire change.
  * @returns {Promise<NextResponse>} A response object.
- * 201: Car added successfully.
+ * 201: Car added successfully. New car info returned.
  * 500: Unexpected server error.
  * @throws {Error} Throws an error if there's an issue with the registration process.
  */
@@ -50,8 +51,8 @@ export async function POST(req: Request) {
     } = await req.json();
 
     // Set defaults
-    let maintenanceOverdue = false;
-    let maintenanceRequired = false;
+    const maintenanceOverdue = false;
+    const maintenanceRequired = false;
 
     await dbConnect();
 
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
       );
     }
 
-    await car.create({
+    const newCar = await car.create({
       manufacturer,
       type,
       year,
@@ -81,7 +82,58 @@ export async function POST(req: Request) {
       maintenanceRequired,
     });
 
-    return NextResponse.json({ message: 'Car Added' }, { status: 201 });
+    return NextResponse.json({ carId: newCar }, { status: 201 });
+  } catch (err: any) {
+    return NextResponse.json(
+      { message: `Server Error: ${err}` },
+      { status: 500 },
+    );
+  }
+}
+
+/**
+ * Get car info REST API access.
+ * This endpoint allows a user to get car information.
+ *
+ * @async
+ * @function
+ * @param {Object} req - The request object.
+ * @param {Object} req.url - The url of the request.
+ * @returns {Promise<NextResponse>} A response object.
+ * 200: Car retrieved successfully.
+ * 400: Car ID not provided or invalid.
+ * 404: Car ID not found in DB.
+ * 500: Unexpected server error.
+ * @throws {Error} Throws an error if there's an issue with the registration process.
+ */
+
+export async function GET(req: Request) {
+  try {
+    const url = new URL(req.url);
+    const carId = url.searchParams.get('carId');
+
+    if (!carId) {
+      return NextResponse.json(
+        { message: 'Please provide a carId' },
+        { status: 400 },
+      );
+    }
+
+    await dbConnect();
+
+    if (!carId.match(/^[0-9a-fA-F]{24}$/)) {
+      return NextResponse.json({ message: 'Invalid carId' }, { status: 400 });
+    }
+
+    const carObject = await car.findById({ _id: carId });
+    if (!carObject) {
+      return NextResponse.json(
+        { message: `Car ID does not match any records: ${carId}` },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({ carObject }, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
