@@ -51,26 +51,9 @@ module.exports = {
       },
       borderRadius: {
         '7xl': '5rem',
+        '4xl': '3rem',
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      const newUtilities = {
-        '.grid-click-through::before': {
-          content: '""',
-          position: 'absolute',
-          top: '0',
-          right: '0',
-          bottom: '0',
-          left: '0',
-          pointerEvents: 'none',
-          zIndex: '-1',
-          // Background if necessary
-        },
-      };
-
-      addUtilities(newUtilities, ['responsive', 'hover']);
-    },
-  ],
+  plugins: [],
 };

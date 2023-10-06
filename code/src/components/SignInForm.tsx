@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -16,7 +17,7 @@ export default function SignInForm({ status }: SignInFormProps) {
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLogin, setIsLogin] = useState(
-    status == true || status == false ? status : true,
+    status === true || status === false ? status : true,
   );
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const router = useRouter();
@@ -86,11 +87,11 @@ export default function SignInForm({ status }: SignInFormProps) {
               </div>
             )}
             <div>
-              <label htmlFor="emailInput" className="font-bold">
+              <label htmlFor="loginEmailInput" className="font-bold">
                 Email
               </label>
               <input
-                id="emailInput"
+                id="loginEmailInput"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 type="text"
@@ -98,11 +99,11 @@ export default function SignInForm({ status }: SignInFormProps) {
               />
             </div>
             <div>
-              <label htmlFor="passwordInput" className="font-bold">
+              <label htmlFor="loginPasswordInput" className="font-bold">
                 Password
               </label>
               <input
-                id="passwordInput"
+                id="loginPasswordInput"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
@@ -178,11 +179,11 @@ export default function SignInForm({ status }: SignInFormProps) {
               )}
               <div className="flex flex-row gap-3">
                 <div>
-                  <label htmlFor="firstNameInput" className="font-bold">
+                  <label htmlFor="registerFirstNameInput" className="font-bold">
                     Firstname
                   </label>
                   <input
-                    id="firstNameInput"
+                    id="registerFirstNameInput"
                     onChange={(e) => setFirstname(e.target.value)}
                     type="text"
                     className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
@@ -190,11 +191,11 @@ export default function SignInForm({ status }: SignInFormProps) {
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastNameInput" className="font-bold">
+                  <label htmlFor="registerLastNameInput" className="font-bold">
                     Lastname
                   </label>
                   <input
-                    id="lastNameInput"
+                    id="registerLastNameInput"
                     onChange={(e) => setLastname(e.target.value)}
                     type="text"
                     className="rounded-xl border border-gray-500 py-1 pl-2 w-full"
@@ -204,11 +205,11 @@ export default function SignInForm({ status }: SignInFormProps) {
               </div>
 
               <div>
-                <label htmlFor="emailInput" className="font-bold">
+                <label htmlFor="registerEmailInput" className="font-bold">
                   Email
                 </label>
                 <input
-                  id="emailInput"
+                  id="registerEmailInput"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   type="text"
@@ -216,11 +217,11 @@ export default function SignInForm({ status }: SignInFormProps) {
                 />
               </div>
               <div>
-                <label htmlFor="passwordInput" className="font-bold">
+                <label htmlFor="registerPasswordInput" className="font-bold">
                   Password
                 </label>
                 <input
-                  id="passwordInput"
+                  id="registerPasswordInput"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"

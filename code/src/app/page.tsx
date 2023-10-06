@@ -1,7 +1,8 @@
 'use client';
-import Link from 'next/link';
+
 import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import SignInForm from '../components/SignInForm';
 
 export default function Home() {
@@ -34,7 +35,7 @@ export default function Home() {
     };
   }, [active]);
 
-  const squares_1 = [
+  const squaresOne = [
     {
       header: 'Protection',
       icon: (
@@ -89,7 +90,7 @@ export default function Home() {
     },
   ];
 
-  const squares_2 = [
+  const squaresTwo = [
     {
       header: '456M',
       text: 'Lorem ipsum dolor sit amet, consectetur.',
@@ -103,15 +104,26 @@ export default function Home() {
       text: 'Lorem ipsum dolor sit amet, consectetur.',
     },
   ];
+
+  const handleKeyInteraction = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      setActive(false);
+    }
+  };
+
   return (
     <>
       {active && (
         <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center z-50">
-          <SignInForm status={true} />
+          <SignInForm status />
           <div
             className="absolute top-0 bottom-0 left-0 right-0 bg-transparent z-0"
             onClick={() => setActive(false)}
-          ></div>
+            onKeyDown={handleKeyInteraction}
+            role="button"                   
+            tabIndex={0} 
+            aria-label="Close sign-in form"                    
+          />
         </div>
       )}
       <div className="bg-white min-h-full w-full">
@@ -181,6 +193,7 @@ export default function Home() {
           </ul>
           <div className="px-10 flex justify-end items-center sm:w-1/3">
             <button
+              type="button"
               onClick={() => setActive(true)}
               className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8"
             >
@@ -210,7 +223,7 @@ export default function Home() {
                 height={720}
               />
             </div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-36 -translate-y-75 w-2/12 opacity-75 hover:opacity-100 transition duration-800 ease-in-out z-20">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-75 w-2/12 opacity-75 hover:opacity-100 transition duration-800 ease-in-out z-20">
               <Image
                 src="/StartButton.svg"
                 alt="Start Button"
@@ -252,8 +265,8 @@ export default function Home() {
           </div>
           <div
             style={{ height: imageDimensions?.height }}
-            className={`absolute w-full translate-y-90 bg-black z-0`}
-          ></div>
+            className="absolute w-full translate-y-90 bg-black z-0"
+          />
         </section>
 
         {/* Body Sections */}
@@ -283,27 +296,28 @@ export default function Home() {
               in sem a nisl wsde faucibus lobortis.
             </p>
             <div className="w-7/12 flex flex-row justify-between items-center -translate-y-50 translate-x-35 px-14 gap-2">
-              <button className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8">
+              <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8">
                 Get Started
               </button>
               <p className="text-center">Learn More</p>
             </div>
           </div>
           <div className="w-1/4 h-1/4 flex grid justify-start -translate-x-40 items-center grid-cols-2 gap-10">
-            {squares_1.map((item, index) => (
-              <div
-                key={index}
-                className={`flex flex-col justify-center items-center rounded-lg w-40 h-40 ${
-                  index === 1
-                    ? 'bg-black text-white scale-110 ml-2 mb-4'
-                    : 'bg-custom-light-grey text-text-grey'
-                }`}
-              >
-                <div className="text-center text-sm">{item?.header}</div>
-                <div className="text-center p-4">{item?.icon}</div>
-                <div className="text-center text-sm">{item?.text}</div>
-              </div>
-            ))}
+            {squaresOne.map((item, index) => {
+              const uniqueId = uuidv4();
+              return (
+                <div
+                  key={uniqueId}
+                  className={`flex flex-col justify-center items-center rounded-lg w-40 h-40 ${
+                    index === 1 ? 'bg-black text-white scale-110 ml-2 mb-4' : 'bg-custom-light-grey text-text-grey'
+                  }`}
+                >
+                  <div className="text-center text-sm">{item?.header}</div>
+                  <div className="text-center p-4">{item?.icon}</div>
+                  <div className="text-center text-sm">{item?.text}</div>
+                </div>
+              )
+            })}
           </div>
         </section>
 
@@ -334,31 +348,30 @@ export default function Home() {
               </p>
             </div>
             <div className="w-9/12 absolute translate-x-90 px-14">
-              <div
-                className={`w-full flex justify-between items-center h-25 -translate-y-10`}
-              >
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2"></div>
-                <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2"></div>
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2"></div>
+              <div className="w-full flex justify-between items-center h-25 -translate-y-10">
+                <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2" />
+                <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2" />
+                <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2" />
               </div>
             </div>
           </div>
           <div className="absolute w-full flex flex-row justify-center translate-y-40 items-center gap-10 px-40 z-20">
-            {squares_2.map((item, index) => (
-              <div
-                key={index}
-                className={`flex flex-col justify-center items-center rounded-lg w-1/3 h-40 ${
-                  index == 0
-                    ? 'bg-custom-light-grey text-text-grey'
-                    : index == 1
-                    ? `bg-custom-light-grey text-custom-grey`
-                    : `bg-custom-light-grey text-dark-grey`
-                }`}
-              >
-                <div className="text-center text-6xl">{item?.header}</div>
-                <div className="text-center text-2xl">{item?.text}</div>
-              </div>
-            ))}
+            {squaresTwo.map((item, index) => {
+              const uniqueId = uuidv4();
+              return (
+                <div
+                  key={uniqueId}
+                  className={`flex flex-col justify-center items-center rounded-lg w-1/3 h-40 bg-custom-light-grey 
+                    ${index === 0 && 'text-text-grey'}
+                    ${index === 1 && `text-custom-grey`}
+                    ${index === 2 && `text-dark-grey`}
+                  }`}
+                >
+                  <div className="text-center text-6xl">{item?.header}</div>
+                  <div className="text-center text-2xl">{item?.text}</div>
+                </div>
+              )
+            })}
           </div>
         </section>
 
@@ -372,7 +385,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="w-full pl-14 justify-end items-start">
-                <button className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8">
+                <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8">
                   Try <span className="font-bold">RentalCompany</span> Now
                 </button>
               </div>
@@ -390,10 +403,7 @@ export default function Home() {
         </section>
 
         {/* Section 4 */}
-        <section
-          id="strategy"
-          className="relative flex flex-col flex justify-center items-center z-30 bg-white pb-20"
-        >
+        <section id="strategy" className="relative flex flex-col flex justify-center items-center z-30 bg-white pb-20">
           <div className="relative flex flex-row justify-between mx-auto z-20 bg-white">
             <div className="w-1/2">
               <div className="w-1/2 translate-x-20 px-14">
@@ -419,22 +429,28 @@ export default function Home() {
               </p>
             </div>
             <div className="w-9/12 absolute translate-y-45 translate-x-90 px-14">
-              <div
-                className={`w-full flex justify-between items-center h-25 -translate-y-10`}
-              >
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2"></div>
-                <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2"></div>
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2"></div>
+              <div className="w-full flex justify-between items-center h-25 -translate-y-10">
+                <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2" />
+                <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2" />
+                <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2" />
               </div>
             </div>
           </div>
           {/* Video element with rounded corners */}
           <div className="w-8/12 px-14">
-            <video
-              className="w-full rounded-7xl"
-              controls
-              src="path_to_your_video.mp4"
+            
+            {/* Video element */}
+            <video 
+              width="100%" 
+              height="100%" 
+              controls 
+              aria-label="Description of the video's content"
+              title="Short description of the video"
+              className="rounded-4xl"
             >
+              <source src="/sample.mp4" type="video/mp4" />
+              {/* Adjusting 'kind' attribute to "captions" */}
+              <track kind="captions" src="/subtitle_en.vtt" srcLang="en" label="English" default />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -447,7 +463,7 @@ export default function Home() {
               Lorem ipsum dolor sit amet, adipiscing elit.
             </p>
           </div>
-          <button className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8">
+          <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8">
             Join <span className="font-bold">RentalCompany</span> Now
           </button>
           <Image
