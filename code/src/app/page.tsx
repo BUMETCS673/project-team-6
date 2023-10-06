@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
+import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
 import SignInForm from '../components/SignInForm';
 
@@ -113,6 +114,64 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        {/* Preloading images */}
+        <link
+          rel="preload"
+          as="image"
+          href="/favicon.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/CompanyLogo.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/CarsImagCards.png"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/StartButton.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/Divider.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/carImage.png"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/BackgroundTexture.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/01.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/02.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/CarFloating.svg"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/03.svg"
+        />
+      </Head>
       {active && (
         <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center z-50">
           <SignInForm status />
@@ -126,7 +185,7 @@ export default function Home() {
           />
         </div>
       )}
-      <div className="bg-white min-h-full w-full">
+      <div className="bg-white h-full w-full">
         {/* Top Bar */}
         <nav className="fixed top-0 w-full flex justify-between items-center px-4 py-10 bg-gradient-to-b from-black to-transparent z-40">
           <div className="flex justify-start items-center sm:w-1/3 px-12">
@@ -255,6 +314,7 @@ export default function Home() {
           </div>
 
           <div className="absolute top-0 left-0 right-0 translate-y-15 opacity-50 z-0">
+            {/* Background texture */}
             <Image
               src="/BackgroundTexture.svg"
               alt="Texture"
@@ -277,6 +337,7 @@ export default function Home() {
         >
           <div className="w-1/2">
             <div className="w-1/2 -translate-y-40 translate-x-20 px-14">
+              {/* The 01 number image */}
               <Image
                 src="/01.svg"
                 alt="01"
@@ -323,9 +384,10 @@ export default function Home() {
 
         {/* Section 2 */}
         <section id="about" className="relative flex flex-col z-30 bg-white">
-          <div className="relative flex flex-row justify-between mx-auto z-20 bg-white">
+          <div className="relative flex flex-row justify-between items-center mx-auto z-20 bg-white">
             <div className="w-1/2">
               <div className="w-1/2 -translate-y-40 translate-x-20 px-14">
+                {/* The 02 number image */}
                 <Image
                   src="/02.svg"
                   alt="02"
@@ -340,17 +402,17 @@ export default function Home() {
               </h1>
             </div>
             <div className="w-1/2">
-              <p className="w-8/12 translate-x-35 px-14 text-black">
+              <p className="w-8/12 -translate-y-30 translate-x-35 px-14 text-black">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
                 lacinia odio vitae vestibulum. Donec in efficitur leo. In
                 scelerisque quam non defd mollis. Vivamus sed porttitor dui. Sed
                 in sem a nisl wsde faucibus lobortis.
               </p>
             </div>
-            <div className="w-9/12 absolute translate-x-90 px-14">
+            <div className="w-9/12 absolute -translate-y-40 translate-x-90 px-14">
               <div className="w-full flex justify-between items-center h-25 -translate-y-10">
                 <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2" />
-                <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2" />
+                <div className="flex-grow w-1/3 h-0.5 bg-extra-light-grey mx-2" />
                 <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2" />
               </div>
             </div>
@@ -391,6 +453,7 @@ export default function Home() {
               </div>
             </div>
             <div className="w-7/12 flex justify-end items-center pr-4 z-10">
+              {/* The car image in the middle black section */}
               <Image
                 src="/CarFloating.svg"
                 alt="Car Floating"
@@ -404,9 +467,10 @@ export default function Home() {
 
         {/* Section 4 */}
         <section id="strategy" className="relative flex flex-col flex justify-center items-center z-30 bg-white pb-20">
-          <div className="relative flex flex-row justify-between mx-auto z-20 bg-white">
+          <div className="relative flex flex-row justify-between items-center mx-auto z-20 bg-white">
             <div className="w-1/2">
               <div className="w-1/2 translate-x-20 px-14">
+                {/* The 03 number image*/}
                 <Image
                   src="/03.svg"
                   alt="03"
@@ -415,20 +479,20 @@ export default function Home() {
                   height={248}
                 />
               </div>
-              <h1 className="w-10/12 -translate-y-20 translate-x-35 px-14 text-5xl">
+              <h1 className="w-10/12 -translate-y-25 translate-x-35 px-14 text-5xl">
                 Hear from the founders of{' '}
                 <span className="font-bold">RentalCompany</span>
               </h1>
             </div>
             <div className="w-1/2">
-              <p className="w-8/12 translate-y-45 translate-x-35 px-14 text-black">
+              <p className="w-8/12 translate-y-5 translate-x-35 px-14 text-black">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
                 lacinia odio vitae vestibulum. Donec in efficitur leo. In
                 scelerisque quam non defd mollis. Vivamus sed porttitor dui. Sed
                 in sem a nisl wsde faucibus lobortis.
               </p>
             </div>
-            <div className="w-9/12 absolute translate-y-45 translate-x-90 px-14">
+            <div className="w-9/12 absolute -translate-y-6 translate-x-90 px-14">
               <div className="w-full flex justify-between items-center h-25 -translate-y-10">
                 <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2" />
                 <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2" />
@@ -466,6 +530,7 @@ export default function Home() {
           <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8">
             Join <span className="font-bold">RentalCompany</span> Now
           </button>
+          {/* Company Logo */}
           <Image
             src="/CompanyLogo.svg"
             alt="Company Logo"
