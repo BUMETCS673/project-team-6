@@ -10,15 +10,18 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "jsx-a11y/label-has-associated-control": [ 2, {
-      "depth": 3,
-      "labelComponents": [],
-      "labelAttributes": ["label"],
-      "controlComponents": ["input"],
-      "assert": "either",
-      "required": {
-        "some": [ "nesting", "id" ]
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "depth": 3,
+        "labelComponents": [],
+        "labelAttributes": ["label"],
+        "controlComponents": ["input"],
+        "assert": "either",
+        "required": {
+          "some": ["nesting", "id"]
+        }
       }
-    }]
+    ]
   }
 }

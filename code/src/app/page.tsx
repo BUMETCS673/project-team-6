@@ -107,7 +107,7 @@ export default function Home() {
   ];
 
   const handleKeyInteraction = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       setActive(false);
     }
   };
@@ -116,61 +116,17 @@ export default function Home() {
     <>
       <Head>
         {/* Preloading images */}
-        <link
-          rel="preload"
-          as="image"
-          href="/favicon.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/CompanyLogo.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/CarsImagCards.png"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/StartButton.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/Divider.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/carImage.png"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/BackgroundTexture.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/01.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/02.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/CarFloating.svg"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/03.svg"
-        />
+        <link rel="preload" as="image" href="/favicon.svg" />
+        <link rel="preload" as="image" href="/CompanyLogo.svg" />
+        <link rel="preload" as="image" href="/CarsImagCards.png" />
+        <link rel="preload" as="image" href="/StartButton.svg" />
+        <link rel="preload" as="image" href="/Divider.svg" />
+        <link rel="preload" as="image" href="/carImage.png" />
+        <link rel="preload" as="image" href="/BackgroundTexture.svg" />
+        <link rel="preload" as="image" href="/01.svg" />
+        <link rel="preload" as="image" href="/02.svg" />
+        <link rel="preload" as="image" href="/CarFloating.svg" />
+        <link rel="preload" as="image" href="/03.svg" />
       </Head>
       {active && (
         <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center z-50">
@@ -179,9 +135,9 @@ export default function Home() {
             className="absolute top-0 bottom-0 left-0 right-0 bg-transparent z-0"
             onClick={() => setActive(false)}
             onKeyDown={handleKeyInteraction}
-            role="button"                   
-            tabIndex={0} 
-            aria-label="Close sign-in form"                    
+            role="button"
+            tabIndex={0}
+            aria-label="Close sign-in form"
           />
         </div>
       )}
@@ -357,7 +313,10 @@ export default function Home() {
               in sem a nisl wsde faucibus lobortis.
             </p>
             <div className="w-7/12 flex flex-row justify-between items-center -translate-y-50 translate-x-35 px-14 gap-2">
-              <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8">
+              <button
+                type="button"
+                className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8"
+              >
                 Get Started
               </button>
               <p className="text-center">Learn More</p>
@@ -370,14 +329,16 @@ export default function Home() {
                 <div
                   key={uniqueId}
                   className={`flex flex-col justify-center items-center rounded-lg w-40 h-40 ${
-                    index === 1 ? 'bg-black text-white scale-110 ml-2 mb-4' : 'bg-custom-light-grey text-text-grey'
+                    index === 1
+                      ? 'bg-black text-white scale-110 ml-2 mb-4'
+                      : 'bg-custom-light-grey text-text-grey'
                   }`}
                 >
                   <div className="text-center text-sm">{item?.header}</div>
                   <div className="text-center p-4">{item?.icon}</div>
                   <div className="text-center text-sm">{item?.text}</div>
                 </div>
-              )
+              );
             })}
           </div>
         </section>
@@ -432,7 +393,7 @@ export default function Home() {
                   <div className="text-center text-6xl">{item?.header}</div>
                   <div className="text-center text-2xl">{item?.text}</div>
                 </div>
-              )
+              );
             })}
           </div>
         </section>
@@ -447,7 +408,10 @@ export default function Home() {
                 </p>
               </div>
               <div className="w-full pl-14 justify-end items-start">
-                <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8">
+                <button
+                  type="button"
+                  className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8"
+                >
                   Try <span className="font-bold">RentalCompany</span> Now
                 </button>
               </div>
@@ -466,11 +430,14 @@ export default function Home() {
         </section>
 
         {/* Section 4 */}
-        <section id="strategy" className="relative flex flex-col flex justify-center items-center z-30 bg-white pb-20">
+        <section
+          id="strategy"
+          className="relative flex flex-col flex justify-center items-center z-30 bg-white pb-20"
+        >
           <div className="relative flex flex-row justify-between items-center mx-auto z-20 bg-white">
             <div className="w-1/2">
               <div className="w-1/2 translate-x-20 px-14">
-                {/* The 03 number image*/}
+                {/* The 03 number image */}
                 <Image
                   src="/03.svg"
                   alt="03"
@@ -502,19 +469,24 @@ export default function Home() {
           </div>
           {/* Video element with rounded corners */}
           <div className="w-8/12 px-14">
-            
             {/* Video element */}
-            <video 
-              width="100%" 
-              height="100%" 
-              controls 
+            <video
+              width="100%"
+              height="100%"
+              controls
               aria-label="Description of the video's content"
               title="Short description of the video"
               className="rounded-4xl"
             >
               <source src="/sample.mp4" type="video/mp4" />
               {/* Adjusting 'kind' attribute to "captions" */}
-              <track kind="captions" src="/subtitle_en.vtt" srcLang="en" label="English" default />
+              <track
+                kind="captions"
+                src="/subtitle_en.vtt"
+                srcLang="en"
+                label="English"
+                default
+              />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -527,7 +499,10 @@ export default function Home() {
               Lorem ipsum dolor sit amet, adipiscing elit.
             </p>
           </div>
-          <button type="button" className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8">
+          <button
+            type="button"
+            className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8"
+          >
             Join <span className="font-bold">RentalCompany</span> Now
           </button>
           {/* Company Logo */}
