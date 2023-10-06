@@ -10,7 +10,9 @@ jest.mock('next/navigation', () => ({
 
 describe('SignInForm', () => {
   test('should render login form when status is true', () => {
-    const { getByRole, getByPlaceholderText } = render(<SignInForm status />);
+    const { getByRole, getByPlaceholderText } = render(
+      <SignInForm status />,
+    );
 
     expect(getByRole('textbox', { name: 'Email' })).toBeInTheDocument();
     expect(getByPlaceholderText('Password')).toBeInTheDocument();

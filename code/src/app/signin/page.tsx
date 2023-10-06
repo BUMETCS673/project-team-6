@@ -1,5 +1,5 @@
-import SignInForm from '../../components/SignInForm';
+import AccessPage from '../../components/AccessPage';
 
 export default function SignIn() {
-  return <SignInForm status />;
+  return <AccessPage />;
 }
