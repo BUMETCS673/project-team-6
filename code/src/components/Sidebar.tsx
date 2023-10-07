@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-
 function SidebarLink({ href, text, classname }) {
   return (
     <Link href={href} className={classname}>
@@ -62,6 +61,5 @@ function Sidebar() {
     </aside>
   );
 }
-
 
 export default Sidebar;
