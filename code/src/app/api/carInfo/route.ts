@@ -4,10 +4,55 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import car from '@/models/Car';
 
-const today = new Date()
-const numDaysScheduled = 7
-const rotationMileageTire = 50000
-const rotationMileageOil = 4500
+const today = new Date();
+const numDaysScheduled = 7;
+const rotationMileageTire = 50000;
+const rotationMileageOil = 4500;
+
+// Returns true if maintenance for a specific part is due
+function isMaintenanceTypeRequired(
+  lastMileageChange: number,
+  rotationMileage: number,
+  currMileage: number,
+) {
+  const nextMileageNeedChange = lastMileageChange + rotationMileage;
+
+  if (currMileage > nextMileageNeedChange) {
+    return true;
+  }
+
+  return false;
+}
+
+// Adds a specified number of days to today and returns new date
+function scheduleMaintenance(days: number) {
+  const newDateTime = new Date().setDate(today.getDate() + days);
+  return new Date(newDateTime);
+}
+
+// Returns the date of scheduled maintenance
+// Assumes maintenance is required
+function dateNeedsMaintenance(nextDateChange: Date) {
+  if (!nextDateChange.getDate() || nextDateChange < today) {
+    return scheduleMaintenance(numDaysScheduled);
+  }
+
+  // Schedule is already valid
+  return nextDateChange;
+}
+
+// Returns true if scheduled maintenance date has already passed today
+function isMaintenanceOverdue(nextDateChange: Date, overdue: boolean) {
+  if (!nextDateChange.getDate()) {
+    return false;
+  }
+
+  if (overdue) {
+    return true;
+  }
+
+  return nextDateChange < today;
+}
 
 /**
  * Add car info REST API access.
@@ -57,8 +102,8 @@ export async function POST(req: Request) {
     // Set defaults
     const oilOverdue = false;
     const tireOverdue = false;
-    let maintenanceRequired = false;
-    
+    const maintenanceRequired = false;
+
     await dbConnect();
 
     const existingLicense = await car.findOne({ license });
@@ -178,43 +223,43 @@ export async function GET(req: Request) {
  * @throws {Error} Throws an error if there's an issue with the registration process.
  */
 export async function PUT(req: Request) {
-    let {
-      manufacturer,
-      type,
-      year,
-      license,
-      mileage,
-      model,
-      color,
-      seats,
-      condition,
-      mileageLastOilChange,
-      mileageLastTireChange,
-      dateNextOilChange,
-      dateNextTireChange,
-      oilOverdue,
-      tireOverdue,
-      maintenanceRequired
-    } = await req.json();
+  const requestBody = await req.json();
+  const {
+    manufacturer,
+    type,
+    year,
+    license,
+    mileage,
+    model,
+    color,
+    seats,
+    condition,
+    mileageLastOilChange,
+    mileageLastTireChange,
+  } = requestBody;
+
+  let {
+    dateNextOilChange,
+    dateNextTireChange,
+    oilOverdue,
+    tireOverdue,
+    maintenanceRequired,
+  } = requestBody;
 
   try {
     // Get saved car object, validate car exist
-    let getRequest = await GET(req)
-    let { message, carObject } = await getRequest.json()
+    const getRequest = await GET(req);
+    const { message, carObject } = await getRequest.json();
     if (!carObject) {
-      return NextResponse.json(
-        { message },
-        { status: getRequest.status},
-      );
+      return NextResponse.json({ message }, { status: getRequest.status });
     }
 
     // Check existing license being registered with another car
     const existingLicense = await car.findOne({
-      $and: [
-        { license },
-        { _id : { "$ne": carObject._id } }
-    ]});
-      
+      // eslint-disable-next-line no-underscore-dangle
+      $and: [{ license }, { _id: { $ne: carObject._id } }],
+    });
+
     if (existingLicense) {
       return NextResponse.json(
         { message: 'License number already registered.' },
@@ -225,126 +270,95 @@ export async function PUT(req: Request) {
     // TODO Assumption: If new Date for last maintenance change, then also new mileage for last maintenance change
 
     // Type conversion from request to Date object
-    let dateNextOilChangeDate = new Date("")
-    let dateNextTireChangeDate = new Date("")
+    let dateNextOilChangeDate = new Date('');
+    let dateNextTireChangeDate = new Date('');
 
     // Oil Maintenance
-    if (isMaintenanceTypeRequired(mileageLastOilChange, rotationMileageOil, mileage)) {
-      dateNextOilChangeDate = new Date(dateNextOilChange)
-      oilOverdue = isMaintenanceOverdue(dateNextOilChangeDate, oilOverdue)
-      dateNextOilChangeDate = dateNeedsMaintenance(dateNextOilChangeDate)
+    if (
+      isMaintenanceTypeRequired(
+        mileageLastOilChange,
+        rotationMileageOil,
+        mileage,
+      )
+    ) {
+      dateNextOilChangeDate = new Date(dateNextOilChange);
+      oilOverdue = isMaintenanceOverdue(dateNextOilChangeDate, oilOverdue);
+      dateNextOilChangeDate = dateNeedsMaintenance(dateNextOilChangeDate);
     } else {
-      oilOverdue = false
-      dateNextOilChange = ""
+      oilOverdue = false;
+      dateNextOilChange = '';
     }
-    
+
     // Tire Maintenance
-    if (isMaintenanceTypeRequired(mileageLastTireChange, rotationMileageTire, mileage)) {
-      dateNextTireChangeDate = new Date(dateNextTireChange)
-      tireOverdue = isMaintenanceOverdue(dateNextTireChangeDate, tireOverdue)
-      dateNextTireChangeDate = dateNeedsMaintenance(dateNextTireChangeDate)
+    if (
+      isMaintenanceTypeRequired(
+        mileageLastTireChange,
+        rotationMileageTire,
+        mileage,
+      )
+    ) {
+      dateNextTireChangeDate = new Date(dateNextTireChange);
+      tireOverdue = isMaintenanceOverdue(dateNextTireChangeDate, tireOverdue);
+      dateNextTireChangeDate = dateNeedsMaintenance(dateNextTireChangeDate);
     } else {
-      tireOverdue = false
-      dateNextTireChange = ""
+      tireOverdue = false;
+      dateNextTireChange = '';
     }
 
     // set overwrites and type conversion to DB date string
-    maintenanceRequired = false
+    maintenanceRequired = false;
 
     if (dateNextOilChangeDate.getDate()) {
-      dateNextOilChange = dateNextOilChangeDate.toISOString()
-      maintenanceRequired = true
+      dateNextOilChange = dateNextOilChangeDate.toISOString();
+      maintenanceRequired = true;
     }
     if (dateNextTireChangeDate.getDate()) {
-      dateNextTireChange = dateNextTireChangeDate.toISOString()
-      maintenanceRequired = true
+      dateNextTireChange = dateNextTireChangeDate.toISOString();
+      maintenanceRequired = true;
     }
 
     // DB Update
-    await dbConnect()
-    
-    const updatedCar = await car.findOneAndUpdate({_id: carObject._id},
-      {$set:{
-        manufacturer,
-        type,
-        year,
-        license,
-        mileage,
-        model,
-        color,
-        seats,
-        condition,
-        mileageLastOilChange,
-        mileageLastTireChange,
-        dateNextOilChange,
-        dateNextTireChange,
-        oilOverdue,
-        tireOverdue,
-        maintenanceRequired,
-      }}, 
-      { new: true }
+    await dbConnect();
+
+    const updatedCar = await car.findOneAndUpdate(
+      // eslint-disable-next-line no-underscore-dangle
+      { _id: carObject._id },
+      {
+        $set: {
+          manufacturer,
+          type,
+          year,
+          license,
+          mileage,
+          model,
+          color,
+          seats,
+          condition,
+          mileageLastOilChange,
+          mileageLastTireChange,
+          dateNextOilChange,
+          dateNextTireChange,
+          oilOverdue,
+          tireOverdue,
+          maintenanceRequired,
+        },
+      },
+      { new: true },
     );
 
     if (!updatedCar) {
       return NextResponse.json(
-        { message: "Could not update document" },
+        { message: 'Could not update document' },
         { status: 500 },
       );
     }
 
     // return carObject
-    return NextResponse.json(
-      { updatedCar },
-      { status: 200 },
-    );
-
+    return NextResponse.json({ updatedCar }, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
       { status: 500 },
     );
   }
-
-}
-
-// Returns true if maintenance for a specific part is due
-function isMaintenanceTypeRequired( lastMileageChange: number, rotationMileage: number, currMileage: number) {
-  let nextMileageNeedChange = lastMileageChange + rotationMileage
-
-  if (currMileage > nextMileageNeedChange) {
-     return true
-  }
-
-  return false
-}
-
-// Returns the date of scheduled maintenance
-// Assumes maintenance is required
-function dateNeedsMaintenance( nextDateChange: Date) {
-
-  if (!nextDateChange.getDate() || (nextDateChange < today)) {
-    return scheduleMaintenance(numDaysScheduled)
-  }
-
-  // Schedule is already valid
-  return nextDateChange
-}
-
-// Adds a specified number of days to today and returns new date
-function scheduleMaintenance( days: number) {
-  let newDateTime = new Date().setDate(today.getDate() + days)
-  return new Date(newDateTime)
-}
-
-// Returns true if scheduled maintenance date has already passed today
-function isMaintenanceOverdue( nextDateChange: Date, overdue: boolean) {
-  if (!nextDateChange.getDate()) {
-    return false
-  }
-
-  if (overdue) {
-    return true
-  }
-
-  return (nextDateChange < today)
 }
