@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CarResultBarProps {
   carId: string;
   manufacturer: string;
@@ -7,43 +5,24 @@ interface CarResultBarProps {
   carType: string;
 }
 
+function Filed({ value }: { value: string | number }) {
+  return (
+    <div className="font-semibold flex justify-center h-full w-full items-center">
+      <div className="text-gray-400">{value}</div>
+    </div>
+  );
+}
+
 function CarResultBar(props: CarResultBarProps) {
   const { carId, manufacturer, model, carType } = props;
   return (
-    <div className="flex relative items-center h-[65px]  bg-white rounded-[5px] shadow-[0px_4px_10px_#cbcedb]">
-      <div className="flex-grow">
-        <p>...</p>
+    <div className="w-full h-14 shadow-lg rounded-sm bg-white">
+      <div className="flex items-center h-full justify-between">
+        <Filed value={carId} />
+        <Filed value={manufacturer} />
+        <Filed value={model} />
+        <Filed value={carType} />
       </div>
-
-      {/* Display Car ID result */}
-      <div className="flex-grow">
-        <p className="w-[233px] top-0 left-0 [font-family:'Lexend_Giga-Regular',Helvetica] font-normal text-black text-[16px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
-          Car ID: {carId}
-        </p>
-      </div>
-
-      {/* Display Manufacturer result */}
-      <div className="flex-grow">
-        <p className="w-[233px] top-0 left-0 [font-family:'Lexend_Giga-Regular',Helvetica] font-normal text-black text-[16px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
-          Manufacturer: {manufacturer}
-        </p>
-      </div>
-
-      {/* Display Model result */}
-      <div className="flex-grow">
-        <p className="w-[233px] top-0 left-0 [font-family:'Lexend_Giga-Regular',Helvetica] font-normal text-black text-[16px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
-          Model: {model}
-        </p>
-      </div>
-
-      {/* Display Car Type result */}
-      <div className="flex-grow">
-        <p className="w-[233px] top-0 left-0 [font-family:'Lexend_Giga-Regular',Helvetica] font-normal text-black text-[16px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
-          Car Type: {carType}
-        </p>
-      </div>
-
-      {/* Future Feature Button */}
     </div>
   );
 }

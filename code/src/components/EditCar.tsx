@@ -1,3 +1,8 @@
+'use client';
+
+import React, { useState } from 'react';
+import RoundedInput from './RoundedInput';
+
 interface EditCarProps {
   carId: string;
   manufacturer: string;
@@ -9,131 +14,135 @@ interface EditCarProps {
   color: string;
   seats: number;
   condition: string;
-  oilChange: string;
+  mileageLastOilChange: number;
+  mileageLastTireChange: number;
+  dateNextTireChange: Date;
+  dateNextOilChange: Date;
 }
 
-function EditCar(props: EditCarProps) {
-  const {
-    carId,
-    manufacturer,
-    type,
-    year,
-    license,
-    mileage,
-    model,
-    color,
-    seats,
-    condition,
-    oilChange,
-  } = props;
+function EditCar({
+  carId,
+  manufacturer: initialManufacturer,
+  type: initialType,
+  year: initialYear,
+  license: initialLicense,
+  mileage: initialMileage,
+  model: initialModel,
+  color: initialColor,
+  seats: initialSeats,
+  condition: initialCondition,
+  mileageLastOilChange: initialMileageLastOilChange,
+  mileageLastTireChange: initialMileageLastTireChange,
+  dateNextTireChange: initialDateNextTireChange,
+  dateNextOilChange: initialDateNextOilChange,
+}: EditCarProps) {
+  const [manufacturer, setManufacturer] = useState(initialManufacturer);
+  const [type, setType] = useState(initialType);
+  const [year, setYear] = useState(initialYear);
+  const [license, setLicense] = useState(initialLicense);
+  const [mileage, setMileage] = useState(initialMileage);
+  const [model, setModel] = useState(initialModel);
+  const [color, setColor] = useState(initialColor);
+  const [seats, setSeats] = useState(initialSeats);
+  const [condition, setCondition] = useState(initialCondition);
+  const [mileageLastOilChange, setMileageLastOilChange] = useState(
+    initialMileageLastOilChange,
+  );
+  const [mileageLastTireChange, setMileageLastTireChange] = useState(
+    initialMileageLastTireChange,
+  );
+  const [dateNextTireChange, setDateNextTireChange] = useState(
+    initialDateNextTireChange,
+  );
+  const [dateNextOilChange, setDateNextOilChange] = useState(
+    initialDateNextOilChange,
+  );
   return (
-    <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">
-      {/* car id  */}
-      <div className="relative h-8 w-8 ">
-        <div className="absolute left-0 top-0 h-16 w-16 [font-family:'Lexend_Giga-SemiBold',Helvetica] font-semibold text-[#cbcedb] text-[16px] tracking-[0] leading-[normal]">
-          Car ID # {carId}
-        </div>
+    <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
+      <div
+        className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
+        font-semibold text-gray-400 text-lg mb-10"
+      >
+        Car ID # {carId}
       </div>
+      <div className="flex flex-col w-full">
+        <form className="grid grid-cols-2 gap-4">
+          <RoundedInput
+            type="text"
+            placeholder={manufacturer}
+            onChange={(e) => setManufacturer(e.target.value)}
+          />
+          <RoundedInput
+            type="text"
+            placeholder={type}
+            onChange={(e) => setType(e.target.value)}
+          />
+          <RoundedInput
+            type="number"
+            placeholder={year.toString()}
+            onChange={(e) => setYear(Number(e.target.value))}
+          />
+          <RoundedInput
+            type="text"
+            placeholder={license}
+            onChange={(e) => setLicense(e.target.value)}
+          />
+          <RoundedInput
+            type="number"
+            placeholder={mileage.toString()}
+            onChange={(e) => setMileage(Number(e.target.value))}
+          />
+          <RoundedInput
+            type="text"
+            placeholder={model}
+            onChange={(e) => setModel(e.target.value)}
+          />
+          <RoundedInput
+            type="text"
+            placeholder={color}
+            onChange={(e) => setColor(e.target.value)}
+          />
+          <RoundedInput
+            type="number"
+            placeholder={seats.toString()}
+            onChange={(e) => setSeats(Number(e.target.value))}
+          />
+          <RoundedInput
+            type="text"
+            placeholder={condition}
+            onChange={(e) => setCondition(e.target.value)}
+          />
+          <RoundedInput
+            type="number"
+            placeholder={`Mileage Last Oil Change: ${mileageLastOilChange.toString()}`}
+            onChange={(e) => setMileageLastOilChange(Number(e.target.value))}
+          />
+          <RoundedInput
+            type="number"
+            placeholder={`Mileage Last Tire Change: ${mileageLastTireChange.toString()}`}
+            onChange={(e) => setMileageLastTireChange(Number(e.target.value))}
+          />
+          <RoundedInput
+            type="date"
+            placeholder={`Next Date Oil Change: ${dateNextOilChange.toString()}`}
+            onChange={(e) => setDateNextOilChange(new Date(e.target.value))}
+          />
 
-      <div className="flex flex-row gap-24">
-        <div className="flex flex-col gap-6 font-semibold text-[#cbcedb]">
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Manufacturer"
-              value={manufacturer}
-            />
-          </div>
-
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Type"
-              value={type}
-            />
-          </div>
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Year"
-              value={year}
-            />
-          </div>
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="License"
-              value={license}
-            />
-          </div>
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Mileage"
-              value={mileage}
-            />
-          </div>
-        </div>
-
-        {/* Right column */}
-        <div className="flex flex-col gap-6 font-semibold text-[#cbcedb]">
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Model"
-              value={model}
-            />
-          </div>
-
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Color"
-              value={color}
-            />
-          </div>
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Seats"
-              value={seats}
-            />
-          </div>
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Condition"
-              value={condition}
-            />
-          </div>
-          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
-            <input
-              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
-              type="text"
-              placeholder="Oil Change"
-              value={oilChange}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Button div */}
-      <div className="flex pt-5">
-        <button
-          type="button"
-          className="w-[150px] h-[40px] top-0 left-0  bg-orange-500 rounded-2xl mr-2 [font-family:'Lexend_Giga-SemiBold',Helvetica] font-normal text-[#f8f8f7] text-[18px] text-center "
-        >
-          Edit Car
-        </button>
+          <div className=" col-span-1 " />
+          <RoundedInput
+            type="date"
+            placeholder={`Next Date  Tire Change: ${dateNextTireChange.toString()}`}
+            onChange={(e) => setDateNextTireChange(new Date(e.target.value))}
+          />
+          <button
+            type="button"
+            className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
+              [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
+              font-semibold text-white text-lg text-center"
+          >
+            Edit Car
+          </button>
+        </form>
       </div>
     </div>
   );

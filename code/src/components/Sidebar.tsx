@@ -1,41 +1,67 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-interface SidebarLinkProps {
-  // imgSrc:string;
-  href: string;
-  text: string;
-}
 
-function SidebarLink({ href, text }: SidebarLinkProps) {
+function SidebarLink({ href, text, classname }) {
   return (
-    <Link className="flex flex-row" href={href}>
-      {/* <img src={imgSrc} alt = "Ikon"></img> */}
+    <Link href={href} className={classname}>
       <p>{text}</p>
     </Link>
   );
 }
+SidebarLink.defaultProps = {
+  href: '/',
+  text: '',
+  classname: '',
+};
+
 function Sidebar() {
+  const inactive = 'felx gpa-1 px-2';
+  const active = `${inactive} text-white bg-orange-500 py-1 px-2 rounded-l-2xl`;
+  const pathname = usePathname();
+
   return (
-    <div className="flex flex-col pl-10 w-1/5 border bg-white">
+    <aside className="flex flex-col pl-10 w-1/5 border text-gray-400">
       <div className="p-3">
         <p className="p-1 text-orange-500 font-bold">
           Rental<span className="underline">Company</span>
         </p>
       </div>
-      <div className="py-2 font-semibold text-[#cbcedb]">MENU</div>
-      <div className="flex flex-col gap-4 font-semibold text-[#cbcedb]">
-        <SidebarLink href="/dashboard/managecars" text="Manage Cars" />
-        <SidebarLink href="/dashboard/addcar" text="Add Cars" />
-        <SidebarLink href="/dashboard/editcar" text="Edit Cars" />
-        <SidebarLink href="/dashboard/carinformation" text="Car Information" />
-        <SidebarLink href="/dashboard/maintenance" text="Maintenance" />
+      <div className="p-2 font-semibold ">MENU</div>
+      <div className="flex flex-col gap-4 font-semibold ">
         <SidebarLink
-          href="/dashboard/editmaintenance"
-          text="Edit Maintenance"
+          href="/dashboard/managecars"
+          text="Manage Cars"
+          classname={`link ${
+            pathname === '/dashboard/managecars' ? active : inactive
+          }`}
+        />
+        <SidebarLink
+          href="/dashboard/addcar"
+          text="Add Cars"
+          classname={pathname === '/dashboard/addcar' ? active : inactive}
+        />
+        <SidebarLink
+          href="/dashboard/editcar"
+          text="Edit Cars"
+          classname={pathname === '/dashboard/editcar' ? active : inactive}
+        />
+        <SidebarLink
+          href="/dashboard/carinformation"
+          text="Car Information"
+          classname={
+            pathname === '/dashboard/carinformation' ? active : inactive
+          }
+        />
+        <SidebarLink
+          href="/dashboard/maintenance"
+          text="Maintenance"
+          classname={pathname === '/dashboard/maintenance' ? active : inactive}
         />
       </div>
-    </div>
+    </aside>
   );
 }
+
 
 export default Sidebar;
