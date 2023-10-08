@@ -166,7 +166,7 @@ export default function Home() {
             <li>
               <a
                 href="#features"
-                className="text-white hover:text-gray-500"
+                className="text-white hover:text-custom-orange transition duration-800"
                 onClick={(e) => {
                   e.preventDefault();
                   document
@@ -180,7 +180,7 @@ export default function Home() {
             <li>
               <a
                 href="#about"
-                className="text-white hover:text-gray-500"
+                className="text-white hover:text-custom-orange transition duration-800"
                 onClick={(e) => {
                   e.preventDefault();
                   document
@@ -194,7 +194,7 @@ export default function Home() {
             <li>
               <a
                 href="#strategy"
-                className="text-white hover:text-gray-500"
+                className="text-white hover:text-custom-orange transition duration-800"
                 onClick={(e) => {
                   e.preventDefault();
                   document
