@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
-import SignInForm from './SignInForm';
+import AccessPage from './AccessPage';
 
 export default function Home() {
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -130,7 +130,7 @@ export default function Home() {
       </Head>
       {active && (
         <div className="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center z-50">
-          <SignInForm status />
+          <AccessPage />
           <div
             className="absolute top-0 bottom-0 left-0 right-0 bg-transparent z-0"
             onClick={() => setActive(false)}
