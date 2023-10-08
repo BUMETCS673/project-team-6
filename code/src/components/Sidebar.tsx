@@ -1,18 +1,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-function SidebarLink({ href, text, classname }) {
+function SidebarLink({ href='', text='', classname='' }) {
   return (
     <Link href={href} className={classname}>
       <p>{text}</p>
     </Link>
   );
 }
-SidebarLink.defaultProps = {
-  href: '/',
-  text: '',
-  classname: '',
-};
+
 
 function Sidebar() {
   const inactive = 'felx gpa-1 px-2';

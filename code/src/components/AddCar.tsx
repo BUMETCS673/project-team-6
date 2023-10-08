@@ -3,43 +3,57 @@
 import React, { useState } from 'react';
 import RoundedInput from './RoundedInput';
 
-interface AddCarProps {
-  carId: string;
-  manufacturer: string;
-  type: string;
-  year: number;
-  license: string;
-  mileage: number;
-  model: string;
-  color: string;
-  seats: number;
-  condition: string;
-  oilChange: string;
-}
+type Message = {
+  text: string;
+  type: 'red' | 'green';
+};
 
-function AddCar({
-  carId,
-  manufacturer: initialManufacturer,
-  type: initialType,
-  year: initialYear,
-  license: initialLicense,
-  mileage: initialMileage,
-  model: initialModel,
-  color: initialColor,
-  seats: initialSeats,
-  condition: initialCondition,
-  oilChange: initialOilChange,
-}: AddCarProps) {
-  const [manufacturer, setManufacturer] = useState(initialManufacturer);
-  const [type, setType] = useState(initialType);
-  const [year, setYear] = useState(initialYear);
-  const [license, setLicense] = useState(initialLicense);
-  const [mileage, setMileage] = useState(initialMileage);
-  const [model, setModel] = useState(initialModel);
-  const [color, setColor] = useState(initialColor);
-  const [seats, setSeats] = useState(initialSeats);
-  const [condition, setCondition] = useState(initialCondition);
-  const [oilChange, setOilChange] = useState(initialOilChange);
+function AddCar() {
+  const [manufacturer, setManufacturer] = useState('manufacturer');
+  const [type, setType] = useState('type');
+  const [year, setYear] = useState(2022);
+  const [license, setLicense] = useState('license');
+  const [mileage, setMileage] = useState(5000);
+  const [model, setModel] = useState('model');
+  const [color, setColor] = useState('color');
+  const [seats, setSeats] = useState(5);
+  const [condition, setCondition] = useState('New');
+  const [mileageLastOilChange, setMileageLastOilChange] = useState(1000);
+  const [mileageLastTireChange, setMileageLastTireChange] = useState(6000);
+  const [dateNextTireChange, setDateNextTireChange] = useState(Date);
+  const [dateNextOilChange, setDateNextOilChange] = useState(Date);
+
+  const [message, setMessage] = useState<Message | null>(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/carInfo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          manufacturer,
+          type,
+          year,
+          license,
+          mileage,
+          model,
+          color,
+          seats,
+          condition,
+          mileageLastOilChange,
+          mileageLastTireChange,
+          dateNextTireChange,
+          dateNextOilChange,
+        }),
+      });
+      const data = await response.json();
+      setMessage({ type: 'green', text: data.message });
+    } catch (error) {
+      {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
@@ -47,10 +61,10 @@ function AddCar({
         className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
         font-semibold text-gray-400 text-lg mb-10"
       >
-        Car ID # {carId}
+        {/* Car ID # {carId} */}
       </div>
       <div className="flex flex-col w-full">
-        <form className="grid grid-cols-2 gap-4">
+        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
           <RoundedInput
             type="text"
             placeholder={manufacturer}
@@ -97,12 +111,32 @@ function AddCar({
             onChange={(e) => setCondition(e.target.value)}
           />
           <RoundedInput
-            type="text"
-            placeholder={oilChange}
-            onChange={(e) => setOilChange(e.target.value)}
+            type="number"
+            placeholder={`Mileage Last Oil Change: ${mileageLastOilChange.toString()}`}
+            onChange={(e) => setMileageLastOilChange(Number(e.target.value))}
           />
+          <RoundedInput
+            type="number"
+            placeholder={`Mileage Last Tire Change: ${mileageLastTireChange.toString()}`}
+            onChange={(e) => setMileageLastTireChange(Number(e.target.value))}
+          />
+          <RoundedInput
+            type="date"
+            placeholder={`Next Date Oil Change: ${dateNextOilChange.toString()}`}
+            onChange={(e) => setDateNextOilChange(e.target.value)}
+          />
+          <RoundedInput
+            type="date"
+            placeholder={`Next Date  Tire Change: ${dateNextTireChange.toString()}`}
+            onChange={(e) => setDateNextTireChange(e.target.value)}
+          />
+          {message && (
+            <div className={`col-span-2 rounded-3xl px-10 py-1 text-center`}>
+              {message.text}
+            </div>
+          )}
           <button
-            type="button"
+            type="submit"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
               font-semibold text-white text-lg text-center"

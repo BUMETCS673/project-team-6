@@ -1,4 +1,9 @@
-function RoundedInput({ type, placeholder, onChange, classname }) {
+function RoundedInput({
+  type = 'text',
+  placeholder = '',
+  onChange= (e:React.ChangeEvent<HTMLInputElement>) => {},
+  classname = 'rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full',
+}) {
   return (
     <input
       onChange={onChange}
@@ -8,13 +13,5 @@ function RoundedInput({ type, placeholder, onChange, classname }) {
     />
   );
 }
-
-RoundedInput.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  onChange: () => {},
-  classname:
-    'rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full',
-};
 
 export default RoundedInput;
