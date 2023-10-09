@@ -18,10 +18,10 @@ interface CarInfoProps {
   color: string;
   seats: number;
   condition: string;
-  mileageLastOilChange: number;
-  mileageLastTireChange: number;
-  dateNextTireChange: Date;
-  dateNextOilChange: Date;
+  mileageLastOilChange: string;
+  mileageLastTireChange: string;
+  dateNextTireChange: string;
+  dateNextOilChange: string;
 }
 
 export default function Page() {
@@ -61,6 +61,10 @@ export default function Page() {
         model={carInfo?.model!}
         color={carInfo?.color!}
         year={carInfo?.year!}
+        mileageLastOilChange={carInfo?.mileageLastOilChange!}
+        mileageLastTireChange={carInfo?.mileageLastTireChange!}
+        dateNextTireChange={carInfo?.dateNextTireChange!}
+        dateNextOilChange={carInfo?.dateNextOilChange!}
       />
     </DashboardLayout>
   );

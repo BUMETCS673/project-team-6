@@ -5,7 +5,6 @@ export default function page() {
   return (
     <DashboardLayout>
       <EditCar
-        carId="1"
         manufacturer="Toyota"
         type="Sedan"
         year={2022}

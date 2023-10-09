@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import RoundedInput from './RoundedInput';
 
 interface EditCarProps {
-  carId: string;
   manufacturer: string;
   type: string;
   year: number;
@@ -21,7 +21,6 @@ interface EditCarProps {
 }
 
 function EditCar({
-  carId,
   manufacturer: initialManufacturer,
   type: initialType,
   year: initialYear,
@@ -57,7 +56,8 @@ function EditCar({
   const [dateNextOilChange, setDateNextOilChange] = useState(
     initialDateNextOilChange,
   );
-
+  const searchParams = useSearchParams()!;
+  const carId = searchParams.get('carId');
   return (
     <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
       <div
@@ -129,7 +129,6 @@ function EditCar({
             onChange={(e) => setDateNextOilChange(new Date(e.target.value))}
           />
 
-          <div className=" col-span-1 " />
           <RoundedInput
             type="date"
             placeholder={`Next Date  Tire Change: ${dateNextTireChange.toString()}`}
