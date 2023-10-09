@@ -2,7 +2,11 @@ import { test, expect } from 'playwright-test-coverage';
 
 test.describe('Sign up', () => {
   test('Success', async ({ page }) => {
-    await page.goto('/signin');
+    await page.goto('/');
+
+    await page.getByTestId('authPopup').click();
+    await expect(page.getByTestId('email')).toBeVisible();
+
     await page.getByTestId('to-signup').click();
 
     // to get unique email every time

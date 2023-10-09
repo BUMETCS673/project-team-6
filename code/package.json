@@ -13,7 +13,7 @@
     "eslint": "next lint",
     "prettierfix": "npx prettier . --write",
     "eslintfix": "next lint --fix",
-    "test": "jest --coverage",
+    "test": "jest --coverage --collectCoverageFrom='src/{app,components}/**/*.{ts,tsx}'",
     "e2e": "playwright test",
     "e2eserver": "npx nyc next dev"
   },
