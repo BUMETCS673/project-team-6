@@ -44,7 +44,7 @@ export default function SignIn({
             {errorMsg}
           </div>
         )}
-        <AuthField type="text" onChangeValue={setEmail}>
+        <AuthField data-testid="email" type="text" onChangeValue={setEmail}>
           Email
         </AuthField>
 

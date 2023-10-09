@@ -19,7 +19,7 @@ export default defineConfig({
     },
   ],
   expect: {
-    toHaveScreenshot: { maxDiffPixelRatio: 1 },
+    toHaveScreenshot: { maxDiffPixelRatio: 0.5 },
   },
   snapshotPathTemplate: 'e2e/snapshots/{testFilePath}/{arg}{ext}',
 });

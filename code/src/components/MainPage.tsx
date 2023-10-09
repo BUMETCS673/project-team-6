@@ -211,6 +211,7 @@ export default function Home() {
           </ul>
           <div className="px-10 flex justify-end items-center sm:w-1/3">
             <button
+              data-testid="authPopup"
               type="button"
               onClick={() => setActive(true)}
               className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8"
