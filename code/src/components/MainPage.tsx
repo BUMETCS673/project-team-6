@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 'use client';
 
 import Image from 'next/image';
@@ -6,6 +8,7 @@ import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
 import AccessPage from './AccessPage';
 
+// eslint-disable-next-line max-lines-per-function
 export default function Home() {
   const imageRef = useRef<HTMLImageElement | null>(null);
   const [imageDimensions, setImageDimensions] = useState<{

@@ -15,6 +15,7 @@ interface EditCarProps {
   dateNextTireChange: string;
 }
 
+// eslint-disable-next-line max-lines-per-function
 function EditCar(props: EditCarProps) {
   const {
     carId,
