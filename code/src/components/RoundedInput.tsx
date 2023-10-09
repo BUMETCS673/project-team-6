@@ -10,7 +10,7 @@ function RoundedInput({
     <input
       onChange={onChange}
       type={type}
-      placeholder={placeholder.toString()}
+      placeholder={placeholder}
       className={classname}
     />
   );

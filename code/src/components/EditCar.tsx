@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import RoundedInput from './RoundedInput';
+import CarForm from './CarForm';
 
 const logger = require('pino')();
 
@@ -110,63 +110,31 @@ function EditCar() {
         Car ID # {carId}
       </div>
       <div className="flex flex-col w-full">
-        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
-          <RoundedInput
-            type="text"
-            placeholder={carInfo?.manufacturer!}
-            onChange={(e) => setManufacturer(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={carInfo?.type!}
-            onChange={(e) => setType(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={carInfo?.year!}
-            onChange={(e) => setYear(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={carInfo?.license!}
-            onChange={(e) => setLicense(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={carInfo?.mileage!}
-            onChange={(e) => setMileage(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={carInfo?.model!}
-            onChange={(e) => setModel(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={carInfo?.color!}
-            onChange={(e) => setColor(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={carInfo?.seats!}
-            onChange={(e) => setSeats(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={carInfo?.condition!}
-            onChange={(e) => setCondition(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={`Mileage Last Oil Change: ${carInfo?.mileageLastOilChange}`}
-            onChange={(e) => setMileageLastOilChange(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={`Mileage Last Tire Change: ${carInfo?.mileageLastTireChange}`}
-            onChange={(e) => setMileageLastTireChange(e.target.value)}
-          />
-
+        <CarForm
+          handleSubmit={handleSubmit}
+          manufacturer={carInfo?.manufacturer}
+          setManufacturer={setManufacturer}
+          type={carInfo?.type}
+          setType={setType}
+          year={carInfo?.year}
+          setYear={setYear}
+          license={carInfo?.license}
+          setLicense={setLicense}
+          mileage={carInfo?.mileage}
+          setMileage={setMileage}
+          model={carInfo?.model}
+          setModel={setModel}
+          color={carInfo?.color}
+          setColor={setColor}
+          seats={carInfo?.seats}
+          setSeats={setSeats}
+          condition={carInfo?.condition}
+          setCondition={setCondition}
+          mileageLastOilChange={carInfo?.mileageLastOilChange}
+          setMileageLastOilChange={setMileageLastOilChange}
+          mileageLastTireChange={carInfo?.mileageLastTireChange}
+          setMileageLastTireChange={setMileageLastTireChange}
+        >
           <input
             type="date"
             defaultValue={carInfo?.dateNextOilChange.split('T')[0]}
@@ -192,7 +160,7 @@ function EditCar() {
           >
             Edit Car
           </button>
-        </form>
+        </CarForm>
       </div>
     </div>
   );

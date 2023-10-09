@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import RoundedInput from './RoundedInput';
+import CarForm from './CarForm';
 
 type Message = {
   text: string;
@@ -64,71 +64,40 @@ function AddCar() {
         {/* Car ID # {carId} */}
       </div>
       <div className="flex flex-col w-full">
-        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
-          <RoundedInput
-            type="text"
-            placeholder={manufacturer}
-            onChange={(e) => setManufacturer(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={type}
-            onChange={(e) => setType(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={year.toString()}
-            onChange={(e) => setYear(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={license}
-            onChange={(e) => setLicense(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={mileage.toString()}
-            onChange={(e) => setMileage(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={model}
-            onChange={(e) => setModel(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={color}
-            onChange={(e) => setColor(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={seats.toString()}
-            onChange={(e) => setSeats(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={condition}
-            onChange={(e) => setCondition(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={`Mileage Last Oil Change: ${mileageLastOilChange.toString()}`}
-            onChange={(e) => setMileageLastOilChange(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={`Mileage Last Tire Change: ${mileageLastTireChange.toString()}`}
-            onChange={(e) => setMileageLastTireChange(Number(e.target.value))}
-          />
-          <RoundedInput
+        <CarForm
+          handleSubmit={handleSubmit}
+          manufacturer={manufacturer}
+          setManufacturer={setManufacturer}
+          type={type}
+          setType={setType}
+          year={year}
+          setYear={setYear}
+          license={license}
+          setLicense={setLicense}
+          mileage={mileage}
+          setMileage={setMileage}
+          model={model}
+          setModel={setModel}
+          color={color}
+          setColor={setColor}
+          seats={seats}
+          setSeats={setSeats}
+          condition={condition}
+          setCondition={setCondition}
+          mileageLastOilChange={mileageLastOilChange}
+          setMileageLastOilChange={setMileageLastOilChange}
+          mileageLastTireChange={mileageLastTireChange}
+          setMileageLastTireChange={setMileageLastTireChange}
+        >
+          <input
             type="date"
-            placeholder={`Next Date Oil Change: ${dateNextOilChange.toString()}`}
             onChange={(e) => setDateNextOilChange(e.target.value)}
+            className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
           />
-          <RoundedInput
+          <input
             type="date"
-            placeholder={`Next Date  Tire Change: ${dateNextTireChange.toString()}`}
             onChange={(e) => setDateNextTireChange(e.target.value)}
+            className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
           />
           {message && (
             <div className="col-span-2 rounded-3xl px-10 py-1 text-center">
@@ -138,12 +107,12 @@ function AddCar() {
           <button
             type="submit"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
-              [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
-              font-semibold text-white text-lg text-center"
+          [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
+          font-semibold text-white text-lg text-center"
           >
             Add Car
           </button>
-        </form>
+        </CarForm>
       </div>
     </div>
   );

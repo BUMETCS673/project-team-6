@@ -16,7 +16,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
     required: true,
   });
   if (status === 'loading') {
-    return redirect('/signin');
+    return redirect('/');
   }
 
   return (
@@ -26,7 +26,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
 
       {/* Car information */}
       <div className="flex-col w-full bg-gray-50 flex">
-        <div className="flex flex-row bg-white w-full h-12 items-center px-4">
+        <div className="flex flex-row bg-white w-full h-12 items-center px-4 justify-between">
           {/* Left Icon */}
           <div className="w-4 flex justify-center items-center ml-4">
             <Image
