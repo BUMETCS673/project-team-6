@@ -1,63 +1,103 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import RoundedInput from './RoundedInput';
+type Message = {
+  text: string;
+  type: 'red' | 'green';
+};
 
 interface EditCarProps {
   manufacturer: string;
   type: string;
-  year: number;
+  year: string;
   license: string;
-  mileage: number;
+  mileage: string;
   model: string;
   color: string;
-  seats: number;
+  seats: string;
   condition: string;
-  mileageLastOilChange: number;
-  mileageLastTireChange: number;
-  dateNextTireChange: Date;
-  dateNextOilChange: Date;
+  mileageLastOilChange: string;
+  mileageLastTireChange: string;
+  dateNextTireChange: string;
+  dateNextOilChange: string;
 }
 
-function EditCar({
-  manufacturer: initialManufacturer,
-  type: initialType,
-  year: initialYear,
-  license: initialLicense,
-  mileage: initialMileage,
-  model: initialModel,
-  color: initialColor,
-  seats: initialSeats,
-  condition: initialCondition,
-  mileageLastOilChange: initialMileageLastOilChange,
-  mileageLastTireChange: initialMileageLastTireChange,
-  dateNextTireChange: initialDateNextTireChange,
-  dateNextOilChange: initialDateNextOilChange,
-}: EditCarProps) {
-  const [manufacturer, setManufacturer] = useState(initialManufacturer);
-  const [type, setType] = useState(initialType);
-  const [year, setYear] = useState(initialYear);
-  const [license, setLicense] = useState(initialLicense);
-  const [mileage, setMileage] = useState(initialMileage);
-  const [model, setModel] = useState(initialModel);
-  const [color, setColor] = useState(initialColor);
-  const [seats, setSeats] = useState(initialSeats);
-  const [condition, setCondition] = useState(initialCondition);
-  const [mileageLastOilChange, setMileageLastOilChange] = useState(
-    initialMileageLastOilChange,
-  );
-  const [mileageLastTireChange, setMileageLastTireChange] = useState(
-    initialMileageLastTireChange,
-  );
-  const [dateNextTireChange, setDateNextTireChange] = useState(
-    initialDateNextTireChange,
-  );
-  const [dateNextOilChange, setDateNextOilChange] = useState(
-    initialDateNextOilChange,
-  );
+function EditCar() {
+  const [manufacturer, setManufacturer] = useState('');
+  const [type, setType] = useState('');
+  const [year, setYear] = useState('');
+  const [license, setLicense] = useState('');
+  const [mileage, setMileage] = useState('');
+  const [model, setModel] = useState('');
+  const [color, setColor] = useState('');
+  const [seats, setSeats] = useState('');
+  const [condition, setCondition] = useState('');
+  const [mileageLastOilChange, setMileageLastOilChange] = useState('');
+  const [mileageLastTireChange, setMileageLastTireChange] = useState('');
+  const [dateNextTireChange, setDateNextTireChange] = useState('');
+  const [dateNextOilChange, setDateNextOilChange] = useState('');
+  const [message, setMessage] = useState<Message | null>(null);
   const searchParams = useSearchParams()!;
   const carId = searchParams.get('carId');
+  const [carInfo, setCarInfo] = useState<EditCarProps | null>(null);
+
+  useEffect(() => {
+    const getCarsInfo = async () => {
+      if (!carId) return;
+      try {
+        const response = await fetch(`/api/carInfo?carId=${carId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+
+        setCarInfo(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCarsInfo();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/carInfo`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          carId,
+          manufacturer,
+          type,
+          year,
+          license,
+          mileage,
+          model,
+          color,
+          seats,
+          condition,
+          mileageLastOilChange,
+          mileageLastTireChange,
+          dateNextTireChange,
+          dateNextOilChange,
+        }),
+      });
+      console.log(carId);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Something went wrong');
+      }
+      const data = await response.json();
+      setMessage({ type: 'green', text: data.message });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
       <div
@@ -67,75 +107,77 @@ function EditCar({
         Car ID # {carId}
       </div>
       <div className="flex flex-col w-full">
-        <form className="grid grid-cols-2 gap-4">
+        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
           <RoundedInput
             type="text"
-            placeholder={manufacturer}
+            placeholder={carInfo?.manufacturer!}
             onChange={(e) => setManufacturer(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder={type}
+            placeholder={carInfo?.type!}
             onChange={(e) => setType(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder={year.toString()}
-            onChange={(e) => setYear(Number(e.target.value))}
+            placeholder={carInfo?.year!}
+            onChange={(e) => setYear(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder={license}
+            placeholder={carInfo?.license!}
             onChange={(e) => setLicense(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder={mileage.toString()}
-            onChange={(e) => setMileage(Number(e.target.value))}
+            placeholder={carInfo?.mileage!}
+            onChange={(e) => setMileage(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder={model}
+            placeholder={carInfo?.model!}
             onChange={(e) => setModel(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder={color}
+            placeholder={carInfo?.color!}
             onChange={(e) => setColor(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder={seats.toString()}
-            onChange={(e) => setSeats(Number(e.target.value))}
+            placeholder={carInfo?.seats!}
+            onChange={(e) => setSeats(e.target.value)}
           />
           <RoundedInput
             type="text"
-            placeholder={condition}
+            placeholder={carInfo?.condition!}
             onChange={(e) => setCondition(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder={`Mileage Last Oil Change: ${mileageLastOilChange.toString()}`}
-            onChange={(e) => setMileageLastOilChange(Number(e.target.value))}
+            placeholder={`Mileage Last Oil Change: ${carInfo?.mileageLastOilChange}`}
+            onChange={(e) => setMileageLastOilChange(e.target.value)}
           />
           <RoundedInput
             type="number"
-            placeholder={`Mileage Last Tire Change: ${mileageLastTireChange.toString()}`}
-            onChange={(e) => setMileageLastTireChange(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="date"
-            placeholder={`Next Date Oil Change: ${dateNextOilChange.toString()}`}
-            onChange={(e) => setDateNextOilChange(new Date(e.target.value))}
+            placeholder={`Mileage Last Tire Change: ${carInfo?.mileageLastTireChange}`}
+            onChange={(e) => setMileageLastTireChange(e.target.value)}
           />
 
-          <RoundedInput
+          <input
             type="date"
-            placeholder={`Next Date  Tire Change: ${dateNextTireChange.toString()}`}
-            onChange={(e) => setDateNextTireChange(new Date(e.target.value))}
+            defaultValue={carInfo?.dateNextOilChange.split('T')[0]}
+            onChange={(e) => setDateNextOilChange(e.target.value)}
+            className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
+          />
+          <input
+            type="date"
+            defaultValue={carInfo?.dateNextTireChange.split('T')[0]}
+            onChange={(e) => setDateNextTireChange(e.target.value)}
+            className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
           />
           <button
-            type="button"
+            type="submit"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
               font-semibold text-white text-lg text-center"

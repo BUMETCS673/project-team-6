@@ -32,6 +32,7 @@ export default function Page() {
 
   useEffect(() => {
     const getCarsInfo = async () => {
+      if (!carId) return;
       try {
         const response = await fetch(`/api/carInfo?carId=${carId}`, {
           method: 'GET',
@@ -53,6 +54,7 @@ export default function Page() {
     <DashboardLayout>
       <CarInfo
         carId={carId!}
+        manufacturer={carInfo?.manufacturer!}
         mileage={carInfo?.mileage!}
         type={carInfo?.type!}
         seats={carInfo?.seats!}

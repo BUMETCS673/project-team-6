@@ -191,168 +191,224 @@ export async function GET(req: Request) {
   }
 }
 
-/**
- * Edit car info REST API access.
- * This endpoint allows a user to edit car information.
- * Calculates whether maintenance is required
- *
- * @async
- * @function
- * @param {Object} req - The request object.
- * @param {Object} req.body - The body of the request.
- * @param {string} req.body.manufacturer - The manufacturer of the car
- * @param {string} req.body.type - The type of the car.
- * @param {string} req.body.year - The year of the car.
- * @param {string} req.body.license - The license number of the car.
- * @param {string} req.body.mileage - The current mileage of the car.
- * @param {string} req.body.model - The model of the car.
- * @param {string} req.body.color - The color of the car.
- * @param {string} req.body.seats - The number of seats in the car.
- * @param {string} req.body.condition - The condition of the car.
- * @param {string} req.body.mileageLastOilChange - The mileage of last oil change.
- * @param {string} req.body.mileageLastTireChange - The mileage of last tire change.
- * @param {string} req.body.dateNextOilChange - The date of next oil change.
- * @param {string} req.body.dateNextTireChange - The date of next tire change.
- * @returns {Promise<NextResponse>} A response object.
- * 200: Car edited successfully. Updated car info returned.
- * 400: Bad request. Duplicate license or Car ID not provided or invalid.
- * 404: Car ID not found in DB.
- * 500: Unexpected server error.
- * @throws {Error} Throws an error if there's an issue with the registration process.
- */
+// /**
+//  * Edit car info REST API access.
+//  * This endpoint allows a user to edit car information.
+//  * Calculates whether maintenance is required
+//  *
+//  * @async
+//  * @function
+//  * @param {Object} req - The request object.
+//  * @param {Object} req.body - The body of the request.
+//  * @param {string} req.body.manufacturer - The manufacturer of the car
+//  * @param {string} req.body.type - The type of the car.
+//  * @param {string} req.body.year - The year of the car.
+//  * @param {string} req.body.license - The license number of the car.
+//  * @param {string} req.body.mileage - The current mileage of the car.
+//  * @param {string} req.body.model - The model of the car.
+//  * @param {string} req.body.color - The color of the car.
+//  * @param {string} req.body.seats - The number of seats in the car.
+//  * @param {string} req.body.condition - The condition of the car.
+//  * @param {string} req.body.mileageLastOilChange - The mileage of last oil change.
+//  * @param {string} req.body.mileageLastTireChange - The mileage of last tire change.
+//  * @param {string} req.body.dateNextOilChange - The date of next oil change.
+//  * @param {string} req.body.dateNextTireChange - The date of next tire change.
+//  * @returns {Promise<NextResponse>} A response object.
+//  * 200: Car edited successfully. Updated car info returned.
+//  * 400: Bad request. Duplicate license or Car ID not provided or invalid.
+//  * 404: Car ID not found in DB.
+//  * 500: Unexpected server error.
+//  * @throws {Error} Throws an error if there's an issue with the registration process.
+//  */
+// export async function PUT(req: Request) {
+//   const requestBody = await req.json();
+//   const {
+//     manufacturer,
+//     type,
+//     year,
+//     license,
+//     mileage,
+//     model,
+//     color,
+//     seats,
+//     condition,
+//     mileageLastOilChange,
+//     mileageLastTireChange,
+//   } = requestBody;
+
+//   let {
+//     dateNextOilChange,
+//     dateNextTireChange,
+//     oilOverdue,
+//     tireOverdue,
+//     maintenanceRequired,
+//   } = requestBody;
+
+//   try {
+//     // Get saved car object, validate car exist
+//     const getRequest = await GET(req);
+//     const { message, carObject } = await getRequest.json();
+//     if (!carObject) {
+//       return NextResponse.json({ message }, { status: getRequest.status });
+//     }
+
+//     // Check existing license being registered with another car
+//     const existingLicense = await car.findOne({
+//       // eslint-disable-next-line no-underscore-dangle
+//       $and: [{ license }, { _id: { $ne: carObject._id } }],
+//     });
+
+//     if (existingLicense) {
+//       return NextResponse.json(
+//         { message: 'License number already registered.' },
+//         { status: 400 },
+//       );
+//     }
+
+//     // TODO Assumption: If new Date for last maintenance change, then also new mileage for last maintenance change
+
+//     // Type conversion from request to Date object
+//     let dateNextOilChangeDate = new Date('');
+//     let dateNextTireChangeDate = new Date('');
+
+//     // Oil Maintenance
+//     if (
+//       isMaintenanceTypeRequired(
+//         mileageLastOilChange,
+//         rotationMileageOil,
+//         mileage,
+//       )
+//     ) {
+//       dateNextOilChangeDate = new Date(dateNextOilChange);
+//       oilOverdue = isMaintenanceOverdue(dateNextOilChangeDate, oilOverdue);
+//       dateNextOilChangeDate = dateNeedsMaintenance(dateNextOilChangeDate);
+//     } else {
+//       oilOverdue = false;
+//       dateNextOilChange = '';
+//     }
+
+//     // Tire Maintenance
+//     if (
+//       isMaintenanceTypeRequired(
+//         mileageLastTireChange,
+//         rotationMileageTire,
+//         mileage,
+//       )
+//     ) {
+//       dateNextTireChangeDate = new Date(dateNextTireChange);
+//       tireOverdue = isMaintenanceOverdue(dateNextTireChangeDate, tireOverdue);
+//       dateNextTireChangeDate = dateNeedsMaintenance(dateNextTireChangeDate);
+//     } else {
+//       tireOverdue = false;
+//       dateNextTireChange = '';
+//     }
+
+//     // set overwrites and type conversion to DB date string
+//     maintenanceRequired = false;
+
+//     if (dateNextOilChangeDate.getDate()) {
+//       dateNextOilChange = dateNextOilChangeDate.toISOString();
+//       maintenanceRequired = true;
+//     }
+//     if (dateNextTireChangeDate.getDate()) {
+//       dateNextTireChange = dateNextTireChangeDate.toISOString();
+//       maintenanceRequired = true;
+//     }
+
+//     // DB Update
+//     await dbConnect();
+
+//     const updatedCar = await car.findOneAndUpdate(
+//       // eslint-disable-next-line no-underscore-dangle
+//       { _id: carObject._id },
+//       {
+//         $set: {
+//           manufacturer,
+//           type,
+//           year,
+//           license,
+//           mileage,
+//           model,
+//           color,
+//           seats,
+//           condition,
+//           mileageLastOilChange,
+//           mileageLastTireChange,
+//           dateNextOilChange,
+//           dateNextTireChange,
+//           oilOverdue,
+//           tireOverdue,
+//           maintenanceRequired,
+//         },
+//       },
+//       { new: true },
+//     );
+
+//     if (!updatedCar) {
+//       return NextResponse.json(
+//         { message: 'Could not update document' },
+//         { status: 500 },
+//       );
+//     }
+
+//     // return carObject
+//     return NextResponse.json({ updatedCar }, { status: 200 });
+//   } catch (err: any) {
+//     return NextResponse.json(
+//       { message: `Server Error: ${err}` },
+//       { status: 500 },
+//     );
+//   }
+// }
+
+function filterEmptyProperties(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, value]) => value != null && value !== ''),
+  );
+}
+
 export async function PUT(req: Request) {
-  const requestBody = await req.json();
-  const {
-    manufacturer,
-    type,
-    year,
-    license,
-    mileage,
-    model,
-    color,
-    seats,
-    condition,
-    mileageLastOilChange,
-    mileageLastTireChange,
-  } = requestBody;
-
-  let {
-    dateNextOilChange,
-    dateNextTireChange,
-    oilOverdue,
-    tireOverdue,
-    maintenanceRequired,
-  } = requestBody;
-
   try {
-    // Get saved car object, validate car exist
-    const getRequest = await GET(req);
-    const { message, carObject } = await getRequest.json();
-    if (!carObject) {
-      return NextResponse.json({ message }, { status: getRequest.status });
-    }
+    const data = await req.json();
 
-    // Check existing license being registered with another car
-    const existingLicense = await car.findOne({
-      // eslint-disable-next-line no-underscore-dangle
-      $and: [{ license }, { _id: { $ne: carObject._id } }],
-    });
+    const entries = Object.entries(data);
+    const nonEmptyOrNull = entries.filter(
+      ([key, val]) => val !== '' && val !== null,
+    );
+    const filteredData = Object.fromEntries(nonEmptyOrNull);
 
-    if (existingLicense) {
+    await dbConnect();
+    const updatedCar = await car.findOneAndUpdate(
+      { _id: filteredData.carId },
+      {
+        $set: {
+          manufacturer: filteredData.manufacturer,
+          type: filteredData.type,
+          year: filteredData.year,
+          license: filteredData.license,
+          mileage: filteredData.mileage,
+          model: filteredData.model,
+          color: filteredData.color,
+          seats: filteredData.seats,
+          condition: filteredData.condition,
+          mileageLastOilChange: filteredData.mileageLastOilChange,
+          mileageLastTireChange: filteredData.mileageLastTireChange,
+          dateNextOilChange: filteredData.dateNextOilChange,
+          dateNextTireChange: filteredData.dateNextTireChange,
+        },
+      },
+    );
+    if (!updatedCar) {
       return NextResponse.json(
-        { message: 'License number already registered.' },
+        { message: 'Car not found or update failed.' },
         { status: 400 },
       );
     }
 
-    // TODO Assumption: If new Date for last maintenance change, then also new mileage for last maintenance change
-
-    // Type conversion from request to Date object
-    let dateNextOilChangeDate = new Date('');
-    let dateNextTireChangeDate = new Date('');
-
-    // Oil Maintenance
-    if (
-      isMaintenanceTypeRequired(
-        mileageLastOilChange,
-        rotationMileageOil,
-        mileage,
-      )
-    ) {
-      dateNextOilChangeDate = new Date(dateNextOilChange);
-      oilOverdue = isMaintenanceOverdue(dateNextOilChangeDate, oilOverdue);
-      dateNextOilChangeDate = dateNeedsMaintenance(dateNextOilChangeDate);
-    } else {
-      oilOverdue = false;
-      dateNextOilChange = '';
-    }
-
-    // Tire Maintenance
-    if (
-      isMaintenanceTypeRequired(
-        mileageLastTireChange,
-        rotationMileageTire,
-        mileage,
-      )
-    ) {
-      dateNextTireChangeDate = new Date(dateNextTireChange);
-      tireOverdue = isMaintenanceOverdue(dateNextTireChangeDate, tireOverdue);
-      dateNextTireChangeDate = dateNeedsMaintenance(dateNextTireChangeDate);
-    } else {
-      tireOverdue = false;
-      dateNextTireChange = '';
-    }
-
-    // set overwrites and type conversion to DB date string
-    maintenanceRequired = false;
-
-    if (dateNextOilChangeDate.getDate()) {
-      dateNextOilChange = dateNextOilChangeDate.toISOString();
-      maintenanceRequired = true;
-    }
-    if (dateNextTireChangeDate.getDate()) {
-      dateNextTireChange = dateNextTireChangeDate.toISOString();
-      maintenanceRequired = true;
-    }
-
-    // DB Update
-    await dbConnect();
-
-    const updatedCar = await car.findOneAndUpdate(
-      // eslint-disable-next-line no-underscore-dangle
-      { _id: carObject._id },
-      {
-        $set: {
-          manufacturer,
-          type,
-          year,
-          license,
-          mileage,
-          model,
-          color,
-          seats,
-          condition,
-          mileageLastOilChange,
-          mileageLastTireChange,
-          dateNextOilChange,
-          dateNextTireChange,
-          oilOverdue,
-          tireOverdue,
-          maintenanceRequired,
-        },
-      },
-      { new: true },
+    return NextResponse.json(
+      { message: 'Update successful', car: updatedCar },
+      { status: 200 },
     );
-
-    if (!updatedCar) {
-      return NextResponse.json(
-        { message: 'Could not update document' },
-        { status: 500 },
-      );
-    }
-
-    // return carObject
-    return NextResponse.json({ updatedCar }, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },

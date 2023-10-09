@@ -11,6 +11,7 @@ function Filed({ label, value }: { label: string; value: string | number }) {
 
 interface CarInfoProps {
   carId: string;
+  manufacturer: string;
   mileage: number;
   type: string;
   seats: number;
@@ -27,6 +28,7 @@ interface CarInfoProps {
 
 function CarInfo({
   carId,
+  manufacturer,
   mileage,
   type,
   model,
@@ -52,6 +54,7 @@ function CarInfo({
 
       <div className="grid grid-cols-2 gap-5 gap-x-20 ">
         <Filed label="Mileage:" value={mileage} />
+        <Filed label="Manufacturer:" value={manufacturer} />
         <Filed label="Type:" value={type} />
         <Filed label="Model:" value={model} />
         <Filed label="Seat:" value={seats} />
