@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export, max-lines */
 
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';

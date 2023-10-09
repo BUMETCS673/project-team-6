@@ -8,6 +8,8 @@
 # testing
 /coverage
 /playwright-report
+/.nyc_output/
+/test-results/
 
 # next.js
 /.next/
