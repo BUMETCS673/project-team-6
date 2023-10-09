@@ -2,16 +2,16 @@ import mongoose from 'mongoose';
 
 declare global {
   // eslint-disable-next-line vars-on-top, no-var
-  var mongoose: any; // This must be a `var` and not a `let / const`
+  var db: any; // This must be a `var` and not a `let / const`
 }
 
 const logger = require('pino')();
 
-let cached = global.mongoose;
+let cached = global.db;
 
 if (!cached) {
-  global.mongoose = { conn: null, promise: null };
-  cached = global.mongoose;
+  global.db = { conn: null, promise: null };
+  cached = global.db;
 }
 
 const MONGODB_URI = process.env.MONGODB_URI!;

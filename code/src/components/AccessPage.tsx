@@ -10,8 +10,8 @@ export default function AccessPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="grid place-items-center h-screen bg-gray-200">
-      <div className="flex rounded-2xl shadow-xl bg-white w-1/2 h-1/2 items-center space-x-4">
+    <div className="grid place-items-center w-1/2 h-1/2 relative grid-click-through bg-transparent z-10">
+      <div className="flex rounded-3xl shadow-xl bg-white w-full h-full items-center space-x-4 z-10">
         {isLogin ? (
           <SignIn
             email={email}

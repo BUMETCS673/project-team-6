@@ -10,7 +10,22 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "depth": 3,
+        "labelComponents": [],
+        "labelAttributes": ["label"],
+        "controlComponents": ["input"],
+        "assert": "either",
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
     "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "max-lines-per-function": ["error", { "max": 150 }],
+    "max-lines": ["error", 300]
   }
 }

@@ -44,7 +44,7 @@ export default function SignIn({
             {errorMsg}
           </div>
         )}
-        <AuthField type="text" onChangeValue={setEmail}>
+        <AuthField data-testid="email" type="text" onChangeValue={setEmail}>
           Email
         </AuthField>
 
@@ -59,7 +59,7 @@ export default function SignIn({
         </button>
       </form>
 
-      <div className="w-1/2 flex flex-col justify-center items-center bg-blue-400 h-full rounded-bl-5xl rounded-r-2xl">
+      <div className="w-1/2 flex flex-col justify-center items-center bg-custom-orange h-full rounded-bl-5xl rounded-r-2xl">
         <p className="text-white text-lg font-bold flex flex-col">
           Don&apos;t Have an Account Yet?
           <span className="text-xs font-light">
