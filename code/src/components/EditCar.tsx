@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import RoundedInput from './RoundedInput';
+
+const logger = require('pino')();
+
 type Message = {
   text: string;
   type: 'red' | 'green';
@@ -57,11 +60,11 @@ function EditCar() {
 
         setCarInfo(data);
       } catch (error) {
-        console.log(error);
+        logger.info(error);
       }
     };
     getCarsInfo();
-  }, []);
+  }, [carId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +89,7 @@ function EditCar() {
           dateNextOilChange,
         }),
       });
-      console.log(carId);
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Something went wrong');
@@ -94,7 +97,7 @@ function EditCar() {
       const data = await response.json();
       setMessage({ type: 'green', text: data.message });
     } catch (error) {
-      console.log(error);
+      logger.info(error);
     }
   };
 
@@ -176,6 +179,11 @@ function EditCar() {
             onChange={(e) => setDateNextTireChange(e.target.value)}
             className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
           />
+          {message && (
+            <div className="col-span-2 rounded-3xl px-10 py-1 text-center">
+              {message.text}
+            </div>
+          )}
           <button
             type="submit"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
