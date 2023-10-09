@@ -8,6 +8,8 @@ type Message = {
   type: 'red' | 'green';
 };
 
+const logger = require('pino')();
+
 function AddCar() {
   const [manufacturer, setManufacturer] = useState('manufacturer');
   const [type, setType] = useState('type');
@@ -49,9 +51,7 @@ function AddCar() {
       const data = await response.json();
       setMessage({ type: 'green', text: data.message });
     } catch (error) {
-      {
-        console.log(error);
-      }
+      logger.log(error);
     }
   };
 
@@ -131,7 +131,7 @@ function AddCar() {
             onChange={(e) => setDateNextTireChange(e.target.value)}
           />
           {message && (
-            <div className={`col-span-2 rounded-3xl px-10 py-1 text-center`}>
+            <div className="col-span-2 rounded-3xl px-10 py-1 text-center">
               {message.text}
             </div>
           )}

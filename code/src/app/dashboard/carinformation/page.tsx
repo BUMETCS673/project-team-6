@@ -1,20 +1,66 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import DashboardLayout from '../../../components/DashboardLayout';
 import CarInfo from '../../../components/CarInfo';
 
-export default function page() {
+const logger = require('pino')();
+
+interface CarInfoProps {
+  _id: string;
+  manufacturer: string;
+  model: string;
+  type: string;
+  year: number;
+  license: string;
+  mileage: number;
+  color: string;
+  seats: number;
+  condition: string;
+  mileageLastOilChange: number;
+  mileageLastTireChange: number;
+  dateNextTireChange: Date;
+  dateNextOilChange: Date;
+}
+
+export default function Page() {
+  const searchParams = useSearchParams()!;
+  const carId = searchParams.get('carId');
+
+  const [carInfo, setCarInfo] = useState<CarInfoProps | null>(null);
+
+  useEffect(() => {
+    const getCarsInfo = async () => {
+      try {
+        const response = await fetch(`/api/carInfo?carId=${carId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+
+        setCarInfo(data);
+      } catch (error) {
+        logger.log(error);
+      }
+    };
+    getCarsInfo();
+  });
+
   return (
     <DashboardLayout>
       <CarInfo
-        carId="2"
-        mileage={10000}
-        type="Sedan"
-        seats={5}
-        condition="New"
-        license="ABC-123"
-        oilChange="2022-01-01"
-        model="Camry"
-        color="Red"
-        year={2022}
+        carId={carId!}
+        mileage={carInfo?.mileage!}
+        type={carInfo?.type!}
+        seats={carInfo?.seats!}
+        condition={carInfo?.condition!}
+        license={carInfo?.license!}
+        model={carInfo?.model!}
+        color={carInfo?.color!}
+        year={carInfo?.year!}
       />
     </DashboardLayout>
   );

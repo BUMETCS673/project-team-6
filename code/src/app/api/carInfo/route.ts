@@ -112,7 +112,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const newCar = await car.create({
+    await car.create({
       manufacturer,
       type,
       year,
@@ -131,7 +131,7 @@ export async function POST(req: Request) {
       maintenanceRequired,
     });
 
-    return NextResponse.json({ message:'Success' }, { status: 201 });
+    return NextResponse.json({ message: 'Success' }, { status: 201 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
@@ -182,7 +182,7 @@ export async function GET(req: Request) {
       );
     }
 
-    return NextResponse.json({ carObject }, { status: 200 });
+    return NextResponse.json(carObject, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },

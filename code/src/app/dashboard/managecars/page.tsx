@@ -1,5 +1,10 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import DashboardLayout from '../../../components/DashboardLayout';
 import CarResultBar from '../../../components/CarResultBar';
+
+const logger = require('pino')();
 
 function SearchField({ children }) {
   return (
@@ -14,8 +19,35 @@ function SearchField({ children }) {
     </div>
   );
 }
+type Car = {
+  _id: string;
+  manufacturer: string;
+  model: string;
+  type: string;
+  // ... any other properties ...
+};
+export default function Page() {
+  const [cars, setCars] = useState<Car[]>([]);
 
-export default function page() {
+  useEffect(() => {
+    const getAllCars = async () => {
+      try {
+        const response = await fetch('/api/carInfo/check', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+
+        setCars(data);
+      } catch (error) {
+        logger.log(error);
+      }
+    };
+    getAllCars();
+  }, []);
+
   return (
     <DashboardLayout>
       {/* 4 info search */}
@@ -27,13 +59,18 @@ export default function page() {
       </div>
 
       {/* Results display */}
-      <div>
-        <CarResultBar
-          carId="12345"
-          manufacturer="Toyota"
-          model="Camry"
-          carType="Sedan"
-        />
+      <div className="flex flex-col gap-4">
+        {cars.map((car) => (
+          <CarResultBar
+            // eslint-disable-next-line no-underscore-dangle
+            key={car._id}
+            // eslint-disable-next-line no-underscore-dangle
+            carId={car._id}
+            manufacturer={car.manufacturer}
+            model={car.model}
+            carType={car.type}
+          />
+        ))}
       </div>
     </DashboardLayout>
   );

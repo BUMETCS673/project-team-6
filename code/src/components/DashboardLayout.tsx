@@ -12,12 +12,12 @@ interface DashboardLayoutProps {
 export default function DashboardLayout(props: DashboardLayoutProps) {
   const { children } = props;
 
-  // const { status } = useSession({
-  //   required: true,
-  // });
-  // if (status === 'loading') {
-  //   return redirect('/signin');
-  // }
+  const { status } = useSession({
+    required: true,
+  });
+  if (status === 'loading') {
+    return redirect('/signin');
+  }
 
   return (
     <div className="flex border h-screen">
