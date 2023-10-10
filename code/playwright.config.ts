@@ -18,4 +18,8 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+  expect: {
+    toHaveScreenshot: { maxDiffPixelRatio: 0.5 },
+  },
+  snapshotPathTemplate: 'e2e/snapshots/{testFilePath}/{arg}{ext}',
 });

@@ -9,9 +9,13 @@ interface EditCarProps {
   color: string;
   seats: number;
   condition: string;
-  oilChange: string;
+  mileageLastOilChange: number;
+  mileageLastTireChange: number;
+  dateNextOilChange: string;
+  dateNextTireChange: string;
 }
 
+// eslint-disable-next-line max-lines-per-function
 function EditCar(props: EditCarProps) {
   const {
     carId,
@@ -24,7 +28,10 @@ function EditCar(props: EditCarProps) {
     color,
     seats,
     condition,
-    oilChange,
+    mileageLastOilChange,
+    mileageLastTireChange,
+    dateNextOilChange,
+    dateNextTireChange,
   } = props;
   return (
     <div className="w-[977px] h-[545px] top-0 left-0 bg-white rounded-[25px] shadow-[0px_4px_10px_#cbcedb] flex flex-col justify-center items-center">
@@ -74,8 +81,24 @@ function EditCar(props: EditCarProps) {
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Mileage"
+              placeholder="Current Mileage"
               value={mileage}
+            />
+          </div>
+          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
+            <input
+              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
+              type="text"
+              placeholder="Mileage of Last Oil Change"
+              value={mileageLastOilChange}
+            />
+          </div>
+          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
+            <input
+              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
+              type="text"
+              placeholder="Mileage of Last Tire Change"
+              value={mileageLastTireChange}
             />
           </div>
         </div>
@@ -115,12 +138,23 @@ function EditCar(props: EditCarProps) {
               value={condition}
             />
           </div>
+          <div className="w-[308px] h-[45px]">
+            {/* Placeholder for Empty Space */}
+          </div>
           <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
             <input
               className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
               type="text"
-              placeholder="Oil Change"
-              value={oilChange}
+              placeholder="Date Next Oil Change"
+              value={dateNextOilChange}
+            />
+          </div>
+          <div className="w-[308px] h-[45px] bg-white rounded-[10px] border-2 border-solid border-[#cbcedb] flex justify-center items-center">
+            <input
+              className="w-[90%] h-[80%] opacity-75 font-medium text-[#cbcedb] text-[12px] tracking-[0] leading-[normal] "
+              type="text"
+              placeholder="Date Next Tire Change"
+              value={dateNextTireChange}
             />
           </div>
         </div>

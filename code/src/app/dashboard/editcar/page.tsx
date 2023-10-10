@@ -16,7 +16,10 @@ export default function page() {
           color="Red"
           seats={5}
           condition="New"
-          oilChange="2022-01-01"
+          mileageLastOilChange={20000}
+          mileageLastTireChange={30000}
+          dateNextOilChange="2022-02-02"
+          dateNextTireChange="2022-03-03"
         />
       </div>
     </DashboardLayout>
