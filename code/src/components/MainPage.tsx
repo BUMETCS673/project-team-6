@@ -6,6 +6,10 @@ import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
+import SectionTwo from './SectionTwo';
+import SectionThree from './SectionThree';
+import SectionFour from './SectionFour';
+import Footer from './Footer';
 import AccessPage from './AccessPage';
 
 // eslint-disable-next-line max-lines-per-function
@@ -91,21 +95,6 @@ export default function Home() {
         />
       ),
       text: 'Feel free to transact anywhere, anytime',
-    },
-  ];
-
-  const squaresTwo = [
-    {
-      header: '456M',
-      text: 'Lorem ipsum dolor sit amet, consectetur.',
-    },
-    {
-      header: '456M',
-      text: 'Lorem ipsum dolor sit amet, consectetur.',
-    },
-    {
-      header: '456M',
-      text: 'Lorem ipsum dolor sit amet, consectetur.',
     },
   ];
 
@@ -346,188 +335,10 @@ export default function Home() {
             })}
           </div>
         </section>
-
-        {/* Section 2 */}
-        <section id="about" className="relative flex flex-col z-30 bg-white">
-          <div className="relative flex flex-row justify-between items-center mx-auto z-20 bg-white">
-            <div className="w-1/2">
-              <div className="w-1/2 -translate-y-40 translate-x-20 px-14">
-                {/* The 02 number image */}
-                <Image
-                  src="/02.svg"
-                  alt="02"
-                  className="w-80"
-                  width={251}
-                  height={248}
-                />
-              </div>
-              <h1 className="w-10/12 -translate-y-65 translate-x-35 px-14 text-5xl">
-                Learn more about{' '}
-                <span className="font-bold">RentalCompany</span>
-              </h1>
-            </div>
-            <div className="w-1/2">
-              <p className="w-8/12 -translate-y-30 translate-x-35 px-14 text-black">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                lacinia odio vitae vestibulum. Donec in efficitur leo. In
-                scelerisque quam non defd mollis. Vivamus sed porttitor dui. Sed
-                in sem a nisl wsde faucibus lobortis.
-              </p>
-            </div>
-            <div className="w-9/12 absolute -translate-y-40 translate-x-90 px-14">
-              <div className="w-full flex justify-between items-center h-25 -translate-y-10">
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2" />
-                <div className="flex-grow w-1/3 h-0.5 bg-extra-light-grey mx-2" />
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2" />
-              </div>
-            </div>
-          </div>
-          <div className="absolute w-full flex flex-row justify-center translate-y-40 items-center gap-10 px-40 z-20">
-            {squaresTwo.map((item, index) => {
-              const uniqueId = uuidv4();
-              return (
-                <div
-                  key={uniqueId}
-                  className={`flex flex-col justify-center items-center rounded-lg w-1/3 h-40 bg-custom-light-grey 
-                    ${index === 0 && 'text-text-grey'}
-                    ${index === 1 && `text-custom-grey`}
-                    ${index === 2 && `text-dark-grey`}
-                  }`}
-                >
-                  <div className="text-center text-6xl">{item?.header}</div>
-                  <div className="text-center text-2xl">{item?.text}</div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Section 3 */}
-        <section className="relative flex justify-center items-center bg-white pt-20 pb-10">
-          <div className="w-9/12 flex flex-row items-center rounded-7xl mx-40 py-10 bg-black text-white z-30">
-            <div className="w-5/12 flex flex-col gap-8">
-              <div className="w-full flex -translate-y-10">
-                <p className="w-full pl-14 text-4xl">
-                  Lorem ipsum dolor sit amet, adipiscing elit.
-                </p>
-              </div>
-              <div className="w-full pl-14 justify-end items-start">
-                <button
-                  type="button"
-                  className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8"
-                >
-                  Try <span className="font-bold">RentalCompany</span> Now
-                </button>
-              </div>
-            </div>
-            <div className="w-7/12 flex justify-end items-center pr-4 z-10">
-              {/* The car image in the middle black section */}
-              <Image
-                src="/CarFloating.svg"
-                alt="Car Floating"
-                className="w-158 h-115"
-                width={782}
-                height={573}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4 */}
-        <section
-          id="strategy"
-          className="relative flex flex-col flex justify-center items-center z-30 bg-white pb-20"
-        >
-          <div className="relative flex flex-row justify-between items-center mx-auto z-20 bg-white">
-            <div className="w-1/2">
-              <div className="w-1/2 translate-x-20 px-14">
-                {/* The 03 number image */}
-                <Image
-                  src="/03.svg"
-                  alt="03"
-                  className="w-80"
-                  width={251}
-                  height={248}
-                />
-              </div>
-              <h1 className="w-10/12 -translate-y-25 translate-x-35 px-14 text-5xl">
-                Hear from the founders of{' '}
-                <span className="font-bold">RentalCompany</span>
-              </h1>
-            </div>
-            <div className="w-1/2">
-              <p className="w-8/12 translate-y-5 translate-x-35 px-14 text-black">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                lacinia odio vitae vestibulum. Donec in efficitur leo. In
-                scelerisque quam non defd mollis. Vivamus sed porttitor dui. Sed
-                in sem a nisl wsde faucibus lobortis.
-              </p>
-            </div>
-            <div className="w-9/12 absolute -translate-y-6 translate-x-90 px-14">
-              <div className="w-full flex justify-between items-center h-25 -translate-y-10">
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full translate-x-2" />
-                <div className="flex-grow w-full h-0.5 bg-extra-light-grey mx-2" />
-                <div className="w-2 h-2 bg-extra-light-grey rounded-full -translate-x-2" />
-              </div>
-            </div>
-          </div>
-          {/* Video element with rounded corners */}
-          <div className="w-8/12 px-14">
-            {/* Video element */}
-            <video
-              width="100%"
-              height="100%"
-              controls
-              aria-label="Description of the video's content"
-              title="Short description of the video"
-              className="rounded-4xl"
-            >
-              <source src="/sample.mp4" type="video/mp4" />
-              {/* Adjusting 'kind' attribute to "captions" */}
-              <track
-                kind="captions"
-                src="/subtitle_en.vtt"
-                srcLang="en"
-                label="English"
-                default
-              />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="relative flex flex-col justify-center items-center gap-20 rounded-t-7xl bg-black text-white z-30 p-6 mx-14">
-          <div className="w-5/12 mb-4 justify-center items-center pt-10 text-center">
-            <p className="text-5xl">
-              Lorem ipsum dolor sit amet, adipiscing elit.
-            </p>
-          </div>
-          <button
-            type="button"
-            className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8"
-          >
-            Join <span className="font-bold">RentalCompany</span> Now
-          </button>
-          {/* Company Logo */}
-          <Image
-            src="/CompanyLogo.svg"
-            alt="Company Logo"
-            width={366}
-            height={36}
-          />
-          <div className="w-full flex flex-row justify-evenly items-center">
-            <p className="w-1/3 text-sm text-center text-custom-grey">
-              Terms & Agreements
-            </p>
-            <p className="w-1/3 text-sm text-center text-custom-grey">
-              @2023 RentalCompany All Rights Reserved
-            </p>
-            <p className="w-1/3 text-sm text-center text-custom-grey">
-              Privacy Policy
-            </p>
-          </div>
-        </footer>
+        <SectionTwo />
+        <SectionThree />
+        <SectionFour />
+        <Footer />
       </div>
     </>
   );
