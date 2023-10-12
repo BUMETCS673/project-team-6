@@ -133,7 +133,7 @@ export async function POST(req: Request) {
       maintenanceRequired,
     });
 
-    return NextResponse.json({ newCar }, { status: 201 });
+    return NextResponse.json( newCar, { status: 201 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
@@ -145,6 +145,8 @@ export async function POST(req: Request) {
 /**
  * Get car info REST API access.
  * This endpoint allows a user to get car information.
+ * If a carId query parameter is provided, returns one car
+ * Otherwise, returns all cars
  *
  * @async
  * @function
@@ -152,11 +154,24 @@ export async function POST(req: Request) {
  * @param {Object} req.url - The url of the request.
  * @returns {Promise<NextResponse>} A response object.
  * 200: Car retrieved successfully.
- * 400: Car ID not provided or invalid.
+ * 400: Car ID is invalid.
  * 404: Car ID not found in DB.
  * 500: Unexpected server error.
  * @throws {Error} Throws an error if there's an issue with the registration process.
  */
+
+async function getAllCars(req: Request) {
+  try {
+    await dbConnect();
+    const cars = await car.find({});
+    return NextResponse.json(cars, { status: 200 });
+  } catch (err: any) {
+    return NextResponse.json(
+      { message: `Server Error: ${err}` },
+      { status: 500 },
+    );
+  }
+}
 
 export async function GET(req: Request) {
   try {
@@ -164,10 +179,7 @@ export async function GET(req: Request) {
     const carId = url.searchParams.get('carId');
 
     if (!carId) {
-      return NextResponse.json(
-        { message: 'Please provide a carId' },
-        { status: 400 },
-      );
+      return getAllCars(req)
     }
 
     await dbConnect();
@@ -184,7 +196,7 @@ export async function GET(req: Request) {
       );
     }
 
-    return NextResponse.json({ carObject }, { status: 200 });
+    return NextResponse.json( carObject , { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
@@ -354,7 +366,7 @@ export async function PUT(req: Request) {
     }
 
     // return carObject
-    return NextResponse.json({ updatedCar }, { status: 200 });
+    return NextResponse.json( updatedCar , { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
