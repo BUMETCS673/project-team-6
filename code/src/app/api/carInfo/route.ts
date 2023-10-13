@@ -160,7 +160,7 @@ export async function POST(req: Request) {
  * @throws {Error} Throws an error if there's an issue with the registration process.
  */
 
-async function getAllCars(req: Request) {
+async function getAllCars() {
   try {
     await dbConnect();
     const cars = await car.find({});
@@ -179,7 +179,7 @@ export async function GET(req: Request) {
     const carId = url.searchParams.get('carId');
 
     if (!carId) {
-      return getAllCars(req)
+      return await getAllCars()
     }
 
     await dbConnect();
@@ -261,9 +261,11 @@ export async function PUT(req: Request) {
   try {
     // Get saved car object, validate car exist
     const getRequest = await GET(req);
-    const { message, carObject } = await getRequest.json();
-    if (!carObject) {
-      return NextResponse.json({ message }, { status: getRequest.status });
+    const carObject = await getRequest.json();
+
+    // Check if GET request returned an error
+    if (carObject.message) {
+      return NextResponse.json({ message: carObject.message }, { status: getRequest.status });
     }
 
     // Check existing license being registered with another car
