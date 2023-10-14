@@ -5,7 +5,7 @@
 import Image from 'next/image';
 
 // eslint-disable-next-line max-lines-per-function
-export default function SectionThree() {
+export default function SectionThree({ setActive }: { setActive: (value: boolean) => void }) {
 
     return (
         <>
@@ -15,13 +15,14 @@ export default function SectionThree() {
                     <div className="w-5/12 flex flex-col gap-8">
                         <div className="w-full flex -translate-y-10">
                             <p className="w-full pl-14 text-4xl">
-                                Lorem ipsum dolor sit amet, adipiscing elit.
+                                The Future Of Rental SaaS is <span className="font-bold">RentalCompany</span>
                             </p>
                         </div>
                         <div className="w-full pl-14 justify-end items-start">
                             <button
                                 type="button"
-                                className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8"
+                                className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-1000 px-4 ease-in-out rounded-3xl py-4 px-8"
+                                onClick={() => setActive(true)}
                             >
                                 Try <span className="font-bold">RentalCompany</span> Now
                             </button>

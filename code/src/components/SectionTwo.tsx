@@ -3,22 +3,22 @@
 'use client';
 
 import Image from 'next/image';
-import { v4 as uuidv4 } from 'uuid';;
+import { v4 as uuidv4 } from 'uuid';
 
 // eslint-disable-next-line max-lines-per-function
 export default function SectionTwo() {
     const squares = [
         {
           header: '456M',
-          text: 'Lorem ipsum dolor sit amet, consectetur.',
+          text: 'Miles covered by our rentals yearly.',
         },
         {
-          header: '456M',
-          text: 'Lorem ipsum dolor sit amet, consectetur.',
+          header: '30K+',
+          text: 'Satisfied customers and counting.',
         },
         {
-          header: '456M',
-          text: 'Lorem ipsum dolor sit amet, consectetur.',
+          header: 'Over 5 Years',
+          text: 'Years of top-tier service.',
         },
     ];
     return(
@@ -43,11 +43,11 @@ export default function SectionTwo() {
                         </h1>
                     </div>
                     <div className="w-1/2">
-                        <p className="w-8/12 -translate-y-30 translate-x-35 px-14 text-black">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                            lacinia odio vitae vestibulum. Donec in efficitur leo. In
-                            scelerisque quam non defd mollis. Vivamus sed porttitor dui. Sed
-                            in sem a nisl wsde faucibus lobortis.
+                        <p className="w-8/12 -translate-y-25 translate-x-35 px-14 text-black text-end">
+                            At RentalCompany, we pride ourselves on delivering not just a service, 
+                            but an unparalleled experience. Our journey in the rental industry has 
+                            been marked by dedication, innovation, and the trust of our valued customers. 
+                            Join us and experience the best in vehicle rentals.
                         </p>
                     </div>
                     <div className="w-9/12 absolute -translate-y-40 translate-x-90 px-14">
@@ -58,7 +58,7 @@ export default function SectionTwo() {
                         </div>
                     </div>
                 </div>
-                <div className="absolute w-full flex flex-row justify-center translate-y-40 items-center gap-10 px-40 z-20">
+                <div className="absolute w-full flex flex-row justify-center translate-y-50 items-center gap-10 px-40 z-20">
                     {squares.map((item, index) => {
                         const uniqueId = uuidv4();
                         return (
@@ -71,7 +71,7 @@ export default function SectionTwo() {
                             }`}
                         >
                             <div className="text-center text-6xl">{item?.header}</div>
-                            <div className="text-center text-2xl">{item?.text}</div>
+                            <div className="text-center text-2xl px-2">{item?.text}</div>
                         </div>
                         );
                     })}
