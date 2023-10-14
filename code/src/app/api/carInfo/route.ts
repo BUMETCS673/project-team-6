@@ -33,7 +33,7 @@ function scheduleMaintenance(days: number) {
 // Returns the date of scheduled maintenance
 // Assumes maintenance is required
 function dateNeedsMaintenance(nextDateChange: Date) {
-  if (!nextDateChange.getDate() || nextDateChange < today) {
+  if (isNaN(nextDateChange.getDate()) || nextDateChange < today) {
     return scheduleMaintenance(numDaysScheduled);
   }
 
@@ -43,7 +43,7 @@ function dateNeedsMaintenance(nextDateChange: Date) {
 
 // Returns true if scheduled maintenance date has already passed today
 function isMaintenanceOverdue(nextDateChange: Date, overdue: boolean) {
-  if (!nextDateChange.getDate()) {
+  if (isNaN(nextDateChange.getDate())) {
     return false;
   }
 
@@ -250,18 +250,20 @@ export async function PUT(req: Request) {
     mileageLastTireChange,
   } = requestBody;
 
-  let {
-    dateNextOilChange,
-    dateNextTireChange,
-    oilOverdue,
-    tireOverdue,
-    maintenanceRequired,
-  } = requestBody;
-
   try {
     // Get saved car object, validate car exist
     const getRequest = await GET(req);
     const carObject = await getRequest.json();
+
+    
+    let {
+      dateNextOilChange,
+      dateNextTireChange,
+      oilOverdue,
+      tireOverdue,
+      maintenanceRequired,
+    } = carObject
+
 
     // Check if GET request returned an error
     if (carObject.message) {
@@ -295,7 +297,10 @@ export async function PUT(req: Request) {
         mileage,
       )
     ) {
-      dateNextOilChangeDate = new Date(dateNextOilChange);
+      // If DB returns null, cannot create new Date object
+      if (dateNextOilChange) {
+        dateNextOilChangeDate = new Date(dateNextOilChange);
+      }
       oilOverdue = isMaintenanceOverdue(dateNextOilChangeDate, oilOverdue);
       dateNextOilChangeDate = dateNeedsMaintenance(dateNextOilChangeDate);
     } else {
@@ -311,7 +316,9 @@ export async function PUT(req: Request) {
         mileage,
       )
     ) {
-      dateNextTireChangeDate = new Date(dateNextTireChange);
+      if (dateNextTireChange) {
+        dateNextTireChangeDate = new Date(dateNextTireChange);
+      }
       tireOverdue = isMaintenanceOverdue(dateNextTireChangeDate, tireOverdue);
       dateNextTireChangeDate = dateNeedsMaintenance(dateNextTireChangeDate);
     } else {
@@ -320,14 +327,16 @@ export async function PUT(req: Request) {
     }
 
     // set overwrites and type conversion to DB date string
+
+    // Only store date of next maintenance without time
     maintenanceRequired = false;
 
     if (dateNextOilChangeDate.getDate()) {
-      dateNextOilChange = dateNextOilChangeDate.toISOString();
+      dateNextOilChange = dateNextOilChangeDate.toISOString().slice(0, 10);
       maintenanceRequired = true;
     }
     if (dateNextTireChangeDate.getDate()) {
-      dateNextTireChange = dateNextTireChangeDate.toISOString();
+      dateNextTireChange = dateNextTireChangeDate.toISOString().slice(0, 10);
       maintenanceRequired = true;
     }
 
