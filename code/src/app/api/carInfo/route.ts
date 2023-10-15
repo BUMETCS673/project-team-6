@@ -33,7 +33,7 @@ function scheduleMaintenance(days: number) {
 // Returns the date of scheduled maintenance
 // Assumes maintenance is required
 function dateNeedsMaintenance(nextDateChange: Date) {
-  if (isNaN(nextDateChange.getDate()) || nextDateChange < today) {
+  if (Number.isNaN(nextDateChange.getDate()) || nextDateChange < today) {
     return scheduleMaintenance(numDaysScheduled);
   }
 
@@ -43,7 +43,7 @@ function dateNeedsMaintenance(nextDateChange: Date) {
 
 // Returns true if scheduled maintenance date has already passed today
 function isMaintenanceOverdue(nextDateChange: Date, overdue: boolean) {
-  if (isNaN(nextDateChange.getDate())) {
+  if (Number.isNaN(nextDateChange.getDate())) {
     return false;
   }
 
@@ -133,7 +133,7 @@ export async function POST(req: Request) {
       maintenanceRequired,
     });
 
-    return NextResponse.json( newCar, { status: 201 });
+    return NextResponse.json(newCar, { status: 201 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
@@ -179,7 +179,7 @@ export async function GET(req: Request) {
     const carId = url.searchParams.get('carId');
 
     if (!carId) {
-      return await getAllCars()
+      return await getAllCars();
     }
 
     await dbConnect();
@@ -196,7 +196,7 @@ export async function GET(req: Request) {
       );
     }
 
-    return NextResponse.json( carObject , { status: 200 });
+    return NextResponse.json(carObject, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
@@ -254,21 +254,20 @@ export async function PUT(req: Request) {
     // Get saved car object, validate car exist
     const getRequest = await GET(req);
     const carObject = await getRequest.json();
+    if (carObject.message) {
+      return NextResponse.json(
+        { message: carObject.message },
+        { status: getRequest.status },
+      );
+    }
 
-    
     let {
       dateNextOilChange,
       dateNextTireChange,
       oilOverdue,
       tireOverdue,
       maintenanceRequired,
-    } = carObject
-
-
-    // Check if GET request returned an error
-    if (carObject.message) {
-      return NextResponse.json({ message: carObject.message }, { status: getRequest.status });
-    }
+    } = carObject;
 
     // Check existing license being registered with another car
     const existingLicense = await car.findOne({
@@ -327,11 +326,10 @@ export async function PUT(req: Request) {
     }
 
     // set overwrites and type conversion to DB date string
-
-    // Only store date of next maintenance without time
     maintenanceRequired = false;
 
     if (dateNextOilChangeDate.getDate()) {
+      // Slice to remove timestamp
       dateNextOilChange = dateNextOilChangeDate.toISOString().slice(0, 10);
       maintenanceRequired = true;
     }
@@ -377,7 +375,7 @@ export async function PUT(req: Request) {
     }
 
     // return carObject
-    return NextResponse.json( updatedCar , { status: 200 });
+    return NextResponse.json(updatedCar, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },
