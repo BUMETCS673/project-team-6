@@ -69,47 +69,47 @@ function AddCar() {
           <div className="grid grid-cols-2 gap-4">
             <RoundedInput
               type="text"
-              placeholder={manufacturer}
+              defaultValue={manufacturer}
               onChange={(e) => setManufacturer(e.target.value)}
             />
             <RoundedInput
               type="text"
-              placeholder={type}
+              defaultValue={type}
               onChange={(e) => setType(e.target.value)}
             />
             <RoundedInput
               type="number"
-              placeholder={year.toString()}
+              defaultValue={year.toString()}
               onChange={(e) => setYear(Number(e.target.value))}
             />
             <RoundedInput
               type="text"
-              placeholder={license}
+              defaultValue={license}
               onChange={(e) => setLicense(e.target.value)}
             />
             <RoundedInput
               type="number"
-              placeholder={mileage.toString()}
+              defaultValue={mileage.toString()}
               onChange={(e) => setMileage(Number(e.target.value))}
             />
             <RoundedInput
               type="text"
-              placeholder={model}
+              defaultValue={model}
               onChange={(e) => setModel(e.target.value)}
             />
             <RoundedInput
               type="text"
-              placeholder={color}
+              defaultValue={color}
               onChange={(e) => setColor(e.target.value)}
             />
             <RoundedInput
               type="number"
-              placeholder={seats.toString()}
+              defaultValue={seats.toString()}
               onChange={(e) => setSeats(Number(e.target.value))}
             />
             <RoundedInput
               type="text"
-              placeholder={condition}
+              defaultValue={condition}
               onChange={(e) => setCondition(e.target.value)}
             />
           </div>

@@ -22,13 +22,12 @@ export async function GET() {
 
     if (!cars) {
       return NextResponse.json(
-        { message: `There was an error retreiving all cars` },
+        { message: `There was an error retrieving all cars` },
         { status: 500 },
       );
     }
 
     const maintenanceInfo = {};
-    // let maintenanceInfo : object[] = [];
 
     cars.forEach((car) => {
       const oilMaintenanceDate = car.dateNextOilChange;
@@ -37,31 +36,44 @@ export async function GET() {
       // Convert to Date Object and parse only date (not time)
 
       if (oilMaintenanceDate) {
+        const oilChangeDate = oilMaintenanceDate.toISOString();
         const oilInfo = {
           // eslint-disable-next-line no-underscore-dangle
-          carID: car._id,
-          oilChange: oilMaintenanceDate,
+          carId: car._id,
           oilOverdue: car.oilOverdue,
         };
-        if (oilMaintenanceDate in maintenanceInfo) {
-          maintenanceInfo[oilMaintenanceDate].push(oilInfo);
+        if (oilChangeDate in maintenanceInfo) {
+          if( maintenanceInfo[oilChangeDate]["oil"]) {
+            maintenanceInfo[oilChangeDate]["oil"].push(oilInfo);
+          } else {
+            maintenanceInfo[oilChangeDate]["oil"] = [oilInfo]
+          }
         } else {
-          maintenanceInfo[oilMaintenanceDate] = [oilInfo];
+          maintenanceInfo[oilChangeDate] = {
+            "oil": [oilInfo]
+          }
         }
       }
 
       if (tireMaintenanceDate) {
+        const tireChangeDate = tireMaintenanceDate.toISOString();
         const tireInfo = {
           // eslint-disable-next-line no-underscore-dangle
-          carID: car._id,
-          tireChange: tireMaintenanceDate,
+          carId: car._id,
           tireOverdue: car.tireOverdue,
         };
-        if (tireMaintenanceDate in maintenanceInfo) {
-          maintenanceInfo[tireMaintenanceDate].push(tireInfo);
+        if (tireChangeDate in maintenanceInfo) {
+          if( maintenanceInfo[tireChangeDate]["tire"]) {
+            maintenanceInfo[tireChangeDate]["tire"].push(tireInfo);
+          } else {
+            maintenanceInfo[tireChangeDate]["tire"] = [tireInfo]
+          }
         } else {
-          maintenanceInfo[tireMaintenanceDate] = [tireInfo];
+          maintenanceInfo[tireChangeDate] = {
+            "tire": [tireInfo]
+          }
         }
+
       }
     });
 
