@@ -1,5 +1,7 @@
 import mongoose, { Schema, models } from 'mongoose';
 
+mongoose.set('sanitizeFilter', true);
+
 /**
  * Schema definition for a Car.
  *
