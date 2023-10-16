@@ -184,6 +184,7 @@ function EditCar() {
           </div>
           {message && <Message {...message} />}
           <button
+            data-testid="editCarButton"
             type="submit"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
