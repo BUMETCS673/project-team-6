@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import AuthField from './AuthField';
+import { type MessageProps, Message } from './Message';
 
 const logger = require('pino')();
-
-type Message = {
-  text: string;
-  type: 'red' | 'green';
-};
 
 export default function SignUp({
   email,
@@ -17,7 +13,7 @@ export default function SignUp({
 }) {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
-  const [message, setMessage] = useState<Message | null>(null);
+  const [message, setMessage] = useState<MessageProps | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,16 +71,7 @@ export default function SignUp({
         onSubmit={handleSignUp}
         className="flex flex-col gap-3  w-1/2 px-10"
       >
-        {message && (
-          <div
-            data-testid="message"
-            className={`p-3 rounded-md mb-2 ${
-              message.type === 'red' ? 'bg-red-400' : 'bg-green-400'
-            } text-white`}
-          >
-            {message.text}
-          </div>
-        )}
+        {message && <Message {...message} />}
         <div className="flex flex-row gap-3">
           <AuthField
             type="text"

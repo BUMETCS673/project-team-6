@@ -36,18 +36,6 @@ function Sidebar() {
           classname={pathname === '/dashboard/addcar' ? active : inactive}
         />
         <SidebarLink
-          href="/dashboard/editcar"
-          text="Edit Cars"
-          classname={pathname === '/dashboard/editcar' ? active : inactive}
-        />
-        <SidebarLink
-          href="/dashboard/carinformation"
-          text="Car Information"
-          classname={
-            pathname === '/dashboard/carinformation' ? active : inactive
-          }
-        />
-        <SidebarLink
           href="/dashboard/maintenance"
           text="Maintenance"
           classname={pathname === '/dashboard/maintenance' ? active : inactive}

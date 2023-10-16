@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       );
     }
 
-    await car.create({
+    const newCar = await car.create({
       manufacturer,
       type,
       year,
@@ -242,6 +242,42 @@ function determineMaintenanceStatus(data: any, currMileage: number) {
  * @throws {Error} Throws an error if there's an issue with the registration process.
  */
 
+// Nick
+const numDaysScheduled = 7;
+
+// Adds a specified number of days to today and returns new date
+function scheduleMaintenance(days: number) {
+  const today = new Date();
+  const newDateTime = new Date().setDate(today.getDate() + days);
+  return new Date(newDateTime);
+}
+
+function dateNeedsMaintenance(nextDateChange: Date) {
+  const today = new Date();
+  if (Number.isNaN(nextDateChange.getDate()) || nextDateChange < today) {
+    return scheduleMaintenance(numDaysScheduled);
+  }
+
+  // Schedule is already valid
+  return nextDateChange;
+}
+
+// Returns true if scheduled maintenance date has already passed today
+function isMaintenanceOverdue(nextDateChange: Date, overdue: boolean) {
+  if (Number.isNaN(nextDateChange.getDate())) {
+    return false;
+  }
+
+  if (overdue) {
+    return true;
+  }
+
+  const today = new Date();
+  return nextDateChange < today;
+}
+// end Nick
+
+// eslint-disable-next-line max-lines-per-function
 export async function PUT(req: Request) {
   try {
     const data = await req.json();
@@ -258,6 +294,90 @@ export async function PUT(req: Request) {
         { status: 400 },
       );
     }
+
+    // Nick
+
+    const { license, mileageLastOilChange, mileage, mileageLastTireChange } =
+      data;
+
+    let {
+      dateNextOilChange,
+      dateNextTireChange,
+      tireOverdue,
+      oilOverdue,
+      maintenanceRequired,
+    } = data;
+
+    // Check existing license being registered with another car
+    const existingLicense = await car.findOne({
+      // eslint-disable-next-line no-underscore-dangle
+      $and: [{ license }, { _id: { $ne: data._id } }],
+    });
+
+    if (existingLicense) {
+      return NextResponse.json(
+        { message: 'License number already registered.' },
+        { status: 400 },
+      );
+    }
+
+    // TODO Assumption: If new Date for last maintenance change, then also new mileage for last maintenance change
+
+    // Type conversion from request to Date object
+    let dateNextOilChangeDate = new Date('');
+    let dateNextTireChangeDate = new Date('');
+
+    // Oil Maintenance
+    if (
+      isMaintenanceTypeRequired(
+        mileageLastOilChange,
+        rotationMileageOil,
+        mileage,
+      )
+    ) {
+      // If DB returns null, cannot create new Date object
+      if (dateNextOilChange) {
+        dateNextOilChangeDate = new Date(dateNextOilChange);
+      }
+      oilOverdue = isMaintenanceOverdue(dateNextOilChangeDate, oilOverdue);
+      dateNextOilChangeDate = dateNeedsMaintenance(dateNextOilChangeDate);
+    } else {
+      oilOverdue = false;
+      dateNextOilChange = '';
+    }
+
+    // Tire Maintenance
+    if (
+      isMaintenanceTypeRequired(
+        mileageLastTireChange,
+        rotationMileageTire,
+        mileage,
+      )
+    ) {
+      if (dateNextTireChange) {
+        dateNextTireChangeDate = new Date(dateNextTireChange);
+      }
+      tireOverdue = isMaintenanceOverdue(dateNextTireChangeDate, tireOverdue);
+      dateNextTireChangeDate = dateNeedsMaintenance(dateNextTireChangeDate);
+    } else {
+      tireOverdue = false;
+      dateNextTireChange = '';
+    }
+
+    // set overwrites and type conversion to DB date string
+    maintenanceRequired = false;
+
+    if (dateNextOilChangeDate.getDate()) {
+      // Slice to remove timestamp
+      dateNextOilChange = dateNextOilChangeDate.toISOString().slice(0, 10);
+      maintenanceRequired = true;
+    }
+    if (dateNextTireChangeDate.getDate()) {
+      dateNextTireChange = dateNextTireChangeDate.toISOString().slice(0, 10);
+      maintenanceRequired = true;
+    }
+    // Nick end
+
     await dbConnect();
 
     /* Check if license already exists for another car */
@@ -316,9 +436,9 @@ export async function PUT(req: Request) {
           mileageLastTireChange: filteredData.mileageLastTireChange,
           dateNextOilChange: filteredData.dateNextOilChange,
           dateNextTireChange: filteredData.dateNextTireChange,
-          oilOverdue: filteredData.oilOverdue,
-          tireOverdue: filteredData.tireOverdue,
-          maintenanceRequired: filteredData.maintenanceRequired,
+          oilOverdue,
+          tireOverdue,
+          maintenanceRequired,
         },
       },
     );
@@ -329,10 +449,7 @@ export async function PUT(req: Request) {
       );
     }
 
-    return NextResponse.json(
-      { message: 'Update successful', car: updatedCar },
-      { status: 200 },
-    );
+    return NextResponse.json(updatedCar, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
       { message: `Server Error: ${err}` },

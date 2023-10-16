@@ -2,11 +2,7 @@
 
 import React, { useState } from 'react';
 import RoundedInput from './RoundedInput';
-
-type Message = {
-  text: string;
-  type: 'red' | 'green';
-};
+import { type MessageProps, Message } from './Message';
 
 const logger = require('pino')();
 
@@ -20,12 +16,17 @@ function AddCar() {
   const [color, setColor] = useState('color');
   const [seats, setSeats] = useState(5);
   const [condition, setCondition] = useState('New');
+  // TODO set next 4
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [mileageLastOilChange, setMileageLastOilChange] = useState(1000);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [mileageLastTireChange, setMileageLastTireChange] = useState(6000);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dateNextTireChange, setDateNextTireChange] = useState(Date);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dateNextOilChange, setDateNextOilChange] = useState(Date);
 
-  const [message, setMessage] = useState<Message | null>(null);
+  const [message, setMessage] = useState<MessageProps | null>(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,80 +49,73 @@ function AddCar() {
           dateNextOilChange,
         }),
       });
-      const data = await response.json();
-      setMessage({ type: 'green', text: data.message });
+
+      if (response.ok) {
+        setMessage({ type: 'green', text: 'Car created' });
+      } else {
+        const data = await response.json();
+        setMessage({ type: 'red', text: data.message });
+      }
     } catch (error) {
+      setMessage({ type: 'red', text: 'Something went wrong' });
       logger.log(error);
     }
   };
 
   return (
     <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
-      <div
-        className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
-        font-semibold text-gray-400 text-lg mb-10"
-      >
-        Car ID # {carId}
-      </div>
       <div className="flex flex-col w-full">
-        <form className="grid grid-cols-2 gap-4">
-          <RoundedInput
-            type="text"
-            placeholder={manufacturer}
-            onChange={(e) => setManufacturer(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={type}
-            onChange={(e) => setType(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={year.toString()}
-            onChange={(e) => setYear(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={license}
-            onChange={(e) => setLicense(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={mileage.toString()}
-            onChange={(e) => setMileage(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={model}
-            onChange={(e) => setModel(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={color}
-            onChange={(e) => setColor(e.target.value)}
-          />
-          <RoundedInput
-            type="number"
-            placeholder={seats.toString()}
-            onChange={(e) => setSeats(Number(e.target.value))}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={condition}
-            onChange={(e) => setCondition(e.target.value)}
-          />
-          <RoundedInput
-            type="text"
-            placeholder={oilChange}
-            onChange={(e) => setOilChange(e.target.value)}
-          />
-          {message && (
-            <div className="col-span-2 rounded-3xl px-10 py-1 text-center">
-              {message.text}
-            </div>
-          )}
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-2 gap-4">
+            <RoundedInput
+              type="text"
+              placeholder={manufacturer}
+              onChange={(e) => setManufacturer(e.target.value)}
+            />
+            <RoundedInput
+              type="text"
+              placeholder={type}
+              onChange={(e) => setType(e.target.value)}
+            />
+            <RoundedInput
+              type="number"
+              placeholder={year.toString()}
+              onChange={(e) => setYear(Number(e.target.value))}
+            />
+            <RoundedInput
+              type="text"
+              placeholder={license}
+              onChange={(e) => setLicense(e.target.value)}
+            />
+            <RoundedInput
+              type="number"
+              placeholder={mileage.toString()}
+              onChange={(e) => setMileage(Number(e.target.value))}
+            />
+            <RoundedInput
+              type="text"
+              placeholder={model}
+              onChange={(e) => setModel(e.target.value)}
+            />
+            <RoundedInput
+              type="text"
+              placeholder={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
+            <RoundedInput
+              type="number"
+              placeholder={seats.toString()}
+              onChange={(e) => setSeats(Number(e.target.value))}
+            />
+            <RoundedInput
+              type="text"
+              placeholder={condition}
+              onChange={(e) => setCondition(e.target.value)}
+            />
+          </div>
+          {message && <Message {...message} />}
           <button
-            type="button"
+            type="submit"
             className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
               font-semibold text-white text-lg text-center"

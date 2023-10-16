@@ -244,7 +244,11 @@ export default function Home() {
                 height={720}
               />
             </div>
-            <div onClick={getStarted} className="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-75 w-2/12 opacity-75 hover:opacity-100 transition duration-800 ease-in-out z-20">
+            {/* eslint-disable-next-line */}
+            <div
+              onClick={getStarted}
+              className="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-75 w-2/12 opacity-75 hover:opacity-100 transition duration-800 ease-in-out z-20"
+            >
               <Image
                 src="/StartButton.svg"
                 alt="Start Button"

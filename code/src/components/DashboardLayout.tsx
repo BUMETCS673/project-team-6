@@ -1,7 +1,6 @@
 'use client';
 
 import { useSession, signOut } from 'next-auth/react';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
 import Sidebar from './Sidebar';
@@ -16,19 +15,19 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
   const { status } = useSession({
     required: true,
   });
+
   if (status === 'loading') {
-    return redirect('/signin');
+    return redirect('/');
   }
 
   return (
-    <div className="flex border h-screen">
     <div className="flex border h-screen">
       {/* side bar */}
       <Sidebar />
 
       {/* Car information */}
       <div className="flex-col w-full bg-gray-50 flex">
-        <div className="flex flex-row bg-white w-full h-10 items-center justify-between">
+        <div className="flex flex-row bg-white w-full h-12 items-center px-4 justify-between">
           {/* Left Icon */}
           <div className="flex w-full pl-5">
             <svg
@@ -57,16 +56,12 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
             <button
               type="button"
               className="bg-orange-500 text-white w-24 h-full rounded-2xl "
-              onClick={() => signOut({ callbackUrl: '/signin' })}
+              onClick={() => signOut({ callbackUrl: '/' })}
             >
               Log Out
             </button>
-
-            <div className="w-8 h-8 bg-gray-300 rounded-full" />
           </div>
         </div>
-
-        <div className="p-10 flex-grow">{children}</div>
 
         <div className="p-10 flex-grow">{children}</div>
       </div>
