@@ -81,12 +81,16 @@ export default function Home() {
       )}
       <div className="bg-white h-full w-full">
         <Navbar setActive={setActive} />
-        <Hero setActive={setActive} imageRef={imageRef} imageDimensions={imageDimensions} />
-        <SectionOne setActive={setActive}/>
+        <Hero
+          setActive={setActive}
+          imageRef={imageRef}
+          imageDimensions={imageDimensions}
+        />
+        <SectionOne setActive={setActive} />
         <SectionTwo />
-        <SectionThree setActive={setActive}/>
+        <SectionThree setActive={setActive} />
         <SectionFour />
-        <Footer setActive={setActive}/>
+        <Footer setActive={setActive} />
       </div>
     </>
   );
