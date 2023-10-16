@@ -85,8 +85,8 @@ export default function SectionOne({ setActive }: { setActive: (value: boolean) 
                     />
                 </div>
                 <h1 className="w-10/12 -translate-y-65 translate-x-35 px-14 text-5xl">
-                    Best features provided by{' '}
-                    <span className="font-bold">RentalCompany</span>
+                    Best features provided by
+                    <span className="font-bold"> RentalCompany</span>
                 </h1>
                 <p className="w-8/12 -translate-y-58 translate-x-35 px-14">
                     At RentalCompany, we are committed to offering an exceptional rental experience,

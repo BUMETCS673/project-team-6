@@ -26,9 +26,8 @@ export default function SectionFour() {
                             />
                         </div>
                         <h1 className="w-10/12 -translate-y-25 translate-x-35 px-14 text-5xl">
-                            Hear from the founders of &apos; 
-                            <span className="font-bold">RentalCompany</span>
-                            &apos;
+                            Hear from the founders of 
+                            <span className="font-bold"> RentalCompany</span>
                         </h1>
                     </div>
                     <div className="w-1/2">
