@@ -6,15 +6,11 @@ import CarResultBar from '../../../components/CarResultBar';
 
 const logger = require('pino')();
 
-function SearchField({ children }) {
+function Headers({ children }) {
   return (
     <div className="w-full">
       <div className="flex flex-col items-center gap-3">
         <p>{children}</p>
-        <input
-          className="w-32 border-gray-100 border-2 pl-3"
-          placeholder="Search"
-        />
       </div>
     </div>
   );
@@ -52,10 +48,10 @@ export default function Page() {
     <DashboardLayout>
       {/* 4 info search */}
       <div className="flex flex-row justify-between mb-5">
-        <SearchField>Car ID</SearchField>
-        <SearchField>Manufacturer</SearchField>
-        <SearchField>Model</SearchField>
-        <SearchField>Car Type</SearchField>
+        <Headers>Car ID</Headers>
+        <Headers>Manufacturer</Headers>
+        <Headers>Model</Headers>
+        <Headers>Car Type</Headers>
       </div>
 
       {/* Results display */}
