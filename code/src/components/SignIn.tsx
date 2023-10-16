@@ -1,7 +1,7 @@
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import AuthField from './AuthField';
+import { Message, MessageProps } from './Message';
 
 const logger = require('pino')();
 
@@ -12,8 +12,7 @@ export default function SignIn({
   setPassword,
   children,
 }) {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const router = useRouter();
+  const [message, setMessage] = useState<MessageProps | null>(null);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,12 +25,10 @@ export default function SignIn({
       });
 
       if (res.error) {
-        setErrorMsg('Invalid Credentials');
-        return;
+        setMessage({type: 'red', text: 'Invalid Credentials'});
       }
-      logger.info(res);
-      router.replace('/dashboard/managecars');
     } catch (error) {
+      setMessage({type: 'red', text: 'Something went wrong'});
       logger.info(error);
     }
   };
@@ -39,11 +36,7 @@ export default function SignIn({
   return (
     <>
       <form onSubmit={handleLogin} className="flex flex-col gap-3  w-1/2 px-10">
-        {errorMsg && (
-          <div className="bg-red-400 text-white p-3 rounded-md mb-2">
-            {errorMsg}
-          </div>
-        )}
+        {message && <Message {...message} />}
         <AuthField data-testid="email" type="text" onChangeValue={setEmail}>
           Email
         </AuthField>

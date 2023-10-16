@@ -115,6 +115,8 @@ export default function Home() {
     }
   };
 
+  const getStarted = () => setActive(true);
+
   return (
     <>
       <Head>
@@ -213,10 +215,10 @@ export default function Home() {
             <button
               data-testid="authPopup"
               type="button"
-              onClick={() => setActive(true)}
+              onClick={getStarted}
               className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8"
             >
-              <span>Get Started</span>
+              Get Started
             </button>
           </div>
         </nav>
@@ -235,14 +237,18 @@ export default function Home() {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-110 w-3/4 z-10">
               {/* Car cards in the center */}
               <Image
-                src="/CarsImagCards.png"
+                src="/CarsImgCards.png"
                 alt="Car Image Cards"
                 className="w-full"
                 width={1066}
                 height={720}
               />
             </div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-75 w-2/12 opacity-75 hover:opacity-100 transition duration-800 ease-in-out z-20">
+            {/* eslint-disable-next-line */}
+            <div
+              onClick={getStarted}
+              className="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-75 w-2/12 opacity-75 hover:opacity-100 transition duration-800 ease-in-out z-20"
+            >
               <Image
                 src="/StartButton.svg"
                 alt="Start Button"
@@ -318,12 +324,12 @@ export default function Home() {
             </p>
             <div className="w-7/12 flex flex-row justify-between items-center -translate-y-50 translate-x-35 px-14 gap-2">
               <button
+                onClick={getStarted}
                 type="button"
                 className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8"
               >
                 Get Started
               </button>
-              <p className="text-center">Learn More</p>
             </div>
           </div>
           <div className="w-1/4 h-1/4 flex grid justify-start -translate-x-40 items-center grid-cols-2 gap-10">
@@ -413,6 +419,7 @@ export default function Home() {
               </div>
               <div className="w-full pl-14 justify-end items-start">
                 <button
+                  onClick={getStarted}
                   type="button"
                   className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-4 px-8"
                 >
@@ -471,29 +478,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Video element with rounded corners */}
-          <div className="w-8/12 px-14">
-            {/* Video element */}
-            <video
-              width="100%"
-              height="100%"
-              controls
-              aria-label="Description of the video's content"
-              title="Short description of the video"
-              className="rounded-4xl"
-            >
-              <source src="/sample.mp4" type="video/mp4" />
-              {/* Adjusting 'kind' attribute to "captions" */}
-              <track
-                kind="captions"
-                src="/subtitle_en.vtt"
-                srcLang="en"
-                label="English"
-                default
-              />
-              Your browser does not support the video tag.
-            </video>
-          </div>
         </section>
 
         {/* Footer */}
@@ -504,6 +488,7 @@ export default function Home() {
             </p>
           </div>
           <button
+            onClick={getStarted}
             type="button"
             className="bg-custom-orange text-white hover:bg-custom-hover-orange transition duration-800 px-4 ease-in-out rounded-3xl py-2 sm:py-4 sm:px-8"
           >

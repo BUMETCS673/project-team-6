@@ -20,7 +20,7 @@ export default function Dashboard() {
         Welcome
         {session?.user?.email}
       </p>
-      <button type="button" onClick={() => signOut({ callbackUrl: '/signin' })}>
+      <button type="button" onClick={() => signOut({ callbackUrl: '/' })}>
         Sign out
       </button>
     </>

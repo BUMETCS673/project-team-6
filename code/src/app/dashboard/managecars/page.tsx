@@ -1,42 +1,76 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import DashboardLayout from '../../../components/DashboardLayout';
 import CarResultBar from '../../../components/CarResultBar';
 
+const logger = require('pino')();
+
 function SearchField({ children }) {
   return (
-    <div className=" flex flex-col items-center w-36 gap-4">
-      <p className="[font-family:'Lexend_Giga-Bold',Helvetica] font-bold text-black text-[16px] text-center tracking-[0] leading-[normal]">
-        {children}
-      </p>
-      <input
-        type="text"
-        placeholder="Search"
-        className="bg-white border rounded px-2 py-1 focus:outline-none w-full text-[#cbcedb]"
-      />
+    <div className="w-full">
+      <div className="flex flex-col items-center gap-3">
+        <p>{children}</p>
+        <input
+          className="w-32 border-gray-100 border-2 pl-3"
+          placeholder="Search"
+        />
+      </div>
     </div>
   );
 }
+type Car = {
+  _id: string;
+  manufacturer: string;
+  model: string;
+  type: string;
+  // ... any other properties ...
+};
+export default function Page() {
+  const [cars, setCars] = useState<Car[]>([]);
 
-export default function page() {
+  useEffect(() => {
+    const getAllCars = async () => {
+      try {
+        const response = await fetch('/api/carInfo/check', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+
+        setCars(data);
+      } catch (error) {
+        logger.log(error);
+      }
+    };
+    getAllCars();
+  }, []);
+
   return (
     <DashboardLayout>
-      <div>
-        {/* 4 info search */}
-        <div className="flex flex-row justify-between p-2 px-32  ">
-          <SearchField>Car ID</SearchField>
-          <SearchField>Manufacturer</SearchField>
-          <SearchField>Model</SearchField>
-          <SearchField>Car Type</SearchField>
-        </div>
+      {/* 4 info search */}
+      <div className="flex flex-row justify-between mb-5">
+        <SearchField>Car ID</SearchField>
+        <SearchField>Manufacturer</SearchField>
+        <SearchField>Model</SearchField>
+        <SearchField>Car Type</SearchField>
+      </div>
 
-        {/* Results display */}
-        <div>
+      {/* Results display */}
+      <div className="flex flex-col gap-4">
+        {cars.map((car) => (
           <CarResultBar
-            carId="12345"
-            manufacturer="Toyota"
-            model="Camry"
-            carType="Sedan"
+            // eslint-disable-next-line no-underscore-dangle
+            key={car._id}
+            // eslint-disable-next-line no-underscore-dangle
+            carId={car._id}
+            manufacturer={car.manufacturer}
+            model={car.model}
+            carType={car.type}
           />
-        </div>
+        ))}
       </div>
     </DashboardLayout>
   );
