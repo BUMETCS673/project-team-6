@@ -6,6 +6,7 @@ interface CarResultBarProps {
   manufacturer: string;
   model: string;
   carType: string;
+  license: string;
 }
 
 function Filed({ value }: { value: string | number }) {
@@ -17,7 +18,7 @@ function Filed({ value }: { value: string | number }) {
 }
 
 function CarResultBar(props: CarResultBarProps) {
-  const { carId, manufacturer, model, carType } = props;
+  const { carId, manufacturer, model, carType, license } = props;
   const router = useRouter();
   const searchParams = useSearchParams()!;
 
@@ -42,7 +43,7 @@ function CarResultBar(props: CarResultBarProps) {
       }}
     >
       <div className="flex items-center h-full justify-between">
-        <Filed value={carId} />
+        <Filed value={license} />
         <Filed value={manufacturer} />
         <Filed value={model} />
         <Filed value={carType} />
