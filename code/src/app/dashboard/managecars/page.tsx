@@ -32,7 +32,7 @@ export default function Page() {
   useEffect(() => {
     const getAllCars = async () => {
       try {
-        const response = await fetch('/api/carInfo/check', {
+        const response = await fetch('/api/carInfo', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
