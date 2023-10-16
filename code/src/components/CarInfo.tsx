@@ -68,6 +68,7 @@ function CarInfo({
         <Filed label="Date next tire change" value={dateNextTireChange} />
         <Filed label="Date next oil change" value={dateNextOilChange} />
         <button
+          data-testid="editButton"
           type="button"
           className="bg-orange-500 col-span-2 place-self-center rounded-3xl px-10 py-1
               [font-family:'Lexend_Giga-SemiBold',Helvetica] my-5
