@@ -98,7 +98,7 @@ function EditCar() {
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
+    <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 w-full text-gray-400">
       <div
         className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
         font-semibold text-gray-400 text-lg mb-10"

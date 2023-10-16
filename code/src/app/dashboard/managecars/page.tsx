@@ -50,6 +50,10 @@ export default function Page() {
         });
         const data = await response.json();
 
+        setManufacturer(data.manufacturer);
+        setLicense(data.license);
+        setModel(data.model);
+        setType(data.type);
         setCars(data);
       } catch (error) {
         logger.log(error);
@@ -63,6 +67,7 @@ export default function Page() {
       {/* 4 info search */}
       <div className="flex flex-row justify-between mb-5">
         <Headers>Car ID</Headers>
+        <Headers>License</Headers>
         <Headers>Manufacturer</Headers>
         <Headers>Model</Headers>
         <Headers>Car Type</Headers>

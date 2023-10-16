@@ -78,7 +78,7 @@ export default async function page() {
       <div
         data-testid="maintainancePage"
         className="bg-white rounded-3xl border border-1 shadow-lg
-       shadow-gray-300 py-5 px-10 w-full text-gray-400 h-full"
+       shadow-gray-300 py-5 px-10 w-full text-gray-400"
       >
         {typeof scheduled === 'string' || scheduled instanceof String ? (
           <Message type="red" text={scheduled.toString()} />
