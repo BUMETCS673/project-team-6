@@ -282,8 +282,6 @@ export async function PUT(req: Request) {
       );
     }
 
-    // TODO Assumption: If new Date for last maintenance change, then also new mileage for last maintenance change
-
     // Type conversion from request to Date object
     let dateNextOilChangeDate = new Date('');
     let dateNextTireChangeDate = new Date('');
