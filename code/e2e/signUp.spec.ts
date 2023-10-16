@@ -24,4 +24,23 @@ test.describe('Sign up', () => {
     await expect(page.getByTestId('message')).toBeVisible();
     await expect(page).toHaveScreenshot();
   });
+
+  test('Failure', async ({ page }) => {
+    await page.goto('/');
+
+    await page.getByTestId('authPopup').click();
+    await expect(page.getByTestId('email')).toBeVisible();
+
+    await page.getByTestId('to-signup').click();
+
+    await page.getByTestId('firstName').fill('first');
+    await page.getByTestId('lastName').fill('last');
+    await page.getByTestId('email').fill('aa');
+    await page.getByTestId('password').fill('password');
+
+    await page.getByTestId('submit-signup').click();
+
+    await expect(page.getByTestId('message')).toBeVisible();
+    await expect(page).toHaveScreenshot();
+  });
 });
