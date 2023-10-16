@@ -22,7 +22,6 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
 
   return (
     <div className="flex border h-screen">
-      {/* side bar */}
       <Sidebar />
 
       {/* Car information */}
