@@ -1,12 +1,13 @@
 'use client';
 
+import { useDebounce } from '@uidotdev/usehooks';
 import { useState, useEffect } from 'react';
 import DashboardLayout from '../../../components/DashboardLayout';
 import CarResultBar from '../../../components/CarResultBar';
 
 const logger = require('pino')();
 
-function SearchField({ children }) {
+function SearchField({ children, value, onTextChange }) {
   return (
     <div className="w-full">
       <div className="flex flex-col items-center gap-3">
@@ -14,6 +15,8 @@ function SearchField({ children }) {
         <input
           className="w-32 border-gray-100 border-2 pl-3"
           placeholder="Search"
+          value={value}
+          onChange={(e) => onTextChange(e.currentTarget.value)}
         />
       </div>
     </div>
@@ -24,20 +27,41 @@ type Car = {
   manufacturer: string;
   model: string;
   type: string;
+  license: string;
   // ... any other properties ...
 };
+
+const DEBOUNCE_TIME = 500;
+
 export default function Page() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [manufacturer, setManufacturer] = useState('');
+  const [license, setLicense] = useState('');
+  const [model, setModel] = useState('');
+  const [type, setType] = useState('');
+
+  const debouncedManufacturer = useDebounce(manufacturer, DEBOUNCE_TIME);
+  const debouncedLicense = useDebounce(license, DEBOUNCE_TIME);
+  const debouncedModel = useDebounce(model, DEBOUNCE_TIME);
+  const debouncedType = useDebounce(type, DEBOUNCE_TIME);
 
   useEffect(() => {
     const getAllCars = async () => {
       try {
-        const response = await fetch('/api/carInfo/check', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          `/api/carInfo/check?${new URLSearchParams({
+            license: debouncedLicense,
+            manufacturer: debouncedManufacturer,
+            model: debouncedModel,
+            type: debouncedType,
+          })}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
           },
-        });
+        );
         const data = await response.json();
 
         setCars(data);
@@ -46,16 +70,24 @@ export default function Page() {
       }
     };
     getAllCars();
-  }, []);
+  }, [debouncedLicense, debouncedManufacturer, debouncedModel, debouncedType]);
 
   return (
     <DashboardLayout>
       {/* 4 info search */}
       <div className="flex flex-row justify-between mb-5">
-        <SearchField>Car ID</SearchField>
-        <SearchField>Manufacturer</SearchField>
-        <SearchField>Model</SearchField>
-        <SearchField>Car Type</SearchField>
+        <SearchField value={license} onTextChange={setLicense}>
+          License
+        </SearchField>
+        <SearchField value={manufacturer} onTextChange={setManufacturer}>
+          Manufacturer
+        </SearchField>
+        <SearchField value={model} onTextChange={setModel}>
+          Model
+        </SearchField>
+        <SearchField value={type} onTextChange={setType}>
+          Car Type
+        </SearchField>
       </div>
 
       {/* Results display */}
@@ -69,6 +101,7 @@ export default function Page() {
             manufacturer={car.manufacturer}
             model={car.model}
             carType={car.type}
+            license={car.license}
           />
         ))}
       </div>
