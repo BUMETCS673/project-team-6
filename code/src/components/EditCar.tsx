@@ -7,22 +7,6 @@ import { type MessageProps, Message } from './Message';
 
 const logger = require('pino')();
 
-interface EditCarProps {
-  manufacturer: string;
-  type: string;
-  year: string;
-  license: string;
-  mileage: string;
-  model: string;
-  color: string;
-  seats: string;
-  condition: string;
-  mileageLastOilChange: string;
-  mileageLastTireChange: string;
-  dateNextTireChange: string;
-  dateNextOilChange: string;
-}
-
 // eslint-disable-next-line max-lines-per-function
 function EditCar() {
   const [manufacturer, setManufacturer] = useState('');
@@ -41,7 +25,6 @@ function EditCar() {
   const [message, setMessage] = useState<MessageProps | null>(null);
   const searchParams = useSearchParams()!;
   const carId = searchParams.get('carId');
-  const [carInfo, setCarInfo] = useState<EditCarProps | null>(null);
 
   useEffect(() => {
     const getCarsInfo = async () => {
@@ -55,7 +38,20 @@ function EditCar() {
         });
         const data = await response.json();
 
-        setCarInfo(data);
+        setManufacturer(data.manufacturer);
+        setType(data.type);
+        setYear(data.year);
+        setLicense(data.license);
+        setMileage(data.mileage);
+        setModel(data.model);
+        setColor(data.color);
+        setSeats(data.seats);
+        setCondition(data.condition);
+        setMileageLastOilChange(data.mileageLastOilChange);
+        setMileageLastTireChange(data.mileageLastTireChange);
+        setDateNextTireChange(data.dateNextTireChange);
+        setDateNextOilChange(data.dateNextOilChange);
+        setMessage(data.message);
       } catch (error) {
         logger.info(error);
       }
@@ -66,11 +62,10 @@ function EditCar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/carInfo`, {
+      const response = await fetch(`/api/carInfo?carId=${carId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          carId,
           manufacturer,
           type,
           year,
@@ -103,7 +98,7 @@ function EditCar() {
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 h-full w-full text-gray-400">
+    <div className="bg-white rounded-3xl border border-1 shadow-lg shadow-gray-300 py-5 px-10 w-full text-gray-400">
       <div
         className="w-full [font-family:'Lexend_Giga-SemiBold',Helvetica] 
         font-semibold text-gray-400 text-lg mb-10"
@@ -113,72 +108,84 @@ function EditCar() {
       <div className="flex flex-col w-full">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
+            Manufacturer
             <RoundedInput
               type="text"
-              placeholder={carInfo?.manufacturer!}
+              defaultValue={manufacturer!}
               onChange={(e) => setManufacturer(e.target.value)}
             />
+            Type
             <RoundedInput
               type="text"
-              placeholder={carInfo?.type!}
+              defaultValue={type!}
               onChange={(e) => setType(e.target.value)}
             />
+            Year
             <RoundedInput
               type="number"
-              placeholder={carInfo?.year!}
+              defaultValue={year!}
               onChange={(e) => setYear(e.target.value)}
             />
+            License
             <RoundedInput
               type="text"
-              placeholder={carInfo?.license!}
+              defaultValue={license!}
               onChange={(e) => setLicense(e.target.value)}
             />
+            Mileage
             <RoundedInput
               type="number"
-              placeholder={carInfo?.mileage!}
+              defaultValue={mileage!}
               onChange={(e) => setMileage(e.target.value)}
             />
+            Model
             <RoundedInput
               type="text"
-              placeholder={carInfo?.model!}
+              defaultValue={model!}
               onChange={(e) => setModel(e.target.value)}
             />
+            Color
             <RoundedInput
               type="text"
-              placeholder={carInfo?.color!}
+              defaultValue={color!}
               onChange={(e) => setColor(e.target.value)}
             />
+            Number of Seats
             <RoundedInput
               type="number"
-              placeholder={carInfo?.seats!}
+              defaultValue={seats!}
               onChange={(e) => setSeats(e.target.value)}
             />
+            Condition
             <RoundedInput
               type="text"
-              placeholder={carInfo?.condition!}
+              defaultValue={condition!}
               onChange={(e) => setCondition(e.target.value)}
             />
+            Mileage Last Oil Change
             <RoundedInput
               type="number"
-              placeholder={`Mileage Last Oil Change: ${carInfo?.mileageLastOilChange}`}
+              defaultValue={mileageLastOilChange}
               onChange={(e) => setMileageLastOilChange(e.target.value)}
             />
+            Mileage Last Tire Change
             <RoundedInput
               type="number"
-              placeholder={`Mileage Last Tire Change: ${carInfo?.mileageLastTireChange}`}
+              defaultValue={mileageLastTireChange}
               onChange={(e) => setMileageLastTireChange(e.target.value)}
             />
-
+            Date Next Oil Change
             <input
+              readOnly
               type="date"
-              defaultValue={carInfo?.dateNextOilChange.split('T')[0]}
-              onChange={(e) => setDateNextOilChange(e.target.value)}
+              value={dateNextOilChange?.split('T')[0]}
               className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
             />
+            Date Next Tire Change
             <input
+              readOnly
               type="date"
-              defaultValue={carInfo?.dateNextTireChange.split('T')[0]}
-              onChange={(e) => setDateNextTireChange(e.target.value)}
+              value={dateNextTireChange?.split('T')[0]}
               className="rounded-xl font-normal border-2 border-gray-200 py-2 px-2 text-2xs w-full"
             />
           </div>

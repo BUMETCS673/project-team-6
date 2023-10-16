@@ -1,4 +1,5 @@
 function RoundedInput({
+  defaultValue,
   type = 'text',
   placeholder = '',
   onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,6 +13,7 @@ function RoundedInput({
       type={type}
       placeholder={placeholder.toString()}
       className={classname}
+      defaultValue={defaultValue}
     />
   );
 }

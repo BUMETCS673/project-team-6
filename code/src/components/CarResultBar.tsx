@@ -43,6 +43,7 @@ function CarResultBar(props: CarResultBarProps) {
       }}
     >
       <div className="flex items-center h-full justify-between">
+        <Filed value={carId} />
         <Filed value={license} />
         <Filed value={manufacturer} />
         <Filed value={model} />

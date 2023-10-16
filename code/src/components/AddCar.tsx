@@ -7,24 +7,17 @@ import { type MessageProps, Message } from './Message';
 const logger = require('pino')();
 
 function AddCar() {
-  const [manufacturer, setManufacturer] = useState('manufacturer');
-  const [type, setType] = useState('type');
-  const [year, setYear] = useState(2022);
-  const [license, setLicense] = useState('license');
-  const [mileage, setMileage] = useState(5000);
-  const [model, setModel] = useState('model');
-  const [color, setColor] = useState('color');
-  const [seats, setSeats] = useState(5);
-  const [condition, setCondition] = useState('New');
-  // TODO set next 4
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [mileageLastOilChange, setMileageLastOilChange] = useState(1000);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [mileageLastTireChange, setMileageLastTireChange] = useState(6000);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [dateNextTireChange, setDateNextTireChange] = useState(Date);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [dateNextOilChange, setDateNextOilChange] = useState(Date);
+  const [manufacturer, setManufacturer] = useState('');
+  const [type, setType] = useState('');
+  const [year, setYear] = useState('');
+  const [license, setLicense] = useState('');
+  const [mileage, setMileage] = useState('');
+  const [model, setModel] = useState('');
+  const [color, setColor] = useState('');
+  const [seats, setSeats] = useState('');
+  const [condition, setCondition] = useState('');
+  const [mileageLastOilChange, setMileageLastOilChange] = useState('');
+  const [mileageLastTireChange, setMileageLastTireChange] = useState('');
 
   const [message, setMessage] = useState<MessageProps | null>(null);
   const handleSubmit = async (e) => {
@@ -45,8 +38,6 @@ function AddCar() {
           condition,
           mileageLastOilChange,
           mileageLastTireChange,
-          dateNextTireChange,
-          dateNextOilChange,
         }),
       });
 
@@ -67,50 +58,71 @@ function AddCar() {
       <div className="flex flex-col w-full">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
+            Manufacturer
             <RoundedInput
               type="text"
-              placeholder={manufacturer}
+              defaultValue={manufacturer}
               onChange={(e) => setManufacturer(e.target.value)}
             />
+            Type
             <RoundedInput
               type="text"
-              placeholder={type}
+              defaultValue={type}
               onChange={(e) => setType(e.target.value)}
             />
+            Year
             <RoundedInput
               type="number"
-              placeholder={year.toString()}
-              onChange={(e) => setYear(Number(e.target.value))}
+              defaultValue={year.toString()}
+              onChange={(e) => setYear(e.target.value)}
             />
+            License
             <RoundedInput
               type="text"
-              placeholder={license}
+              defaultValue={license}
               onChange={(e) => setLicense(e.target.value)}
             />
+            Mileage
             <RoundedInput
               type="number"
-              placeholder={mileage.toString()}
-              onChange={(e) => setMileage(Number(e.target.value))}
+              defaultValue={mileage.toString()}
+              onChange={(e) => setMileage(e.target.value)}
             />
+            Model
             <RoundedInput
               type="text"
-              placeholder={model}
+              defaultValue={model}
               onChange={(e) => setModel(e.target.value)}
             />
+            Color
             <RoundedInput
               type="text"
-              placeholder={color}
+              defaultValue={color}
               onChange={(e) => setColor(e.target.value)}
             />
+            Number of Seats
             <RoundedInput
               type="number"
-              placeholder={seats.toString()}
-              onChange={(e) => setSeats(Number(e.target.value))}
+              defaultValue={seats.toString()}
+              onChange={(e) => setSeats(e.target.value)}
             />
+            Condition
             <RoundedInput
               type="text"
-              placeholder={condition}
+              defaultValue={condition}
               onChange={(e) => setCondition(e.target.value)}
+            />
+            Mileage Last Oil Change
+            <RoundedInput
+              type="number"
+              defaultValue={mileageLastOilChange}
+              onChange={(e) => setMileageLastOilChange(e.target.value)}
+            />
+            Mileage Last Tire Change
+            <RoundedInput
+              type="number"
+              defaultValue={mileageLastTireChange}
+              onChange={(e) => setMileageLastTireChange(e.target.value)}
             />
           </div>
           {message && <Message {...message} />}
