@@ -7,22 +7,6 @@ import { type MessageProps, Message } from './Message';
 
 const logger = require('pino')();
 
-interface EditCarProps {
-  manufacturer: string;
-  type: string;
-  year: string;
-  license: string;
-  mileage: string;
-  model: string;
-  color: string;
-  seats: string;
-  condition: string;
-  mileageLastOilChange: string;
-  mileageLastTireChange: string;
-  dateNextTireChange: string;
-  dateNextOilChange: string;
-}
-
 // eslint-disable-next-line max-lines-per-function
 function EditCar() {
   const [manufacturer, setManufacturer] = useState('');
@@ -54,20 +38,20 @@ function EditCar() {
         });
         const data = await response.json();
 
-        setManufacturer(data.manufacturer)
-        setType(data.type)
-        setYear(data.year)
-        setLicense(data.license)
-        setMileage(data.mileage)
-        setModel(data.model)
-        setColor(data.color)
-        setSeats(data.seats)
-        setCondition(data.condition)
-        setMileageLastOilChange(data.mileageLastOilChange)
-        setMileageLastTireChange(data.mileageLastTireChange)
-        setDateNextTireChange(data.dateNextTireChange)
-        setDateNextOilChange(data.dateNextOilChange)
-        setMessage(data.message)
+        setManufacturer(data.manufacturer);
+        setType(data.type);
+        setYear(data.year);
+        setLicense(data.license);
+        setMileage(data.mileage);
+        setModel(data.model);
+        setColor(data.color);
+        setSeats(data.seats);
+        setCondition(data.condition);
+        setMileageLastOilChange(data.mileageLastOilChange);
+        setMileageLastTireChange(data.mileageLastTireChange);
+        setDateNextTireChange(data.dateNextTireChange);
+        setDateNextOilChange(data.dateNextOilChange);
+        setMessage(data.message);
       } catch (error) {
         logger.info(error);
       }

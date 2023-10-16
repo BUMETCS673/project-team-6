@@ -37,7 +37,7 @@ function AddCar() {
           seats,
           condition,
           mileageLastOilChange,
-          mileageLastTireChange
+          mileageLastTireChange,
         }),
       });
 

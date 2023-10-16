@@ -43,15 +43,15 @@ export async function GET() {
           oilOverdue: car.oilOverdue,
         };
         if (oilChangeDate in maintenanceInfo) {
-          if( maintenanceInfo[oilChangeDate]["oil"]) {
-            maintenanceInfo[oilChangeDate]["oil"].push(oilInfo);
+          if (maintenanceInfo[oilChangeDate].oil) {
+            maintenanceInfo[oilChangeDate].oil.push(oilInfo);
           } else {
-            maintenanceInfo[oilChangeDate]["oil"] = [oilInfo]
+            maintenanceInfo[oilChangeDate].oil = [oilInfo];
           }
         } else {
           maintenanceInfo[oilChangeDate] = {
-            "oil": [oilInfo]
-          }
+            oil: [oilInfo],
+          };
         }
       }
 
@@ -63,17 +63,16 @@ export async function GET() {
           tireOverdue: car.tireOverdue,
         };
         if (tireChangeDate in maintenanceInfo) {
-          if( maintenanceInfo[tireChangeDate]["tire"]) {
-            maintenanceInfo[tireChangeDate]["tire"].push(tireInfo);
+          if (maintenanceInfo[tireChangeDate].tire) {
+            maintenanceInfo[tireChangeDate].tire.push(tireInfo);
           } else {
-            maintenanceInfo[tireChangeDate]["tire"] = [tireInfo]
+            maintenanceInfo[tireChangeDate].tire = [tireInfo];
           }
         } else {
           maintenanceInfo[tireChangeDate] = {
-            "tire": [tireInfo]
-          }
+            tire: [tireInfo],
+          };
         }
-
       }
     });
 
