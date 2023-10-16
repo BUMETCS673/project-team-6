@@ -22,7 +22,6 @@ function Sidebar() {
           Rental<span className="underline">Company</span>
         </p>
       </div>
-      <div className="py-2 font-semibold text-[#cbcedb]">MENU</div>
       <div className="flex flex-col gap-4 font-semibold text-[#cbcedb]">
         <SidebarLink href="/dashboard/managecars" text="Manage Cars" />
         <SidebarLink href="/dashboard/addcar" text="Add Cars" />

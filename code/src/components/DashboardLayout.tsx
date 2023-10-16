@@ -55,8 +55,6 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
             >
               <p className="text-white px-4 py-1 text-sm">Log Out</p>
             </button>
-
-            <div className="w-8 h-8 bg-gray-300 rounded-full" />
           </div>
         </div>
 
