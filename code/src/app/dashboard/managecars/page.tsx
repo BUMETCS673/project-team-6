@@ -1,5 +1,6 @@
 'use client';
 
+import { useDebounce } from '@uidotdev/usehooks';
 import { useState, useEffect } from 'react';
 import DashboardLayout from '../../../components/DashboardLayout';
 import CarResultBar from '../../../components/CarResultBar';
@@ -20,10 +21,23 @@ type Car = {
   manufacturer: string;
   model: string;
   type: string;
+  license: string;
   // ... any other properties ...
 };
+
+const DEBOUNCE_TIME = 500;
+
 export default function Page() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [manufacturer, setManufacturer] = useState('');
+  const [license, setLicense] = useState('');
+  const [model, setModel] = useState('');
+  const [type, setType] = useState('');
+
+  const debouncedManufacturer = useDebounce(manufacturer, DEBOUNCE_TIME);
+  const debouncedLicense = useDebounce(license, DEBOUNCE_TIME);
+  const debouncedModel = useDebounce(model, DEBOUNCE_TIME);
+  const debouncedType = useDebounce(type, DEBOUNCE_TIME);
 
   useEffect(() => {
     const getAllCars = async () => {
@@ -42,7 +56,7 @@ export default function Page() {
       }
     };
     getAllCars();
-  }, []);
+  }, [debouncedLicense, debouncedManufacturer, debouncedModel, debouncedType]);
 
   return (
     <DashboardLayout>
@@ -65,6 +79,7 @@ export default function Page() {
             manufacturer={car.manufacturer}
             model={car.model}
             carType={car.type}
+            license={car.license}
           />
         ))}
       </div>

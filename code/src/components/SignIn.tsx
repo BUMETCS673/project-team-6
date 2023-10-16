@@ -41,10 +41,15 @@ export default function SignIn({
           Email
         </AuthField>
 
-        <AuthField type="password" onChangeValue={setPassword}>
+        <AuthField
+          data-testid="password"
+          type="password"
+          onChangeValue={setPassword}
+        >
           Password
         </AuthField>
         <button
+          data-testid="signIn"
           type="submit"
           className="text-black border border-gray-400 rounded-lg px-6 py-3"
         >

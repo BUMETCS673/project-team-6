@@ -30,6 +30,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
         <div className="flex flex-row-reverse bg-white w-full h-12 items-center px-4 justify-between">
           <div className="flex flex-row items-center gap-x-4">
             <button
+              data-testid="signOut"
               type="button"
               className="bg-orange-500 text-white w-24 h-full rounded-2xl "
               onClick={() => signOut({ callbackUrl: '/' })}
@@ -39,7 +40,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
           </div>
         </div>
 
-        <div className="p-10 flex-grow">{children}</div>
+        <div className="p-10 flex-grow overflow-auto">{children}</div>
       </div>
     </div>
   );

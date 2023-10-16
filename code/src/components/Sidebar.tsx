@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-function SidebarLink({ href = '', text = '', classname = '' }) {
+function SidebarLink({ href = '', text = '', classname = '', ...props }) {
   return (
-    <Link href={href} className={classname}>
+    <Link href={href} className={classname} {...props}>
       <p>{text}</p>
     </Link>
   );
@@ -28,16 +28,19 @@ function Sidebar() {
           classname={`link ${
             pathname === '/dashboard/managecars' ? active : inactive
           }`}
+          data-testid="manageCarsMenuItem"
         />
         <SidebarLink
           href="/dashboard/addcar"
           text="Add Cars"
           classname={pathname === '/dashboard/addcar' ? active : inactive}
+          data-testid="addCarMenuItem"
         />
         <SidebarLink
           href="/dashboard/maintenance"
           text="Maintenance"
           classname={pathname === '/dashboard/maintenance' ? active : inactive}
+          data-testid="maintenanceMenuItem"
         />
       </div>
     </aside>
