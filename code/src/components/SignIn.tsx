@@ -25,10 +25,10 @@ export default function SignIn({
       });
 
       if (res.error) {
-        setMessage({type: 'red', text: 'Invalid Credentials'});
+        setMessage({ type: 'red', text: 'Invalid Credentials' });
       }
     } catch (error) {
-      setMessage({type: 'red', text: 'Something went wrong'});
+      setMessage({ type: 'red', text: 'Something went wrong' });
       logger.info(error);
     }
   };
