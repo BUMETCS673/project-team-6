@@ -10,7 +10,9 @@ export async function GET(req) {
     const addOption = (name) => {
       const option = url.searchParams.get(name);
 
-      options[name] = { $regex: option };
+      if (option) {
+        options[name] = { $regex: option };
+      }
     };
 
     addOption('license');
