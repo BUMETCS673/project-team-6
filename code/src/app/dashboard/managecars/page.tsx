@@ -7,11 +7,19 @@ import CarResultBar from '../../../components/CarResultBar';
 
 const logger = require('pino')();
 
-function Headers({ children }) {
+function Headers({ children, value, onTextChange }) {
   return (
     <div className="w-full">
       <div className="flex flex-col items-center gap-3">
         <p>{children}</p>
+        {value !== undefined && (
+          <input
+            className="w-32 border-gray-100 border-2 pl-3"
+            placeholder="Search"
+            value={value}
+            onChange={(e) => onTextChange(e.currentTarget.value)}
+          />
+        )}
       </div>
     </div>
   );
@@ -42,18 +50,22 @@ export default function Page() {
   useEffect(() => {
     const getAllCars = async () => {
       try {
-        const response = await fetch('/api/carInfo', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          `/api/carInfo?${new URLSearchParams({
+            license: debouncedLicense,
+            manufacturer: debouncedManufacturer,
+            model: debouncedModel,
+            type: debouncedType,
+          })}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
           },
-        });
+        );
         const data = await response.json();
 
-        setManufacturer(data.manufacturer);
-        setLicense(data.license);
-        setModel(data.model);
-        setType(data.type);
         setCars(data);
       } catch (error) {
         logger.log(error);
@@ -66,11 +78,20 @@ export default function Page() {
     <DashboardLayout>
       {/* 4 info search */}
       <div className="flex flex-row justify-between mb-5">
+        {/* @ts-ignore */}
         <Headers>Car ID</Headers>
-        <Headers>License</Headers>
-        <Headers>Manufacturer</Headers>
-        <Headers>Model</Headers>
-        <Headers>Car Type</Headers>
+        <Headers value={license} onTextChange={setLicense}>
+          License
+        </Headers>
+        <Headers value={manufacturer} onTextChange={setManufacturer}>
+          Manufacturer
+        </Headers>
+        <Headers value={model} onTextChange={setModel}>
+          Model
+        </Headers>
+        <Headers value={type} onTextChange={setType}>
+          Car Type
+        </Headers>
       </div>
 
       {/* Results display */}

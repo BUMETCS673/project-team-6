@@ -27,7 +27,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
 
       {/* Car information */}
       <div className="flex-col w-full bg-gray-50 flex">
-        <div className="flex flex-row-reverse bg-white w-full h-12 items-center px-4 justify-between">
+        <div className="flex flex-row bg-white w-full h-12 items-center px-4 justify-end shrink-0">
           <div className="flex flex-row items-center gap-x-4">
             <button
               data-testid="signOut"

@@ -160,10 +160,25 @@ export async function POST(req: Request) {
  * @throws {Error} Throws an error if there's an issue with the registration process.
  */
 
-async function getAllCars() {
+async function getAllCars(req) {
   try {
+    const url = new URL(req.url);
+    const options = {};
+    const addOption = (name) => {
+      const option = url.searchParams.get(name);
+
+      if (option) {
+        options[name] = { $regex: option };
+      }
+    };
+
+    addOption('license');
+    addOption('manufacturer');
+    addOption('model');
+    addOption('type');
+
     await dbConnect();
-    const cars = await car.find({});
+    const cars = await car.find(options);
     return NextResponse.json(cars, { status: 200 });
   } catch (err: any) {
     return NextResponse.json(
@@ -179,7 +194,7 @@ export async function GET(req: Request) {
     const carId = url.searchParams.get('carId');
 
     if (!carId) {
-      return await getAllCars();
+      return await getAllCars(req);
     }
 
     await dbConnect();
