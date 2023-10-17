@@ -13,6 +13,7 @@ async function getMaintenanceInfo() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
       },
     });
     const data = await response.json();
